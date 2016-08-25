@@ -213,7 +213,8 @@
 					"pages/center/center_index.html",
 					"js/index/index.js",
 					"css/mui.min.css",
-					"pages/detail.html"
+					"pages/detail.html",
+					"js/storage.js"
 				],
 				"refer": [
 					"pages/accordion.html",

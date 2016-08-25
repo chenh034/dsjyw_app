@@ -190,10 +190,11 @@ mui('#list').on('tap','a',function(){
 		aniShow: aniShow
 	});
 	
-	mui.fire(contentWebview, 'getId', {
-		id:aid,
-		aniShow: aniShow
-	});
+//	mui.fire(contentWebview, 'getId', {
+//		id:aid,
+//		aniShow: aniShow
+//	});
+    window.localStorage.setItem('announce_id',aid);
 	
 	if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
 		var reload = true;
@@ -214,27 +215,27 @@ mui('#list').on('tap','a',function(){
 
 
 
-			mui('.mui-table-view-cell').on('tap', 'a', function() {
-				var id = this.getAttribute('href');
-				var href = this.href;
-				var type = this.getAttribute('open-type');
-				console.log(type);
-				if (type == "common") {
-					var webview_style = {
-						popGesture: "close"
-					};
+mui('.mui-table-view-cell').on('tap', 'a', function() {
+	var id = this.getAttribute('href');
+	var href = this.href;
+	var type = this.getAttribute('open-type');
+	console.log(type);
+	if (type == "common") {
+		var webview_style = {
+			popGesture: "close"
+		};
 
-					mui.openWindow({
-						id: id,
-						url: this.href,
-						styles: webview_style,
-						show: {
-							aniShow: aniShow,
-							duration:300
-						},
-						waiting: {
-							autoShow: false
-						}
-					});
-				}
-			});
+		mui.openWindow({
+			id: id,
+			url: this.href,
+			styles: webview_style,
+			show: {
+				aniShow: aniShow,
+				duration:300
+			},
+			waiting: {
+				autoShow: false
+			}
+		});
+	}
+});

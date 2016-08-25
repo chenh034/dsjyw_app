@@ -16,45 +16,58 @@
 			.mui-content,body{
 				background-color:#fff;
 			}
+			#title{
+				margin-left: 10px;
+				margin-top: 15px;
+			}
+			#holder{
+				margin-left: 10px;
+				margin-top: 10px;
+			}
+			#content{
+				margin-left: 10px;
+				margin-top: 20px;
+				/*overflow: hidden;*/
+			}
 		</style>
 	</head>
 	<body>
 		<div class="mui-content">
-			<div class="mui-content-padded">
-				<h1 id="title">h1. Heading</h1>
-				<h2>h2. Heading</h2>
-				<h3>h3. Heading</h3>
-				<h4>h4. Heading</h4>
-				<h5>h5. Heading</h5>
-				<h6>h6. Heading</h6>
-				<p>
-					p. 目前最接近原生App效果的框架。
-				</p>
+			<div id="main" class="mui-content-padded">
+				<h4 id="title"></h1>
+				<h5 id="holder">发布时间：<span id="time"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阅览次数：<span id="click"></span></h5>
+				<p id="content"></p>
 			</div>
 		</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script>
 		mui.init();
-		
-		window.addEventListener('getId',function(e){
-			var aid = e.detail.id;
-			mui.ajax('http://www.dsjyw.net/mobile/index/announceDetail',{
-				data:{aid:1079},
-				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
-				headers:{'Content-Type':'application/json'},	              
-				success:function(data){
-					console.log(data.title);
-                    document.getElementById("title").innerHTML = data.title;
-				},
-				error:function(xhr,type,errorThrown){
-					//异常处理；
-					console.log(type);
-				}
-			});
+	    
+	    mui.plusReady(function(){
+		var width = plus.screen.resolutionWidth-30;
+		var content = document.getElementById('content');
+		content.style.width = width+'px';    
+		});
+	    
+		var aid = window.localStorage.getItem('announce_id');
+		mui.ajax('http://www.dsjyw.net/mobile/index/announceDetail',{
+			data:{aid:aid},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},	              
+			success:function(data){
+                document.getElementById("title").innerHTML = data.title;
+                document.getElementById("time").innerHTML = data.add_time;
+                document.getElementById("click").innerHTML = data.clicks;
+                document.getElementById("content").innerHTML = data.content;
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				console.log(type);
+			}
+		});
 
-		})
 	</script>
 </html>
