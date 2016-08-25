@@ -1,0 +1,74 @@
+html,body, .mui-content {
+	background-color: #fff;
+}
+
+.zeo {
+	margin-left: 13px;
+	margin-right: 13px;
+}
+
+h4 {
+	margin-bottom: 8px;
+	font-size: 14px;
+	display: inline-block;
+	color: #8f8f94;
+}
+form {
+	display: inline-block;
+	margin-top: 8px;
+	float: right;
+}
+
+.picer {
+	margin-top: 44px;
+}
+
+.date {
+	float: left;
+	display: block;
+	width: 40px;
+	height: 55px;
+	font-size: 16px;
+	color: #fff;
+}
+
+.teacher{
+	color: #8f8f94;
+	margin-top: 16px;
+	position: relative;
+}
+.teacher h5{
+	font-size: 15px;
+	display: inline-block;
+}
+.teacher span{
+	border-bottom:3px solid #e14a50 ;
+}
+#topic{
+	width: 250px;
+	text-align: center;
+}
+#peace{
+	width: 30px;
+	position: absolute;
+	right: 98px;
+	top: 0;
+}
+#time{
+	width: 60px;
+	position: absolute;
+	right: 15px;
+	top: 0;
+}
+.list{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #fff;
+    list-style: outside none none;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+    position: relative;
+    border-bottom: 1px solid #c8c7cc;
+}

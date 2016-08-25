@@ -1,0 +1,14 @@
+html,body, .mui-content {
+	background-color: #fff;
+}
+
+.grey {
+	margin-right: -10px;
+	color: #dedcdb;
+}
+
+.pleft {
+	position: absolute;
+	left: 52px;
+}
+

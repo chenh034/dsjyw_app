@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/center/center_index.css" />
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+    <style>
+    	.icons {
+    		margin-left: -27px;
+			margin-top: 20px;
+			width: 80px;
+			border-radius: 80px;
+    	}
+    	.mui-content {
+    		margin-top: 40px;
+    	}
+    	.items{
+    		color: #666768;
+    		display: inline-block;
+    		width: 85px;
+    		text-align: center;
+    	}
+    	a.grey {
+    		color: #666768 !important;
+    	}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="center-head">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+		<a href="#">
+			<div>
+				<img src="../../img/center/unlog.jpg" class="icons" />
+			</div>
+			<p class="log-register">上传照片</p>
+		</a>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!-- 正文 start -->
+	<div class="mui-content">
+		
+		
+        <ul class="mui-table-view add1">
+            <li class="mui-table-view-cell">
+                <label class="items">登录账号</label>
+                <label>180***5666</label>
+            </li>
+            <li class="mui-table-view-cell">
+                <label class="items">姓名</label>
+                <label>王中中</label>
+            </li>
+        </ul>
+         <ul class="mui-table-view add1">
+            <li class="mui-table-view-cell">
+                <a href="change_password.html" class="mui-navigate-right grey">
+                	修改密码
+                </a>
+            </li>
+        </ul>
+      
+	</div>
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+	</script>
+</body>
+</html>

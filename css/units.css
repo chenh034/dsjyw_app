@@ -1,0 +1,88 @@
+html, body {
+	background: #fff;
+}
+
+.mui-content {
+	background: #fff;
+}
+
+.ad {
+	position: relative;
+	width: 100%;
+	height: 140px;
+	background: url('../img/ad.gif') no-repeat;
+	background-size: cover;
+}
+
+.logo {
+	position: absolute;
+	top: 55px;
+	left: 20px;
+	width: 68px;
+}
+
+.unit-name {
+	position: absolute;
+	top: 90px;
+	left: 105px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.property {
+	display: inline-block;
+	float: right;
+	margin-top: 50px;
+	width: 50px;
+	height: 20px;
+	border: 1px solid #c9c9c9;
+	border-right: 3px solid #e24524;
+	background: #fff;
+	border-top-left-radius:8px;
+	border-bottom-left-radius:8px;
+	font-size: 14px;
+	text-align: center;
+}
+
+#sliderSegmentedControl {
+	background: #f4f4ff;
+}
+
+#sliderSegmentedControl .mui-active {
+	background: #1e65bf;
+	color: #fff;
+}
+
+.ad-bottom {
+	margin-top: 140px;
+}
+
+.mui-slider-group {
+	margin-top: -2px;
+}
+
+/* 单位首页 */
+.list {
+	margin-left: -30px;
+	width: 280px;
+}
+
+.list li {
+	list-style: none;
+}
+
+.list span {
+	margin-left: 3px;
+}
+.describe{
+	display: block;
+	border-bottom: 1px solid #007AFF;
+	width: 60px;
+	margin-left: 12px;
+}
+.describe-word{
+	margin-left: 12px;
+	text-indent: 24px;
+	margin-top: 12px;
+}
+/*宣讲会日程*/

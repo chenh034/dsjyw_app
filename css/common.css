@@ -1,0 +1,24 @@
+/*
+ * 模块 ： 就业oa 头尾 公共样式
+ * 作者： 田慧婷
+ * 创建日期： 2016.5.8
+ */
+html, body {
+	background-color: #f0f0f0;
+}
+.head {
+	background-color: #e14a50;
+	font-family: "microsoft yahei";
+}
+
+.header {
+	color: #FFFFFF!important;
+}
+
+.bottom {
+	padding-top:5px ;
+}
+
+a.white {
+	color: #fff;
+}

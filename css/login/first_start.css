@@ -1,0 +1,29 @@
+/*初始登陆启动页 样式*/
+.mui-slider-item {
+	background-size: 100% 100%;
+}
+.item1 {
+	background: url(../../img/guide/app1.jpg) no-repeat;
+}
+.item2 {
+	background: url(../../img/guide/app2.jpg) no-repeat;
+}
+.item3 {
+	background: url(../../img/guide/app3.jpg) no-repeat;
+}
+.item4 {
+	position: relative;
+	background: url(../../img/guide/app4.jpg) no-repeat;
+}
+.enter {
+	position: absolute;
+	left: 35%;
+	bottom: 10%;
+	width: 100px;
+	height: 30px;
+	border: 2px solid #fff;
+	line-height: 27px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}

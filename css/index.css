@@ -1,0 +1,109 @@
+/*
+ * 模块 ： 就业oa 首页
+ * 作者： 田慧婷
+ * 创建日期： 2016.5.8
+ */
+.info {
+	margin-top: 5px;
+	border-radius: 0;
+	height: 210px;
+}
+
+.border-left {
+	border-left: 3px solid #f25f1e;
+	margin-left: -14px;
+	text-indent:4px;
+	height: 18px;
+}
+
+
+.grey {
+	color: #dedcdb;
+}
+
+
+.orange {
+	color: #f25f1e !important;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+a.white {
+	color: #fff;
+}
+
+.bottom {
+	margin-top: -3px;
+}
+
+
+
+.more{
+	position: absolute;
+	right: 32px;
+	top: 4px;
+	font-size: 14px;
+}
+
+#block{
+	background-color: #efeff4;
+}
+#teacher{
+	width: 85%;
+	position: relative;
+	left: -5%;
+}
+#recruit{
+	width: 85%;
+	position: relative;
+	left: 5%;
+}
+
+.mui-content-padded {
+     margin: 0; 
+}
+
+.mui-table-view:before{
+	height: 0;
+}
+.mui-table-view:after{
+	height: 0;
+}
+
+.mui-table-view-cell {
+    position: relative;
+    overflow: hidden;
+    padding: 6px 15px;
+}
+
+
+
+.mui-table-view-cell > a:not(.mui-btn) {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: -4px -15px;
+    padding: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+}
+
+.list_cell{
+    padding: 4px 15px;
+}
+
+.index_list{
+	font-size: 12px;
+	float: left;
+	width:250px; //指定宽度：
+　　overflow:hidden; //将超出内容隐藏
+　　text-overflow:ellipsis; //IE专用属性，文本溢出时显示省略标记()；其他浏览器不支持。
+　　white-space:nowrap;
+}
+
+.time{
+	font-size: 12px;
+}

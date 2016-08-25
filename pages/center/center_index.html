@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/center/center_index.css" />
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="center-head">
+		<a href="setting.html" class="mui-icon mui-icon-gear mui-pull-right setting-btn"></a>
+		
+		<a href="login.html">
+			<div>
+				<img src="../../img/center/unlog.jpg" class="icon" />
+			</div>
+			<p class="log-register">登陆</p>
+		</a>
+		<a href="account_infro.html"  class="msged">
+			<div>
+				<img src="../../img/center/unlog.jpg" class="icon" />
+			</div>
+			<div>
+				<p>王中中</p>
+				<p>
+					<span>东北师范大学</span>|<span>教育管理</span>
+				</p>
+			</div>
+		</a>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+
+
+	<!-- 正文 start -->
+	<div class="mui-content">
+	    <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+            	<p class="center-title">我的求职</p>
+            </li>
+            <li>
+            	<div class="mui-table my-apply">
+            		<div class="mui-table-cell mui-col-xs-3">
+            			<a href="#">
+            				<h3>0</h3>
+            				<p>关注职位</p>
+            			</a>
+            		</div>
+            		|
+            		<div class="mui-table-cell mui-col-xs-3">
+            			<a href="company.html">
+            				<h3>0</h3>
+            				<p>关注单位</p>
+            			</a>
+            		</div>
+            		|
+            		<div class="mui-table-cell mui-col-xs-3">
+            			<a href="#">
+            				<h3>0</h3>
+            				<p>报名宣讲会</p>
+            			</a>
+            		</div>
+            	</div>
+            </li>
+            <img src="../../img/center/red-point.jpg" width="5" height="5"  class="red-point" />
+        </ul>
+        <ul class="mui-table-view add1">
+            <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">
+                	添加求职信
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="msg.html" class="mui-navigate-right">
+                  	短信定制
+                </a>
+            </li>
+            <img src="../../img/center/add1_1.jpg" class="add-letter" />
+            <img src="../../img/center/add1_2.jpg" class="short-msg" />
+        </ul>
+        <ul class="mui-table-view add1">
+            <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">
+                	我的简历
+                </a>
+            </li>
+            <img src="../../img/center/add2_1.jpg" class="my-msg" />
+        </ul>
+	</div>
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+	</script>
+</body>
+</html>

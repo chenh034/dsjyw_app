@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <style>
+    	html,body, .mui-content {
+    		background: #fff;
+    	}
+    	.tip {
+    		display: none;
+    		width: 60%;
+    		margin: 50px auto;
+    	}
+    	.tip img {
+    		width: 100%;
+    	}
+    	.mui-scroll-wrapper {
+    		margin-top: 45px;
+    	}
+    	.title {
+    		color: #7c1d2e;
+    	}
+    	
+    	h5 {
+    		color: #3f3f3f;
+    		margin: 7px auto;
+    	}
+    	p {
+    		margin-bottom: 7px !important;
+    	}
+    	span {
+    		color: #949494;
+    	}
+    	.mui-btn {
+    		height: 25px;
+    		margin-right: 7px;
+    		line-height: 10px;
+    		color: #fb8738;
+    		border: 1px solid #e8e8e8;
+    	}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="mui-bar mui-bar-nav head">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+		<h1 id="title" class="mui-title header">已收藏职位（<span>0</span>）</h1>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!-- 正文 start -->
+	<div class="mui-content">
+		<div id="pullrefresh" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<a>
+							<h4 class="title">高中教师</h4>
+							<h5>单位名称：东北师大附中</h5>
+							<p class="">
+								<span><a>校内信息发布</a></span>
+								<span>城市：<a>长春</a></span>
+								<span>学历：<a>本科</a>
+								<span>专业：<a>不限</a>
+							</p>
+							<p>
+								<span class="mui-btn">提供住宿</span>
+								<span class="mui-btn">提供住宿</span>
+							</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+    	<div class="tip">
+    		<img src="../../img/center/no-position.jpg" />
+    	</div>
+	</div>
+        
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+	</script>
+	<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 3; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<a>Item ' + (i + 1) + '</a>';
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 20; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<a>Item ' + (i + 1) + '</a>';
+						table.appendChild(li);
+					}
+				}, 1500);
+			}
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 1000);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+		</script>
+</body>
+</html>

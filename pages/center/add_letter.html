@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+    <style>
+    	html,body, .mui-content {
+    		background: #fff;
+    	}
+    	section {
+    		width: 100%;
+    		height: 150px;
+    		position: relative;
+    		background-size: cover !important;
+    		
+    	}
+    	.shadow {
+    		width: 100%;
+    		height: 150px;
+    		position: absolute;
+    		background-color: rgba(220,220,220,0.85);
+    	}
+    	.shadow div {
+    		float: left;
+    		display: inline-block;
+    	}
+    	.icon-back {
+    		width: 85px;
+    		height: 150px;
+    	}
+    	.icon {
+    		margin-top: 22px;
+    		margin-left: 25px;
+    		width: 70px;
+    		height: 70px;
+    		border-radius: 35px;
+    	}
+    	.info {
+    		width: 270px;
+    		overflow: hidden;
+    	}
+    	.info-list {
+    		list-style: none;
+    		color: #fff;
+    	}
+    	.info-list li {
+    		margin-bottom: 4px;
+    	}
+    	.name {
+    		margin-bottom: 12px !important;
+    	}
+    	.info-msg i {
+    		margin-right: 20px;
+    	}
+    	article {
+    		width: 80%;
+    		margin: 20px auto;
+    		padding-top: 20px;
+    		border: 1px solid #a0a0a0;
+    		color: #797979;
+    	}
+    	.details {
+    		margin-top: 15px;
+    	}
+    	.add {
+    		height: 25px;
+    		line-height: 13px;
+    		padding: 5px;
+    		background: #fa9b05;
+    	}
+    	.add-letter {
+    		display: none;
+    	}
+    	
+    	/*填写求职信*/
+    	.edit-letter {
+    		display: none;
+    	}
+    	.mui-input-group .mui-input-row {
+    		height: auto;
+    	}
+    	.h4-title {
+    		border-left: 7px solid #EC6941;
+    		color: #EC6941;
+    		margin-left: 16px;
+    		padding-left: 10px;
+    	}
+    	.tips {
+    		font-size: 12px;
+    		color: #ec6941;
+    		text-indent: 16px;
+    	}
+    	.btns {
+    		margin-top: 10px;
+    		text-align: center;
+    	}
+    	.btns button {
+    		height: 25px;
+    		line-height: 13px;
+    		margin-bottom: 5px;
+    	}
+    	.save {
+    		background: #ec6941;
+    		color: #fff;
+    	}
+    	
+    	/*展示求职信*/
+    	.add-btn {
+    		margin: 5px auto;
+    		background: #f39903;
+    		color: #fff;
+    	}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="mui-bar mui-bar-nav head">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+		<h1 id="title" class="mui-title header">添加求职信</h1>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!-- 正文 start -->
+	<div class="mui-content">
+    	<section id="J_iconBack">
+    		<div class="shadow">
+				<div class="icon-back">
+	    			<img id="J_icon" class="icon" src="../../img/center/unlog.jpg"  />
+	    		</div>
+	    		<div class="info">
+	    			<ul class="info-list">
+	    				<li class="mui-h4 name">王中中</li>
+	    				<li><span>东北师范大学</span>|<span>教育管理</span></li>
+	    				<li class="info-msg">
+	    					<i class="fa fa-user">女</i>
+	    					<i class="fa fa-map-marker">成都</i>
+	    					<i class="fa fa-graduation-cap">本科</i>
+	    				</li>
+	    				<li>
+	    					出生日期：<span>1955-08-15</span>
+	    				</li>
+	    			</ul>
+	    		</div>
+			</div>    		
+    	</section>
+    	<article class="mui-text-center add-letter" id="J_noLetter">
+    		<h4>毛遂自荐，让招聘者了解你</h4>
+    		<p class="details">一封好的求职信可以拉近招聘者与你之间的距离，帮你活的更多的面试机会。</p>
+    		<button type="button" class="add">添加求职信</button>
+    	</article>
+    	
+    	<article class="edit-letter" id="J_noLetter">
+    		<h4 class="h4-title">求职信</h4>
+    		<p class="details tips">注：标题不得为空，求职信不得少于十个字</p>
+    		<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>标题：</label>
+					<input type="text" placeholder="不得为空">
+				</div>
+				<div class="mui-input-row">
+					<label>内容：</label>
+					<textarea rows="5" placeholder="不得少于十个字"></textarea>
+				</div>
+				<div class="btns">
+					<button type="submit" class="save">保存</button>
+					<button type="reset">重置</button>
+				</div>
+    		</form>
+    	</article>
+    	
+    	<article class="show-letter" id="J_noLetter">
+    		<h4 class="h4-title">求职信</h4>
+			<ul class="mui-table-view">
+			        <li class="mui-table-view-cell">
+			            <p>
+			            	<span>标题：</span>
+			            	<span>title</span>
+			            </p>
+			            <p>
+			            	<span>内容：</span>
+			            	<span>
+			       				dfgdfgsdfgdfsg dfg dfgdfg dfg dfg dfgdfg dfsg fdsg dfg dfsg df gsdf gdf gddddddddddddddddddddddddddddddds
+			            	</span>
+			            </p>
+			            <div class="pull-right">
+			            	<button class="mui-btn-link">编辑</button>
+			            	<button class="mui-btn-link">删除</button>
+			            </div>
+			        </li>
+			        <li class="mui-table-view-cell">
+			            <p>
+			            	<span>标题：</span>
+			            	<span>title</span>
+			            </p>
+			            <p>
+			            	<span>内容：</span>
+			            	<span>
+			       				dfgdfgsdfgdfsg dfg dfgdfg dfg dfg dfgdfg dfsg fdsg dfg dfsg df gsdf gdf gddddddddddddddddddddddddddddddds
+			            	</span>
+			            </p>
+			            <div class="pull-right">
+			            	<button class="mui-btn-link">编辑</button>
+			            	<button class="mui-btn-link">删除</button>
+			            </div>
+			        </li>
+			    </ul>
+			    <div class="mui-text-right">
+			    	<button type="button" class="add-btn">添加求职信</button>
+			    </div>
+
+    	</article>
+	</div>
+        
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+		document.getElementById("J_iconBack").style.background = 'url(' + document.getElementById("J_icon").getAttribute('src') + ') no-repeat';
+	</script>
+</body>
+</html>

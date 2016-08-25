@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+    <style>
+    	html,body, .mui-content {
+    		background: #fff;
+    	}
+    	#info {
+			padding: 20px 10px;
+		}
+		
+		.mui-btn {
+			font-size: 16px;
+			padding: 8px;
+			margin: 3px;
+		}
+		.time {
+			height: 100px;
+		}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="mui-bar mui-bar-nav head">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+		<h1 id="title" class="mui-title header">编辑教育经历</h1>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!-- 正文 start -->
+	<div class="mui-content">
+    	<form class="mui-input-group">
+			<div class="mui-input-row">
+				<label>毕业学校</label>
+				<input type="text">
+			</div>
+			<div class="time">
+				<label>就读时间</label>
+				<input type="month" />
+				<span>至</span>
+				<input type="month" />
+			</div>
+			<div class="mui-input-row">
+				<label>学历</label>
+				<input type="text" class="mui-input-clear">
+			</div>
+			<div class="mui-input-row">
+				<label>教育管理</label>
+				<input type="text" class="mui-input-clear">
+			</div>
+    	</form>
+	</div>
+        
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+		document.getElementById("J_iconBack").style.background = 'url(' + document.getElementById("J_icon").getAttribute('src') + ') no-repeat';
+	</script>
+	<script type="text/javascript" charset="utf-8">
+			 //mui初始化
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var info = document.getElementById("info");
+			
+			document.getElementById("pickDateBtn").addEventListener('tap', function() {
+				var dDate = new Date();
+				dDate.setFullYear(2014, 7, 16);
+				var minDate = new Date();
+				minDate.setFullYear(2010, 0, 1);
+				var maxDate = new Date();
+				maxDate.setFullYear(2016, 11, 31);
+				plus.nativeUI.pickDate(function(e) {
+					var d = e.date;
+					info.innerText = '您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+				}, function(e) {
+					info.innerText = "您没有选择日期";
+				}, {
+					title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+				});
+			})
+			
+		</script>
+</body>
+</html>

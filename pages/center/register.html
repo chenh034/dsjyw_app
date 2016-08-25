@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<!--<meta name="MobileOptimized" content="320"/>-->
+		<title>注册新账号</title>
+		<link href="../../css/mui.css" rel="stylesheet"/>
+	    <link rel="stylesheet" href="../../css/iconfont.css" />
+	    <link rel="stylesheet" href="../../css/common.css" />
+	    <link rel="stylesheet" href="../../css/login/login.css" />
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script>
+			mui.init();
+		</script>
+		<style>
+			.input {
+				border: 1px solid rgba(0, 0, 0, .2);
+				border-radius: 3px;
+				height: 40px;
+				line-height: 40px;
+				padding-left: 15px;
+				color: #a0a2a2;
+				font-size: 17px;
+			}
+			.input input {
+				margin-left: 10px;
+			}
+			.red {
+				color: #e34c52;
+				font-size: 16px;
+			}
+			.yes {
+				display: none;
+				margin-top: 100px;
+				color: #e34c52;
+				font-size: 14px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!-- 顶部标题 公共模块 start -->
+		<header class="mui-bar mui-bar-nav head">
+			<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+			<h1 id="title" class="mui-title header">注册新账号</h1>
+		</header>
+		<!-- 顶部标题 公共模块 end -->
+		<!-- 底部 导航 公共模块 start -->
+		<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+		<!-- 底部 导航 公共模块 end -->
+		<!-- 公告正文部分 start -->
+		<div class="mui-content">
+			<form id="J_formR" class="mui-content-padded">
+				<input type="text" placeholder="姓名" required autofocus />
+				<input type="email" placeholder="邮箱" required />
+				<div class="mui-input-row mui-password">
+					<input id="J_pass" type="password" placeholder="密码"  class="mui-input-password" required />
+				</div>
+				<div class="mui-input-row mui-password">
+					<input id="J_passSure" type="password" placeholder="确认密码"  class="mui-input-password" required />
+				</div>
+				<div class="input">
+					当前状态
+					<input type="radio" name="status" checked /><label>我是学生</label>
+					<input type="radio" name="status" /><label>我已工作</label>
+				</div>
+				<button id="J_register" type="submit" class="mui-btn mui-btn-block submit">立即注册</button>
+				<div class="mui-text-center">
+					<input type="checkbox" class="orange-box" required /> <label class="red">我已阅读并同意联盟网条款</label>
+				</div>
+
+			</form>
+			 <div id="J_yes" class="yes">
+			    	<img src="../../img/center/right.jpg" /><label>注册成功，请登陆注册邮箱查看激活文件</label>
+			 </div>
+		</div>
+		<!-- 公告正文 end -->
+		<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+		
+		function backLogin () {
+			window.location = 'login.html';
+		}
+		
+		mui('#J_formR').on('tap','#J_register', function() {
+			var pass = document.getElementById("J_pass").value.trim();
+			var passSure = document.getElementById("J_passSure").value.trim();
+			if (pass != passSure) {
+				plus.ui.toast('两次密码输入不一致');
+				return;
+			}
+			else {
+				document.getElementById("J_formR").style.display = 'none';
+				document.getElementById("J_yes").style.display = 'block';
+				setTimeout('backLogin()',1000);
+			};
+		});
+		
+	</script>
+	</body>
+	
+</html>

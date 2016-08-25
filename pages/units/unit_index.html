@@ -1,0 +1,206 @@
+<!-- 田慧婷 thtlovelife@163.com 就业oa首页-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>首页</title>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/unit_index.css" />
+	<link href="../../css/mui.picker.css" rel="stylesheet" />
+	<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+    <script src="../../js/mui.min.js"></script>
+    <script>
+    	mui.init();
+    </script>
+</head>
+<body>
+
+	<form  class="picer">
+		<button id='showUserPicker' class="mui-btn btns" type='button'>单位性质</button>
+		<input name="school" type="checkbox">
+		<label for="school">名校</label>
+		<input name="school" type="checkbox">
+		<label for="school">名企</label>
+		<a class="fr" href="javascript:;">关注度<span class="orange">↓</span></a>
+	</form>
+	<!-- 内容 start -->
+	<div class="mui-content">
+		<!-- 最新公告 start -->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<h4>单位名称: <span>联合利华</span></h4>
+						<p>行业:<span class="city">IT</span>城市: <span>天津</span></p>
+						<p>性质:<span>外企</p>
+						<p>
+							<span class="note">带薪休假</span>
+							<span class="note">带薪休假</span>
+						</p>
+						<a href="units.html" class="mui-btn" id="see">查看</a>
+						<a href="javascript:;" class="mui-btn" id="focus">关注</a>
+						<span class="num"><em>2012</em>人关注</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<h4>单位名称: <span>联合利华</span></h4>
+						<p>行业:<span class="city">IT</span>城市: <span>天津</span></p>
+						<p>性质:<span>外企</p>
+						<p>
+							<span class="note">带薪休假</span>
+							<span class="note">带薪休假</span>
+						</p>
+						<a href="units.html" class="mui-btn" id="see">查看</a>
+						<a href="javascript:;" class="mui-btn" id="focus">关注</a>
+						<span class="num"><em>2012</em>人关注</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<h4>单位名称: <span>联合利华</span></h4>
+						<p>行业:<span class="city">IT</span>城市: <span>天津</span></p>
+						<p>性质:<span>外企</p>
+						<p>
+							<span class="note">带薪休假</span>
+							<span class="note">带薪休假</span>
+						</p>
+						<a href="units.html" class="mui-btn" id="see">查看</a>
+						<a href="javascript:;" class="mui-btn" id="focus">关注</a>
+						<span class="num"><em>2012</em>人关注</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<h4>单位名称: <span>联合利华</span></h4>
+						<p>行业:<span class="city">IT</span>城市: <span>天津</span></p>
+						<p>性质:<span>外企</p>
+						<p>
+							<span class="note">带薪休假</span>
+							<span class="note">带薪休假</span>
+						</p>
+						<a href="units.html" class="mui-btn" id="see">查看</a>
+						<a href="javascript:;" class="mui-btn" id="focus">关注</a>
+						<span class="num"><em>2012</em>人关注</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 正文 end -->
+	<div id='userResult' class="ui-alert"></div>
+	<!-- 内容 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+	</script>
+	<script src="../../js/mui.picker.js"></script>
+	<script src="../../js/mui.poppicker.js"></script>
+	<script>
+		(function($, doc) {
+				$.init();
+				$.ready(function() {
+					//普通示例
+					var userPicker = new $.PopPicker();
+					userPicker.setData([{
+						value: 'ywj',
+						text: '党政机关'
+					}, {
+						value: 'aaa',
+						text: '科研单位'
+					}, {
+						value: 'lj',
+						text: '高等教育'
+					}, {
+						value: 'ymt',
+						text: '民办学校'
+					}, {
+						value: 'shq',
+						text: '基础教育'
+					}, {
+						value: 'zhbh',
+						text: '学前教育'
+					}, {
+						value: 'zhy',
+						text: '医疗事业单位'
+					}, {
+						value: 'gyf',
+						text: '其他事业单位'
+					}, {
+						value: 'zhz',
+						text: '国有企业'
+					}, {
+						value: 'gezh', 
+						text: '三资企业'
+					},{
+						value: 'otherscom',
+						text: '其他企业'
+					},{
+						value: 'army',
+						text: '部队'
+					},{
+						value: 'others',
+						text: '其他'
+					}]);
+					var showUserPickerButton = doc.getElementById('showUserPicker');
+					var userResult = doc.getElementById('userResult');
+					showUserPickerButton.addEventListener('tap', function(event) {
+						userPicker.show(function(items) {
+							userResult.innerText = JSON.stringify(items[0]);
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				});
+			})(mui, document);
+	</script>
+	<script>
+			mui.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 3; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<h4>单位名称: <span>联合利华</span></h4><p>行业:<span class="city">IT</span>城市: <span>天津</span></p><p>性质:<span>外企</p><p><span class="note">带薪休假</span><span class="note">带薪休假</span></p><a href="javascript:;" class="mui-btn" id="see">查看</a><a href="javascript:;" class="mui-btn" id="focus">关注</a><span class="num"><em>2012</em>人关注</span>';
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1000);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 20; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<h4>单位名称: <span>联合利华</span></h4><p>行业:<span class="city">IT</span>城市: <span>天津</span></p><p>性质:<span>外企</p><p><span class="note">带薪休假</span><span class="note">带薪休假</span></p><a href="javascript:;" class="mui-btn" id="see">查看</a><a href="javascript:;" class="mui-btn" id="focus">关注</a><span class="num"><em>2012</em>人关注</span>';
+						table.appendChild(li);
+					}
+				}, 1000);
+			}
+		</script>
+</body>
+</html>

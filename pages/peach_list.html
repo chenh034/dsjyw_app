@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/common.css" />
+	    <link rel="stylesheet" href="../css/peach.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="picer">
+			<div class="mui-input-row mui-select" style="border: 1px solid #aaaaaa;">
+                <select id="time">
+                    <option value="0">全部时间</option>
+                    <option value="1">今天</option>
+                    <option value="2">七天内</option>
+                    <option value="3">七天外</option>
+                </select>
+            </div>
+			<div class="mui-input-row mui-select" style="border: 1px solid #aaaaaa;">
+                <select id="trade">
+                    <option value="0">全部行业</option>
+                </select>
+            </div>
+			<div class="mui-input-row mui-select" style="border: 1px solid #aaaaaa;">
+                <select id="type">
+                    <option value="0">全部类型</option>
+                </select>
+            </div>
+            <form class="mui-input-group">
+				<div class="mui-input-row mui-checkbox mui-left">
+					<label>我关注的单位</label>
+					<input name="checkbox" value="focus" type="checkbox">
+				</div>
+			</form>
+			<!--<form>
+				<input name="checkbox" value="focus" type="checkbox">
+				<label>我关注的单位</label>
+			</form>-->
+		</div>
+		
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul id="list" class="mui-table-view mui-table-view-chevron">
+					
+				</ul>
+			</div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			var trade_op = document.getElementById("trade");
+			var type_op = document.getElementById("type");
+			mui.ajax('http://www.dsjyw.net/mobile/index/recruitList',{
+					data:{},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					headers:{'Content-Type':'application/json'},	              
+					success:function(data){
+						var tradeFrag = document.createDocumentFragment();
+						var typeFrag = document.createDocumentFragment();
+						mui.each(data.trade,function(index,item){
+							var option = document.createElement('option');
+							option.value = item.id;
+							option.innerHTML = item.name;
+							tradeFrag.appendChild(option);
+						});
+						mui.each(data.type,function(index,item){
+							var option = document.createElement('option');
+							option.value = item.id;
+							option.innerHTML = item.name;
+							typeFrag.appendChild(option);
+						});
+						trade_op.appendChild(tradeFrag);
+						type_op.appendChild(typeFrag);
+					},
+					error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+				});
+					
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			var page = 0;
+			function pullupRefresh() {				
+				page = page+1;
+				var table = document.getElementById('list');
+				var timeId = document.getElementById('time').value;
+				var tradeId = document.getElementById("trade").value;
+				var typeId = document.getElementById("type").value;
+				mui.ajax('http://www.dsjyw.net/mobile/index/recruitJson',{
+//					data:{timeId:timeId},
+                    data:{page:page,timeId:timeId,industryId:tradeId,preachTypeId:typeId},
+					dataType:'json',
+					type:'get',
+					timeout:10000,
+					headers:{'content-type':'application/json'},
+					success:function(data){
+//						console.log(data.timeId);
+						var listFrag = document.createDocumentFragment();
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.dataCount<10)); 
+							mui.each(data.data,function(index,item){
+								var li =document.createElement('li');
+								li.className='mui-table-view-cell';
+								content='<div class="mui-table"><div class="mui-table-cell"><span class="date mui-bg-primary">&nbsp;'
+								+item.month
+								+'月<br /><strong>'
+								+item.date
+								+'</strong></span><span class="time"><p>&nbsp;'
+								+item.week
+								+'</p><p><time>'
+								+item.time
+								+'</time></p></span><h4>'
+								+item.company
+								+'</h4><h5><span>'
+								+item.preachType;
+								if(item.isEnroll==1){
+									content+='</span></h5><button type="button" class="btn mui-btn mui-btn-primary">已报名</button></div>';
+								}else{
+									content+='</span></h5><button type="button" class="btn mui-btn mui-btn-primary has-btn">我要报名</button></div>';
+								}
+								li.innerHTML = content;	
+	
+								listFrag.appendChild(li);
+							});
+							list.appendChild(listFrag);
+					},
+					error:function(type){
+						console.log(type);
+					}
+				});
+
+		    }
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 100);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+			
+			mui('.picer').on('change','select',function(){
+				page = 0;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+			})
+		</script>
+		</script>
+	</body>
+
+</html>

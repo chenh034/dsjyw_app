@@ -1,0 +1,114 @@
+html,body, .mui-content {
+	background-color: #fff;
+}
+
+.btns {
+	padding: 8px;
+}
+
+h4 {
+	margin-bottom: 8px;
+	font-size: 14px;
+}
+
+form {
+	display: inline-block;
+	font-size: 14px;
+}
+
+.picer {
+	margin-top: 10px;
+	margin-left: 12px;
+}
+
+.date {
+	float: left;
+	display: block;
+	width: 40px;
+	height: 55px;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	padding-top: 2px;
+}
+
+
+strong {
+	display: inline-block;
+	margin-top: 8px;
+	font-size: 20px;
+}
+
+.time {
+	float: left;
+	margin-top: 5px;
+	margin-left: 3px;
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+h5 {
+	height: 30px;
+	line-height: 30px;
+}
+
+.btn {
+	position: absolute;
+	right: -60px;
+	top: 20px;
+	padding: 0;
+	width: 76px;
+	height: 28px;
+	line-height: 26px;
+}
+.has-btn{
+	background: #fff;
+	color: #000;
+}
+
+.mui-select{
+	width: 70px;
+	display: inline-block;
+}
+.mui-select select{
+	height: 25px;
+	font-size: 13px;
+	margin: 0 0;
+	border: 1px solid #aaaaaa;
+}
+.mui-select:before {
+    font-family: Muiicons;
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    content: '\e581';
+    /*color: rgba(170,170,170,.6);*/
+   color: #000000;
+}
+.mui-input-group .mui-input-row {
+    height: 28px;
+    margin-left: 8px;
+}
+
+.mui-input-group:before {
+    height: 0;
+}
+.mui-input-group:after {
+    height: 0;
+}
+.mui-input-group .mui-input-row:after {
+    height: 0;
+}
+.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before {
+    font-size: 20px;
+}
+.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
+	left: 2px;
+}
+.mui-checkbox.mui-left label, .mui-radio.mui-left label {
+    /*padding-right: 11px;
+    padding-left: 52px;*/
+   padding-left: 24px;
+   padding-top: 8px;
+}
+

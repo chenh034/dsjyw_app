@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <style>
+    	html,body, .mui-content {
+    		background: #fff;
+    	}
+    	.tip {
+    		display: none;
+    		width: 60%;
+    		margin: 50px auto;
+    	}
+    	.tip img {
+    		width: 100%;
+    	}
+    	.mui-scroll-wrapper {
+    		margin-top: 45px;
+    	}
+    	.mui-table-view-cell {
+    		border-top: 1px solid #a0a0a0;
+    		border-bottom: 1px solid #a0a0a0;
+    		margin: 10px 0;
+    	}
+    	.date {
+    		display: inline-block;
+    		width: 70px;
+    		height: 90px;
+    		padding-top: 10px;
+    		background: #e34c52;
+    		color: #fff;
+    		font-size: 20px;
+    		text-align: center;
+    	}
+    	.date strong {
+    		margin-top: 20px;
+    		display: block;
+    		width: 70px;
+    		height: 70px;
+    		font-size: 40px;
+    	}
+    	.time {
+    		display: inline-block;
+    		width: 70px;
+    		height: 90px;
+    		padding-top: 10px;
+    		color: #4f4f4f;
+    		font-size: 20px;
+    		text-align: center;
+    	}
+    	.time strong {
+    		margin-top: 20px;
+    		display: block;
+    		width: 70px;
+    		height: 70px;
+    	}
+    	.times {
+    		display: inline-block;
+    		height: 90px;
+    		padding-top: 10px;
+    		color: #4f4f4f;
+    		text-align: center;
+    	}
+    	.times strong {
+    		margin-top: 20px;
+    		display: block;
+    	}
+    	em {
+    		font-style: normal;
+    	}
+    	button.mui-btn {
+    		height: 40px;
+    		line-height: 10px;
+    		background: #e34c52;
+    		color: #fff;
+    	}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="mui-bar mui-bar-nav head">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+		<h1 id="title" class="mui-title header">我报名的宣讲会（<span>0</span>）</h1>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!-- 正文 start -->
+	<div class="mui-content">
+		<div id="pullrefresh" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<p>
+							<span class="date">
+								<em>2</em>&nbsp;月<strong>16</strong>
+							</span>
+							<span class="time">
+								周<em>四</em><strong>14:30</strong>
+							</span>
+							<span class="times">
+								<em>东北师范大学附属中学</em>
+								<strong>视频宣讲会</strong>
+							</span>
+						</p>
+						<p class="mui-text-center">
+							<button class="mui-btn mui-btn-block"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;取消报名</button>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+    	<div class="tip">
+    		<img src="../../img/center/no-peach.jpg" />
+    	</div>
+	</div>
+        
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+	</script>
+	<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 3; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<a>Item ' + (i + 1) + '</a>';
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 20; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<a>Item ' + (i + 1) + '</a>';
+						table.appendChild(li);
+					}
+				}, 1500);
+			}
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 1000);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+		</script>
+</body>
+</html>

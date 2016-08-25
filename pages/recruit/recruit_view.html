@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>招聘信息主页</title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/recruit/recruit.css" />
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+    <style>
+    	body{
+    		background-color: #fff;
+    	}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="mui-bar mui-bar-nav head">
+		<h1 class="mui-title header">职位详情</h1>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+			<a id="defaultTab J_index" class="mui-tab-item" href="../index.html">
+				<span class="mui-icon iconfont icon-shouye"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a id="J_info" class="mui-tab-item mui-active" href="recruit_index.html">
+				<span class="mui-icon iconfont icon-info"></span>
+				<span class="mui-tab-label">招聘信息</span>
+			</a>
+			<a id="J_unit" class="mui-tab-item" href="../units/unit_index.html">
+				<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+				<span class="mui-tab-label">用人单位</span>
+			</a>
+			<a id="J_me" class="mui-tab-item" href="../center/center_index.html">
+				<span class="mui-icon iconfont icon-geren"></span>
+				<span class="mui-tab-label">求职通</span>
+			</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!--正文 start-->
+	<div class="mui-content">
+		<div id="slider" class="mui-slider mui-fullscreen">
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll wrap">
+							<h1 class="recruit-view-name">高中教学教师</h1>
+							<h4 class="recruit-view-request"><i>R</i>职位要求<p>requirements</p></h4>
+							<ul class="recruit-request-list">
+								<li>职位类别：<span>工程师</span></li>
+								<li>学历要求：<span>工程师</span></li>
+								<li>所需专业：<span>工程师</span></li>
+								<li>招聘人数：<span>工程师</span></li>
+								<li>工作地点 ：<span>工程师</span></li>
+								<li>信息来源：<span>工程师</span></li>
+							</ul>
+							<div class="recruit-view-link">
+								<a href="#">
+									<a href="#" class="recruit-link-img">
+						                <img class="mui-media-object" src="../../img/logo.png">
+						            </a>
+									<div class="recruit-link-word">
+										<h3>东北师范大学第一附属中学</h3>
+										<p>长春</p>
+										<p>联系电话：<span>1111</span></p>
+									</div>
+								</a>
+							</div>
+							<div class="recruit-view-describe">
+								<h4 class="recruit-view-request"><i>R</i>职位描述<p>describe</p></h4>
+								<p class="recruit-describe">我们要的是以为优秀的，有教育创新能力的高中数学老师</p>
+								<h6 class="recruit-describe-tit">任职要求</h6>
+								<p class="recruit-describe-word">教师应忠诚社会主义教育事业，有强烈的事业心、责任感，有正确的教育思想，对学生负责，对全体学生负责，爱生育人。遵循教育方针和“三个面向”的要求和所任课班级的实际情况，制订出学期教学工作计划(包括班主任工作计划)。</p>
+								<p class="recruit-describe-word">教师应忠诚社会主义教育事业，有强烈的事业心、责任感，有正确的教育思想，对学生负责，对全体学生负责，爱生育人。遵循教育方针和“三个面向”的要求和所任课班级的实际情况，制订出学期教学工作计划(包括班主任工作计划)。</p>
+							</div>
+							<div class="recruit-view-our">
+								<h5>联系人</h5>
+								<ul>
+									<li><i>姓 名</i>：<span>丽丽</span></li>
+									<li><i>固 话</i>：<span>丽丽</span></li>
+									<li><i>手 机</i>：<span>11111111111</span></li>
+									<li>电子邮件 ：<span>1000000000@qq.com</span></li>
+								</ul>
+							</div>
+							<div style="height: 66px;"></div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- 公告正文 end -->
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script>
+			mui.init();
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios?0.003:0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration:deceleration
+				});
+			})(mui);
+		</script>
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+	</script>
+</body>
+</html>

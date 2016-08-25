@@ -1,0 +1,50 @@
+<!-- 田慧婷 thtlovelife@163.com 就业oa首页 最新公告-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title>首页</title>
+	    <link href="../css/mui.css" rel="stylesheet"/>
+	    <link rel="stylesheet" href="../css/iconfont.css" />
+	    <link rel="stylesheet" href="../css/common.css" />
+	    <link rel="stylesheet" href="../css/latest_info.css" />
+	</head>
+	<body>
+		<!-- 公告正文部分 start -->
+		<header class="mui-bar mui-bar-nav head">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+			<h1 id="title" class="mui-title header">最近公告</h1>
+		</header>
+		<div class="mui-content">
+			
+		</div>
+		<!-- 公告正文 end -->
+		<script src="../js/mui.min.js"></script>
+		<!--<script src="../js/index/latest_info.js" type="text/javascript" charset="utf-8"></script>-->
+        <script type="text/javascript">
+        	//启用双击监听
+			mui.init({
+				gestureConfig:{
+					doubletap:true
+				},
+				subpages:[{
+					url:'latest_info_list.html',
+					id:'latest_info_list.html',
+					styles:{
+						top: '45px',
+						bottom: '0px',
+					}
+				}]
+			});
+		
+			var contentWebview = null;
+			document.querySelector('header').addEventListener('doubletap',function () {
+				if(contentWebview==null){
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+			});
+        </script>
+	</body>
+</html>

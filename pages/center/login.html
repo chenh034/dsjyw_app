@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<!--<meta name="MobileOptimized" content="320"/>-->
+		<title>求职通登陆</title>
+		<link href="../../css/mui.css" rel="stylesheet"/>
+	    <link rel="stylesheet" href="../../css/iconfont.css" />
+	    <link rel="stylesheet" href="../../css/common.css" />
+	    <link rel="stylesheet" href="../../css/login/login.css" />
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script>
+			mui.init();
+		</script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript">
+			
+			var auths={};
+			function plusReady(){
+				// 获取登录认证通道
+				plus.oauth.getServices(function(services){
+					var content=document.getElementById('dcontent');
+					for(var i in services){
+						var service=services[i];
+						auths[service.id]=service;
+						var de = document.createElement('div');
+						de.setAttribute('onclick','login(this.id)');
+						de.id=service.id;
+						de.setAttribute('class','oauth-btn');
+						de.style.backgroundImage = 'url("../../img/center/' + service.id + '.jpg")';
+						oauth.appendChild(de);
+					}
+				},function(e){
+					outLine("获取登录认证失败："+e.message);
+				});
+			}
+			document.addEventListener('plusready',plusReady,false);
+			// 登录认证
+			function login(id){
+				outSet("----- 登录认证 -----");
+				var auth=auths[id];
+				if(auth){
+					var w=null;
+					if(plus.os.name=="Android"){
+						w=plus.nativeUI.showWaiting();
+					}
+					document.addEventListener("pause",function(){
+						setTimeout(function(){
+							w&&w.close();w=null;
+						},2000);
+					}, false );
+					auth.login(function(){
+						w&&w.close();w=null;
+						outLine("登录认证成功：");
+						outLine(JSON.stringify(auth.authResult));
+						userinfo(auth);
+					},function(e){
+						w&&w.close();w=null;
+						outLine("登录认证失败：");
+						outLine("["+e.code+"]："+e.message);
+						plus.nativeUI.alert("详情错误信息请参考授权登录(OAuth)规范文档：http://www.html5plus.org/#specification#/specification/OAuth.html",null,"登录失败["+e.code+"]："+e.message);
+					});
+				}else{
+					outLine("无效的登录认证通道！");
+					plus.nativeUI.alert("无效的登录认证通道！",null,"登录");
+				}
+			}
+			// 获取用户信息
+			function userinfo(a){
+				outLine("----- 获取用户信息 -----");
+				a.getUserInfo(function(){
+					outLine("获取用户信息成功：");
+					outLine(JSON.stringify(a.userInfo));
+					var nickname=a.userInfo.nickname||a.userInfo.name;
+					plus.nativeUI.alert("欢迎“"+nickname+"”登录！");
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 顶部标题 公共模块 start -->
+		<header class="mui-bar mui-bar-nav head">
+			<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+			<h1 id="title" class="mui-title header">求职通登陆</h1>
+		</header>
+		<!-- 顶部标题 公共模块 end -->
+		<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+		<!-- 底部 导航 公共模块 end -->
+		<!-- 公告正文部分 start -->
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl"  class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<div class="mui-scroll mui-text-center">
+							<a class="mui-control-item mui-active student" href="#item1mobile">
+								东北师范大学用户
+							</a>
+							<a class="mui-control-item other" href="#item2mobile">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他用户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</a>
+						</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<form class="mui-content-padded">
+							<input type="text" placeholder="学号" />
+							<input type="password" placeholder="密码" />
+							<p>
+								<a href="forget_password.html" class="mui-pull-right grey">忘记密码?</a>
+							</p>
+							<button type="submit" class="mui-btn mui-btn-block submit">立即登陆</button>
+						</form>
+						<p class="mui-text-center">
+							<a href="register.html" class="black">注册新账号</a>
+						</p>
+						<p class="mui-text-center white-grey mui-content-padded">
+							<span class="login-other">其他方式登录</span>
+						</p>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<form class="mui-content-padded">
+							<input type="text" placeholder="账号" />
+							<input type="password" placeholder="密码" />
+							<p>
+								<a href="forget_password.html" class="mui-pull-right grey">忘记密码?</a>
+							</p>
+							<button type="submit" class="mui-btn mui-btn-block submit">立即登陆</button>
+						</form>
+						<p class="mui-text-center">
+							<a href="register.html" class="black">注册新账号</a>
+						</p>
+						<p class="mui-text-center white-grey mui-content-padded">
+							<span class="login-other">其他方式登录</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="dcontent" class="dcontent oauth-area">
+				<div id="oauth"></div>
+			</div>
+			<div id="output" style="display: none;" ></div>
+		</div>
+		<!-- 公告正文 end -->
+		<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+		
+	</script>
+	</body>
+	
+</html>

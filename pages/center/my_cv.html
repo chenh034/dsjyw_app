@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/iconfont.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+    <style>
+    	html,body, .mui-content {
+    		background: #fff;
+    	}
+    	section {
+    		width: 100%;
+    		height: 150px;
+    		position: relative;
+    		background-size: cover !important;
+    		
+    	}
+    	.top {
+    		color: #fff;
+    		border-bottom: 1px solid #fff;
+    		margin: 5px 10px;
+    		padding-left: 10px;
+    		padding-bottom: 5px;
+    	}
+    	.top span {
+    		font-size: 12px;
+    		margin-top: 5px;
+    	}
+    	.shadow {
+    		width: 100%;
+    		height: 160px;
+    		position: absolute;
+    		background-color: rgba(220,220,220,0.85);
+    	}
+    	.shadow div {
+    		float: left;
+    		display: inline-block;
+    	}
+    	.icon-back {
+    		width: 85px;
+    		height: 160px;
+    	}
+    	.icon {
+    		margin-top: 12px;
+    		margin-left: 25px;
+    		width: 70px;
+    		height: 70px;
+    		border-radius: 35px;
+    	}
+    	.info {
+    		width: 270px;
+    		overflow: hidden;
+    	}
+    	.info-list {
+    		list-style: none;
+    		color: #fff;
+    	}
+    	.info-list li {
+    		margin-bottom: 4px;
+    	}
+    	.name {
+    		margin-bottom: 12px !important;
+    	}
+    	.info-msg i {
+    		margin-right: 20px;
+    	}
+    	article {
+    		width: 80%;
+    		margin: 30px auto;
+    		padding-top: 20px;
+    		border: 1px solid #a0a0a0;
+    		color: #797979;
+    	}
+    	.add {
+    		height: 25px;
+    		margin-top: 50px;
+    		margin-bottom: 10px;
+    		line-height: 13px;
+    		padding: 5px;
+    		background: #fa9b05;
+    		color: #fff;
+    	}
+    	.add-letter {
+    		display: none;
+    	}
+    	
+    	/*以上为第一次登陆*/
+    	
+    	/*已经有简历的页面 start*/
+    	.box {
+    		width: 90%;
+    		margin: 20px auto;
+    		border: 1px solid #a8a8a8;
+    		color: #888888;
+    	}
+    	.cv-title {
+    		border-bottom: 1px solid #a8a8a8;
+    		padding-bottom: 5px;
+    		width: 95%;
+    		margin: 7px auto;
+    		font-size: 16px;
+    	}
+    	.box ul {
+    		list-style: none;
+    	}
+    	.label {
+    		text-indent: 2em;
+    	}
+    	.add-ex {
+    		width: 90%;
+    		margin: 10px auto;
+    		height: 40px;
+    		line-height: 13px;
+    		font-size: 14px;
+    		color: #e15e65;
+    		background: #f7eaeb;
+    		border: 1px dotted #959595;
+    	}
+    </style>
+</head>
+<body>
+	<!-- 顶部标题 公共模块 start -->
+	<header class="mui-bar mui-bar-nav head">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+		<h1 id="title" class="mui-title header">我的简历</h1>
+	</header>
+	<!-- 顶部标题 公共模块 end -->
+	<!-- 底部 导航 公共模块 start -->
+	<!-- 底部 导航 公共模块 start -->
+	<nav class="mui-bar mui-bar-tab bottom">
+		<a id="defaultTab" class="mui-tab-item" href="../index.html">
+			<span class="mui-icon iconfont icon-shouye"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" href="../recruit/recruit_index.html">
+			<span class="mui-icon iconfont icon-info"></span>
+			<span class="mui-tab-label">招聘信息</span>
+		</a>
+		<a class="mui-tab-item" href="../units/unit_index.html">
+			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
+			<span class="mui-tab-label">用人单位</span>
+		</a>
+		<a class="mui-tab-item mui-active" href="center_index.html">
+			<span class="mui-icon iconfont icon-geren"></span>
+			<span class="mui-tab-label">求职通</span>
+		</a>
+	</nav>
+	<!-- 底部 导航 公共模块 end -->
+	<!-- 正文 start -->
+	<div class="mui-content">
+    	<section id="J_iconBack">
+    		<div class="shadow">
+    			<h4 class="top">
+    				基本信息
+    				<span class="pull-right">更新时间：<em>2016-03-15</em></span>
+    			</h4>
+				<div class="icon-back">
+	    			<img id="J_icon" class="icon" src="../../img/center/unlog.jpg"  />
+	    		</div>
+	    		<div class="info">
+	    			<ul class="info-list">
+	    				<li class="mui-h4 name">王中中</li>
+	    				<li><span>东北师范大学</span>|<span>教育管理</span></li>
+	    				<li class="info-msg">
+	    					<i class="fa fa-user">女</i>
+	    					<i class="fa fa-map-marker">成都</i>
+	    					<i class="fa fa-graduation-cap">本科</i>
+	    				</li>
+	    				<li>
+	    					出生日期：<span>1955-08-15</span>
+	    				</li>
+	    			</ul>
+	    		</div>
+			</div>    		
+    	</section>
+    	<article class="mui-text-center add-letter" id="J_noLetter">
+    		<h4>填写个人简历，让招聘者更了解你</h4>
+    		<button type="button" class="add">编辑个人简历</button>
+    	</article>
+    	<div class="box">
+    		<h4 class="cv-title">联系方式</h4>
+    		<ul>
+    			<li>手机：<span>110</span></li>
+    			<li>Q&nbsp;&nbsp;Q：<span>110</span></li>
+    			<li>邮箱：<span>110</span></li>
+    			<li>微信：<span>110</span></li>
+    		</ul>
+    		<div class="mui-text-right">
+    			<a class="mui-btn mui-btn-link" href="contact.html">编辑</a>
+    		</div>
+
+    	</div>
+    	<div class="box">
+    		<h4 class="cv-title">工作经历</h4>
+    		<!--<ul>
+    			<li>2014.09：<span>后端开发</span></li>
+    		</ul>-->
+    		<a class="mui-btn mui-btn-block add-ex" href="experence.html">点此添加描述，让经历信息更加丰富</a>
+    	</div>
+    	<div class="box">
+    		<h4 class="cv-title">教育经历</h4>
+    		<ul>
+    			<li>毕业学校：<span>110</span></li>
+    			<li>就读时间：<span>110</span></li>
+    			<li class="label">学历：<span>110</span></li>
+    			<li class="label">专业：<span>110</span></li>
+    		</ul>
+    		<div class="mui-text-right">
+    			<a class="mui-btn mui-btn-link" href="education.html">编辑</a>
+    		</div>
+    	</div>
+	</div>
+        
+	<!-- 正文 end -->
+	<script type="application/javascript" charset="UTF-8">
+		//底部导航跳转bug修复
+		mui('.mui-bar-tab').on('tap','a',function(){
+			location.href = this.getAttribute('href');
+		});
+		document.getElementById("J_iconBack").style.background = 'url(' + document.getElementById("J_icon").getAttribute('src') + ') no-repeat';
+	</script>
+</body>
+</html>
