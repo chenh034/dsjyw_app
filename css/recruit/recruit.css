@@ -9,10 +9,16 @@ html, body, .mui-content {
 .picer {
 	height: 66px;
 	background: #fff;
-	padding-top: 22px;
+	padding-top: 30px;
+	padding-left: 10px;
 	line-height: 33px;
 }
-
+#change{
+	display: inline-block;
+	position: relative;
+	top: -10px;
+	left: 5px;
+}
 .mui-content {
 	margin-top: -20px;
 }
@@ -178,4 +184,38 @@ html, body, .mui-content {
     top: 0px;
     width: auto;
     margin: 0 auto;
+}
+
+.mui-select{
+	width: 70px;
+	display: inline-block;
+}
+.mui-select select{
+	height: 25px;
+	font-size: 13px;
+	margin: 0 0;
+	border: 1px solid #aaaaaa;
+}
+.mui-select:before {
+    font-family: Muiicons;
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    content: '\e581';
+    /*color: rgba(170,170,170,.6);*/
+   color: #000000;
+}
+.mui-input-group .mui-input-row {
+    height: 28px;
+    margin-left: 8px;
+}
+
+.mui-input-group:before {
+    height: 0;
+}
+.mui-input-group:after {
+    height: 0;
+}
+.mui-input-group .mui-input-row:after {
+    height: 0;
 }

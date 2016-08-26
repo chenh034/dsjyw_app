@@ -621,7 +621,11 @@
 					"fonts/mui.ttf",
 					"css/mui.poppicker.css",
 					"css/peach.css",
-					"css/mui.picker.css"
+					"css/mui.picker.css",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"js/city.data.js",
+					"css/app.css"
 				],
 				"refer": [],
 				"priority": 0
