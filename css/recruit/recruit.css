@@ -18,7 +18,7 @@ html, body, .mui-content {
 }
 
 .recruit-title {
-	margin-left: 20%;
+	/*margin-left: 20%;*/
 }
 .recruit-title a {
     color: #fff!important;
@@ -168,4 +168,14 @@ html, body, .mui-content {
 .recruit-view-our i{
 	letter-spacing: 16px;
 	font-style: normal;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    color: #007aff;
+    border-bottom: none;
+    background: none;
+}
+.mui-bar .mui-segmented-control {
+    top: 0px;
+    width: auto;
+    margin: 0 auto;
 }

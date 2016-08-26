@@ -341,9 +341,12 @@
 					"js/mui.poppicker.js",
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js",
-					"pages/recruit/recruit_view.html"
+					"pages/recruit/recruit_view.html",
+					"pages/recruit/jiaoyu.html"
 				],
-				"refer": [],
+				"refer": [
+					"pages/recruit/feijiaoyu.html"
+				],
 				"priority": 0
 			},
 			"pages/units/unit_index.html": {
@@ -592,6 +595,33 @@
 					"css/app.css",
 					"js/mui.min.js",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/recruit/feijiaoyu.html": {
+				"resources": [
+					"css/recruit/recruit.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/iconfont.css",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/recruit/jiaoyu.html": {
+				"resources": [
+					"css/recruit/recruit.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"pages/recruit/recruit_view.html",
+					"fonts/mui.ttf",
+					"css/mui.poppicker.css",
+					"css/peach.css",
+					"css/mui.picker.css"
 				],
 				"refer": [],
 				"priority": 0

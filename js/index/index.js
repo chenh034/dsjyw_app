@@ -219,7 +219,6 @@ mui('.mui-table-view-cell').on('tap', 'a', function() {
 	var id = this.getAttribute('href');
 	var href = this.href;
 	var type = this.getAttribute('open-type');
-	console.log(type);
 	if (type == "common") {
 		var webview_style = {
 			popGesture: "close"
