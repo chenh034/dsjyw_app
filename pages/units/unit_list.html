@@ -207,7 +207,7 @@
 				var href = this.href;
 				var type = this.getAttribute('open-type');
 				var cid = this.rel;
-				console.log(type);
+//				console.log(type);
 				if (type == "common") {
 					window.localStorage.setItem('company_id',cid);
 					var webview_style = {
@@ -220,10 +220,11 @@
 						styles: webview_style,
 						show: {
 							aniShow: "pop-in",
-							duration:300
+							duration:300,
+							autoShow:true
 						},
 						waiting: {
-							autoShow: true
+							autoShow: false
 						}
 					});
 				}
