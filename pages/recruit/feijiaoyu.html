@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -8,115 +7,255 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/iconfont.css" />
 	    <link rel="stylesheet" href="../../css/common.css" />
+	    <link rel="stylesheet" type="text/css" href="../../css/app.css" />
+	    <link href="../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
 	    <link rel="stylesheet" href="../../css/recruit/recruit.css" />
 	</head>
 
 	<body>
-		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen head">
 			<div class="picer">
-					<div class="mui-scroll">
-						<button id='showUserPicker' class="mui-btn btns" type='button'>职位类别</button>
-						<button id='showUserPicker' class="mui-btn btns" type='button'>信息来源</button>
-						<button id='showUserPicker' class="mui-btn btns" type='button'>工作地点</button>
-						<a class="mui-control-item mui-active orange" href="#item1mobile">
-							时间
-						</a>
-						|
-						<a class="mui-control-item grey" href="#item2mobile">
-							热度↓
-						</a>
-					</div>
-			</div>
-			
-			<div class="mui-slider-group">
-				<div id="item2mobile" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell">
-									<a href="recruit_view.html">
-										<h4 class="recruit-name">职位名称: <span>高中教师2</span></h4>
-										<h5 class="unit-name">单位名称:<span>东北师大附中</span></h5>
-										<p class="hot">
-											<span>校内信息发布</span>
-											<span>城市:<i>长春</i></span>
-											<span>学历:<i>本科</i></span>
-											<span>专业:<i>不限</i></span>
-										</p>								
-										<p class="time">
-											<span class="note">提供住宿</span>
-											<span class="note">带薪休假</span>
-										</p>
-										<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-										<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-									</a>
-								</li>
-								<li class="mui-table-view-cell">
-									<a href="recruit_view.html">
-										<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-										<h5 class="unit-name">单位名称:<span>东北师大附中</span></h5>
-										<p class="hot">
-											<span>校内信息发布</span>
-											<span>城市:<i>长春</i></span>
-											<span>学历:<i>本科</i></span>
-											<span>专业:<i>不限</i></span>
-										</p>								
-										<p class="time">
-											<span class="note">提供住宿</span>
-											<span class="note">带薪休假</span>
-										</p>
-										<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-										<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-									</a>
-								</li>
-								<li class="mui-table-view-cell">
-									<a href="recruit_view.html">
-										<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-										<h5 class="unit-name">单位名称:<span>东北师大附中</span></h5>
-										<p class="hot">
-											<span>校内信息发布</span>
-											<span>城市:<i>长春</i></span>
-											<span>学历:<i>本科</i></span>
-											<span>专业:<i>不限</i></span>
-										</p>								
-										<p class="time">
-											<span class="note">提供住宿</span>
-											<span class="note">带薪休假</span>
-										</p>
-										<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-										<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-									</a>
-								</li>
-								<li class="mui-table-view-cell">
-									<a href="recruit_view.html">
-										<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-										<h5 class="unit-name">单位名称:<span>东北师大附中</span></h5>
-										<p class="hot">
-											<span>校内信息发布</span>
-											<span>城市:<i>长春</i></span>
-											<span>学历:<i>本科</i></span>
-											<span>专业:<i>不限</i></span>
-										</p>								
-										<p class="time">
-											<span class="note">提供住宿</span>
-											<span class="note">带薪休假</span>
-										</p>
-										<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-										<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-									</a>
-										
-								</li>
-							</ul>
-						</div>
-					</div>
+				<div class="mui-input-row mui-select" style="border: 1px solid #aaaaaa;">
+	                <select id="degree">
+	                    <option value="0">&nbsp;&nbsp;&nbsp;&nbsp;学历</option>
+	
+	                </select>
+	            </div>
+				<div class="mui-input-row mui-select" style="border: 1px solid #aaaaaa;">
+	                <select id="source">
+	                    <option value="0">消息来源</option>
+	                </select>
+	            </div>
+				<div class="mui-input-row mui-select" style="border: 1px solid #aaaaaa;">
+	                <!--<select id="type">
+	                    <option value="0">工作地点</option>
+	                </select>-->
+	                <!--<input id='showCityPicker'value="工作地点" type="button">-->
+                	<a href="#" id="showCityPicker" style="font-size: 13px; color:#000;padding-left: 4px;">工作地点</a>
+	            </div>
+	            <div id="change">
+	            	<a class="mui-control-item mui-active orange" href="#" id="time" rel="timeSort">
+						时间
+					</a>
+					<span>|</span>
+					<a class="mui-control-item grey" href="#" id="heat" rel="heatSort">
+						热度&nbsp;↓
+					</a>
+	            </div>
+	        </div>
+	       
+	        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--数据列表-->
+					<ul id="list" class="mui-table-view mui-table-view-chevron">
+						
+					</ul>
 				</div>
 			</div>
-		</div>
-		</div>
+	            			
 		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script src="../../js/city.data.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			mui.init()
+			(function($, doc) {
+				$.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+				$.ready(function() {
+					//省市联动
+					var cityPicker = new $.PopPicker({
+						layer: 2
+					});
+					cityPicker.setData(cityData);
+					var showCityPickerButton = doc.getElementById('showCityPicker');
+					var cityResult = doc.getElementById('cityResult');
+					showCityPickerButton.addEventListener('tap', function(event) {
+						cityPicker.show(function(items) {
+							showCityPickerButton.innerText = items[1].text;
+							page = 0;
+							document.getElementById("list").innerHTML='';
+							mui('#pullrefresh').pullRefresh().pullupLoading();
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+					
+					//select内容
+					var degree_op = document.getElementById("degree");
+					var source_op = document.getElementById("source");
+					mui.ajax('http://www.dsjyw.net/mobile/position/positionList',{
+							data:{},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+								var degreeFrag = document.createDocumentFragment();
+								var sourceFrag = document.createDocumentFragment();
+								mui.each(data.degree,function(index,item){
+									var option = document.createElement('option');
+									option.value = item.id;
+									option.innerHTML = item.name;
+									degreeFrag.appendChild(option);
+								});
+								mui.each(data.source,function(index,item){
+									var option = document.createElement('option');
+									option.value = item.id;
+									option.innerHTML = item.name;
+									sourceFrag.appendChild(option);
+								});
+								degree_op.appendChild(degreeFrag);
+								source_op.appendChild(sourceFrag);
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+						});
+					
+				});
+			})(mui, document);
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			var page = 0;
+			var timeSort = 1;
+			var heatSort = 0;
+			function pullupRefresh() {				
+				page = page+1;
+				var table = document.getElementById('list');
+				var degreeId = document.getElementById('degree').value;
+				var sourceId = document.getElementById("source").value;
+				var locationId = document.getElementById("showCityPicker").innerHTML;
+				mui.ajax('http://www.dsjyw.net/mobile/position/searchJson',{
+                    data:{page:page,degreeId:degreeId,messageSourceId:sourceId,locationId:locationId,kind:0,timeSort:timeSort,heatSort:heatSort},
+					dataType:'json',
+					type:'get',
+					timeout:10000,
+					headers:{'content-type':'application/json'},
+					success:function(data){                   
+                        var listFrag = document.createDocumentFragment();
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.dataCount<10)); 
+						mui.each(data.data,function(index,item){
+							var li =document.createElement('li');
+							li.className='mui-table-view-cell';
+							content='<a href="recruit_view.html" open-type="common" rel='
+							+item.id
+							+'><h4 class="recruit-name">职位名称: <span>'
+							+item.posName
+							+'</span></h4><h5 class="unit-name">单位名称:<span class="comName">'
+							+item.comName
+							+'</span></h5><p class="hot"><span>'
+							+item.publish
+							+'</span><span>城市:'
+							+item.city
+							+'</span><span>学历:'
+							+item.degree
+							+'</span><span>专业:'
+							+item.major
+							+'</span></p><p class="time"><span class="note">'
+							+item.specialA
+							+'</span><span class="note">'+item.specialB+'</span></p><a href="#" class="mui-btn mailing" id="see" open-type="send">立即投递</a>';
+							
+							if(item.collection==1){
+								content+='<a href="javascript:;" class="mui-btn remove" id="focus" open-type="focus">取消收藏</a></a>';
+							}else{
+								content+='<a href="javascript:;" class="mui-btn remove" id="focus" open-type="focus">收藏</a></a>'
+							}
+							li.innerHTML = content;	
+
+							listFrag.appendChild(li);
+						});
+						list.appendChild(listFrag);
+					},
+					error:function(type){
+						console.log(type);
+					}
+				});
+
+		    }
+			
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 50);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+			
+			mui('.picer').on('change','select',function(){
+				page = 0;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+			
+			mui('.picer').on('tap','a',function(){
+				page = 0;
+				Sort = this.rel;
+				if(Sort=='timeSort'){
+					timeSort = 1;
+					heatSort = 0;
+					document.getElementById("time").className = 'mui-control-item mui-active orange';
+					document.getElementById("heat").className = 'mui-control-item grey';
+				}else if(Sort=='heatSort'){
+					timeSort = 0;
+					heatSort = 1;
+					document.getElementById("heat").className = 'mui-control-item mui-active orange';
+					document.getElementById("time").className = 'mui-control-item grey';
+				}
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+			
+			mui('#list').on('tap', 'a', function() {
+				var id = this.getAttribute('href');
+				var href = this.href;
+				var type = this.getAttribute('open-type');
+				var pid = this.rel;
+				if (type == "common") {
+					window.localStorage.setItem('position_id',pid)
+					var webview_style = {
+						popGesture: "close"
+					};
+			
+					mui.openWindow({
+						id: id,
+						url: this.href,
+						styles: webview_style,
+						show: {
+							aniShow: "pop-in",
+							duration:300
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}
+			});
+			
 		</script>
 	</body>
 

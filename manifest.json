@@ -365,7 +365,8 @@
 					"pages/index.html",
 					"pages/recruit/recruit_index.html",
 					"pages/units/units.html",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"pages/units/unit_list.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -508,7 +509,8 @@
 					"pages/index.html",
 					"img/logo.png",
 					"img/center/account.jpg",
-					"pages/center/center_index.html"
+					"pages/center/center_index.html",
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"pages/teacher.html"
@@ -605,7 +607,14 @@
 					"js/mui.min.js",
 					"css/common.css",
 					"css/iconfont.css",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/mui.picker.js",
+					"css/app.css",
+					"js/mui.poppicker.js",
+					"fonts/mui.ttf",
+					"js/city.data.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -626,6 +635,33 @@
 					"js/mui.poppicker.js",
 					"js/city.data.js",
 					"css/app.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/units/unit_list.html": {
+				"resources": [
+					"css/unit_index.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"pages/units/units.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/company.html": {
+				"resources": [
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"fonts/iconfont.ttf",
+					"css/mui.css",
+					"fonts/fontawesome-webfont.ttf"
 				],
 				"refer": [],
 				"priority": 0

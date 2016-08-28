@@ -6,6 +6,10 @@ html, body {
 	background: #fff;
 }
 
+.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+    padding: 0px 8px;
+    font-size: 13px;
+}
 .ad {
 	position: relative;
 	width: 100%;
@@ -86,3 +90,4 @@ html, body {
 	margin-top: 12px;
 }
 /*宣讲会日程*/
+

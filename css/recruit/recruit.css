@@ -9,7 +9,7 @@ html, body, .mui-content {
 .picer {
 	height: 66px;
 	background: #fff;
-	padding-top: 30px;
+	padding-top: 10px;
 	padding-left: 10px;
 	line-height: 33px;
 }
@@ -22,7 +22,21 @@ html, body, .mui-content {
 .mui-content {
 	margin-top: -20px;
 }
-
+.mui-table-view-cell>a:not(.mui-btn) {
+    width: 280px;
+}
+.comName{
+	position: relative;
+    display: inline-block;
+    overflow: hidden;
+    top: 3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+.note{
+	font-size: 12px;
+}
 .recruit-title {
 	/*margin-left: 20%;*/
 }
@@ -55,8 +69,9 @@ html, body, .mui-content {
 .time span{
 	border: 1px solid #e8e8e8;
 	display: inline-block;
-	width: 75px;
 	height: 25px;
+	padding: 0 5px;
+	margin-right: 10px;
 	line-height: 23px;
 	text-align: center;
 }
@@ -70,6 +85,8 @@ html, body, .mui-content {
 	color: #fff;
 }
 #focus{
+	display: inline-block;
+	width: 64px;
 	top: 69%;
 	font-size: 13px;
 	padding: 4px 7px;
@@ -113,11 +130,11 @@ html, body, .mui-content {
 	float: left;
 	margin-left: -37px;
 	height: 28px;
+	font-size: 14px;
 }
 .recruit-view-link{
-	height: 150px;
-	padding-top: 22px;
-	padding-bottom: 22px;
+	height: 90px;
+	padding-top: 10px;
 	border-bottom: 1px solid #b1b1b1;
 	border-top: 1px solid #b1b1b1;
 }
@@ -128,7 +145,10 @@ html, body, .mui-content {
 }
 .recruit-link-word{
 	display: inline-block;
-	padding-left: 12px;
+	padding-left: 0px;
+	position: relative;
+	left: -20px;
+	top: -4px;
 }
 .recruit-link-word h3{
 	font-size: 16px;
@@ -167,7 +187,7 @@ html, body, .mui-content {
 }
 .recruit-view-our li{
 	list-style: none;
-	font-size: 18px;
+	font-size: 15px;
 	color: #3f3f3f;
 	margin-left: -37px;
 }
@@ -218,4 +238,21 @@ html, body, .mui-content {
 }
 .mui-input-group .mui-input-row:after {
     height: 0;
+}
+
+#logo{
+	width:70px;
+}
+
+#company_name{
+	width: 200px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.mui-btn-block{
+	display: inline-block;
+	width: 48%;
 }
