@@ -165,7 +165,22 @@
 	<!-- 正文内容 end -->
 	<script src="../../js/mui.min.js"></script>
 	<script type="application/javascript" charset="UTF-8">
+		mui.init();
 		
+		mui.ajax('http://www.dsjyw.net/mobile/company/detail',{
+                    data:{id:window.localStorage.getItem('company_id')},
+					dataType:'json',
+					type:'get',
+					timeout:10000,
+					headers:{'content-type':'application/json'},
+					success:function(data){  
+                       console.log(data);
+						
+					},
+					error:function(type){
+						console.log(type);
+					}
+				});
 	</script>
 </body>
 </html>

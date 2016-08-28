@@ -35,7 +35,7 @@
 		<div class="mui-content">
 			<div id="main" class="mui-content-padded">
 				<h4 id="title"></h1>
-				<h5 id="holder"><span id="time"></span><span id="click"></span></h5>
+				<h5 id="holder"><p id="time"></p><p id="click"></p></h5>
 				<p id="content"></p>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 				setTimeout(function(){
 					document.getElementById("title").innerHTML = data.title;
 	                document.getElementById("time").innerHTML = '发布时间：'+data.add_time;
-	                document.getElementById("click").innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阅览次数：'+data.clicks;
+	                document.getElementById("click").innerHTML = '阅览次数：'+data.clicks;
 	                document.getElementById("content").innerHTML = data.content;
 				},50);
 			},

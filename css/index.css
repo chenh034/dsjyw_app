@@ -86,6 +86,7 @@ a.white {
     overflow: hidden;
     margin: -4px -15px;
     padding: inherit;
+	padding-right: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: inherit;
@@ -98,12 +99,12 @@ a.white {
 .index_list{
 	font-size: 12px;
 	float: left;
-	width:250px; //指定宽度：
+	width:240px; //指定宽度：
 　　overflow:hidden; //将超出内容隐藏
 　　text-overflow:ellipsis; //IE专用属性，文本溢出时显示省略标记()；其他浏览器不支持。
 　　white-space:nowrap;
 }
 
 .time{
-	font-size: 12px;
+	font-size: 10px;
 }
