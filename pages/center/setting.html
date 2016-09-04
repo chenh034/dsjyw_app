@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/common.css" />
     <link rel="stylesheet" href="../../css/center/center_index.css" />
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
     <style>
     	html,body, .mui-content {
     		background: #fff;
@@ -26,27 +22,7 @@
 		<h1 id="title" class="mui-title header">设置</h1>
 	</header>
 	<!-- 顶部标题 公共模块 end -->
-	<!-- 底部 导航 公共模块 start -->
-	<!-- 底部 导航 公共模块 start -->
-	<nav class="mui-bar mui-bar-tab bottom">
-		<a id="defaultTab" class="mui-tab-item" href="../index.html">
-			<span class="mui-icon iconfont icon-shouye"></span>
-			<span class="mui-tab-label">首页</span>
-		</a>
-		<a class="mui-tab-item" href="../recruit/recruit_index.html">
-			<span class="mui-icon iconfont icon-info"></span>
-			<span class="mui-tab-label">招聘信息</span>
-		</a>
-		<a class="mui-tab-item" href="../units/unit_index.html">
-			<span class="mui-icon iconfont icon-wanglaidanwei"></span>
-			<span class="mui-tab-label">用人单位</span>
-		</a>
-		<a class="mui-tab-item mui-active" href="center_index.html">
-			<span class="mui-icon iconfont icon-geren"></span>
-			<span class="mui-tab-label">求职通</span>
-		</a>
-	</nav>
-	<!-- 底部 导航 公共模块 end -->
+	
 	<!-- 正文 start -->
 	<div class="mui-content setting">
 	    <ul class="mui-table-view add1">
@@ -98,18 +74,29 @@
         </ul>
 	</div>
 	<!-- 正文 end -->
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/loginTime.js"></script>
 	<script type="application/javascript" charset="UTF-8">
-		//底部导航跳转bug修复
-		mui('.mui-bar-tab').on('tap','a',function(){
-			location.href = this.getAttribute('href');
-		});
+	    mui.init();
 		//退出登陆
 		document.getElementById("J_exit").addEventListener('tap', function() {
 			var btnArray = ['取消', '确认'];
 			mui.confirm('确认退出登录？', function(e) {
 				if (e.index == 1) {
-					window.location = 'login.html';
+					setLogin('user_id',0);
+					var loginview = plus.webview.getWebviewById('center/center_index.html');
+					loginview.reload(true);
+					
+					curview = plus.webview.currentWebview();
+					
+					setTimeout(function(){
+						plus.webview.close(curview);
+					},500);
+//                  alert(1);
+				}else{
+//					alert(2);
 				}
+//              mui.back();
 			})
 		});
 		document.getElementById("J_share").addEventListener('tap', function() {

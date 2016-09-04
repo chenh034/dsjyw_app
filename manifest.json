@@ -366,7 +366,9 @@
 					"pages/recruit/recruit_index.html",
 					"pages/units/units.html",
 					"fonts/mui.ttf",
-					"pages/units/unit_list.html"
+					"pages/units/unit_list.html",
+					"pages/center/education.html",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -393,9 +395,17 @@
 					"fonts/iconfont.ttf",
 					"css/mui.css",
 					"pages/latest_info.html",
-					"img/center/red-point.png"
+					"img/center/red-point.png",
+					"js/loginTime.js",
+					"pages/center/my_cv.html",
+					"pages/center/add_letter.html"
 				],
-				"refer": [],
+				"refer": [
+					"pages/center/account_infro.html",
+					"pages/center/position.html",
+					"pages/center/company.html",
+					"pages/center/peach.html"
+				],
 				"priority": 0
 			},
 			"pages/center/login.html": {
@@ -415,7 +425,9 @@
 					"fonts/iconfont.ttf",
 					"css/mui.css",
 					"pages/index.html",
-					"pages/center/center_index.html"
+					"pages/center/center_index.html",
+					"pages/center/forget_password.html",
+					"js/loginTime.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -424,7 +436,8 @@
 				"resources": [
 					"img/center/right.jpg",
 					"pages/center/login.html",
-					"pages/units/unit_index.html"
+					"pages/units/unit_index.html",
+					"fonts/iconfont.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -446,13 +459,22 @@
 					"css/peach.css",
 					"css/recruit/recruit.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/recruit/recruit_view.html"
+				],
 				"priority": 0
 			},
 			"pages/center/msg.html": {
 				"resources": [
 					"img/center/msg-icon.jpg",
-					"pages/units/unit_index.html"
+					"pages/units/unit_index.html",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"fonts/iconfont.ttf",
+					"css/mui.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -468,16 +490,34 @@
 					"img/center/weixinfocus.jpg",
 					"pages/center/about.html",
 					"pages/center/advice.html",
-					"pages/units/unit_index.html"
+					"pages/units/unit_index.html",
+					"fonts/mui.ttf",
+					"css/mui.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"fonts/iconfont.ttf",
+					"css/center/center_index.css",
+					"pages/center/share.html",
+					"js/loginTime.js"
 				],
-				"refer": [
-					"pages/center/share.html"
-				],
+				"refer": [],
 				"priority": 0
 			},
 			"pages/center/account_infro.html": {
 				"resources": [
-					"pages/center/change_password.html"
+					"pages/center/change_password.html",
+					"img/center/unlog.jpg",
+					"pages/center/setting.html",
+					"fonts/iconfont.ttf",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"css/mui.css",
+					"css/center/center_index.css"
 				],
 				"refer": [
 					"pages/center/center_index.html"
@@ -489,7 +529,8 @@
 					"img/center/weibo_share.jpg",
 					"img/center/share_title.jpg",
 					"img/center/weixin_share.jpg",
-					"img/center/qzone_share.jpg"
+					"img/center/qzone_share.jpg",
+					"pages/center/setting.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -661,7 +702,147 @@
 					"css/font-awesome.min.css",
 					"fonts/iconfont.ttf",
 					"css/mui.css",
+					"fonts/fontawesome-webfont.ttf",
+					"pages/center/company_list.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/add_letter.html": {
+				"resources": [
+					"img/center/unlog.jpg",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"fonts/iconfont.ttf",
+					"css/mui.css",
 					"fonts/fontawesome-webfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/my_cv.html": {
+				"resources": [
+					"img/center/unlog.jpg",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"fonts/iconfont.ttf",
+					"css/mui.css",
+					"fonts/fontawesome-webfont.ttf",
+					"pages/center/education.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/forget_password.html": {
+				"resources": [
+					"pages/center/login.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/about.html": {
+				"resources": [
+					"pages/center/setting.html",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/advice.html": {
+				"resources": [
+					"pages/center/setting.html",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/education.html": {
+				"resources": [
+					"pages/units/unit_index.html",
+					"pages/center/my_cv.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/change_password.html": {
+				"resources": [
+					"pages/center/account_infro.html",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/position.html": {
+				"resources": [
+					"pages/center/position_list.html",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"img/center/no-position.jpg",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/position_list.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"css/mui.css",
+					"js/loginTime.js",
+					"css/recruit/recruit.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/company_list.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"js/loginTime.js",
+					"fonts/fontawesome-webfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/peach.html": {
+				"resources": [
+					"img/center/no-peach.jpg",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/font-awesome.min.css",
+					"fonts/iconfont.ttf",
+					"css/mui.css",
+					"fonts/fontawesome-webfont.ttf",
+					"pages/center/peach_list.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/center/peach_list.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/loginTime.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/peach.css"
 				],
 				"refer": [],
 				"priority": 0

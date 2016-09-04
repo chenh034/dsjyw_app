@@ -107,3 +107,7 @@ html, body {
     color:#000;
     font-size: 14px;
 }
+
+.mui-table-view-cell>a:not(.mui-btn) {
+    width: 100%;
+}

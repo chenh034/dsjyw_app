@@ -21,7 +21,7 @@
 }
 
 .icon {
-	margin-left: 32px;
+	/*margin-left: 32px;*/
 	margin-top: 20px;
 	width: 60px;
 	border-radius: 80px;
@@ -93,8 +93,10 @@ h3 {
 .setting img {
 	left: 10px;
 }
-
-.msged {
+.show{
+	display: block;
+}
+.hide {
 	display: none;
 }
 

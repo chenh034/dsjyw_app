@@ -159,7 +159,7 @@
 							li.className='mui-table-view-cell';
 							content='<a href="recruit_view.html" open-type="common" rel='
 							+item.id
-							+'><h4 class="recruit-name" style="position: relative;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 230px;">职位名称: <span>'
+							+'><h4 class="recruit-name">职位名称: <span>'
 							+item.posName
 							+'</span></h4><h5 class="unit-name">单位名称:<span class="comName">'
 							+item.comName
@@ -184,7 +184,7 @@
 
 							listFrag.appendChild(li);
 						});
-						list.appendChild(listFrag);
+						table.appendChild(listFrag);
 					},
 					error:function(type){
 						console.log(type);

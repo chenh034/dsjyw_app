@@ -86,10 +86,10 @@ html, body, .mui-content {
 }
 #focus{
 	display: inline-block;
-	width: 64px;
+	width: 60px;
 	top: 69%;
 	font-size: 13px;
-	padding: 4px 7px;
+	padding: 4px 5px;
 }
 #see{
 	top: 42%;

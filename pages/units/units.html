@@ -8,13 +8,20 @@
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/common.css" />
-    <link rel="stylesheet" href="../../css/units.css" />
     <link rel="stylesheet" href="../../css/peach.css" />
     <link rel="stylesheet" href="../../css/recruit/recruit.css" />
-	<script src="../../js/mui.min.js"></script>
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
+    <link rel="stylesheet" href="../../css/units.css" />
+    <style type="text/css">
+		.mui-loader {
+			position: absolute;
+			top: 100px;
+			width: 100%;
+			height: 80%;
+			color: #888;
+			font-size: 14px;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<!-- 顶部标题 公共模块 start -->
@@ -23,14 +30,13 @@
 		<h1 id="title" class="mui-title header">公司主页</h1>
 	</header>
 	<!-- 顶部标题 公共模块 end -->
-	<!-- 底部 导航 公共模块 start -->
 	
 	<!-- 正文内容 start -->
 	<div class="mui-content">
 		<div class="ad">
 	    	<span id="company_logo"></span>
 	    	<span class="unit-name" id="company_name"></span>
-			<span class="property">名校</span>
+			<div id="famous"></div>
 		</div>
 		
 		<div id="segmentedControl" class="mui-segmented-control">
@@ -52,8 +58,6 @@
 		</div>
 		
 		<div id="item1" class="mui-control-content mui-active">
-			<!--<div id="scroll" class="mui-scroll-wrapper">
-				<div class="mui-scroll">-->
 					<ul class="list">
 						<li>所属行业:<span id="company_trade"></span></li>
 						<li>单位性质:<span id="company_property"></span></li>
@@ -63,225 +67,29 @@
 					</ul>
 					<div>
 					    <span class="describe">单位介绍</span>
-					    <p class="describe-word" id="company_describe">教师应忠诚社会主义教育事业，有强烈的事业心、责任感，有正确的教育思想，对学生负责，对全体学生负责，爱生育人。遵循教育方针和“三个面向”的要求和所任课班级的实际情况，制订出学期教学工作计划(包括班主任工作计划)。</p>
-				    </div>
-		        <!--</div>
-			</div>-->
+					    <p class="describe-word" id="company_describe"></p>
+				   </div>
 		</div>
 				<div id="item2" class="mui-control-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="#">
-								<div class="mui-table">
-					                <div class="mui-table-cell">
-					                	<span class="date mui-bg-primary">
-					                		&nbsp;2月<br />
-					                		<strong>16</strong>
-					                	</span>
-					                	<span class="time">
-					                		<p>&nbsp;周一</p>
-					                		<p>
-					                			<time>14:30</time>
-					                		</p>
-					                	</span>
-					                    <h4>东北师范大学附属中学东北师</h4>
-					                    <h5><span>视频宣讲会</span></h5>
-					                    <button type="button" class="btn mui-btn mui-btn-primary" style="right:-12px;">已报名</button>
-					                </div>
-					            </div>
-				            </a>
-						</li>
+					<ul class="mui-table-view" id="recruit">
+							<div class="mui-loader">暂无宣讲会</div>
 					</ul>
 				</div>
 				<div id="item3" class="mui-control-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="#">
-								<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-								<p class="hot">
-									<span>校内信息发布</span>
-									<span>城市:长春</span>
-									<span>学历:本科</span>
-									<span>专业:不限</span>
-								</p>								
-								<p class="time">
-									<span class="note">提供住宿</span>
-									<span class="note">带薪休假</span>
-								</p>
-								<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-								<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-							</a>
-						</li>
+					<ul class="mui-table-view" id="position">
+						<div class="mui-loader">暂无职位</div>
 					</ul>
 				</div>
 				
 				<div id="item4" class="mui-control-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="#">
-								<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-								<p class="hot">
-									<span>校内信息发布</span>
-									<span>城市:长春</span>
-									<span>学历:本科</span>
-									<span>专业:不限</span>
-								</p>								
-								<p class="time">
-									<span class="note">提供住宿</span>
-									<span class="note">带薪休假</span>
-								</p>
-								<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-								<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-							</a>
-						</li>
-					</ul>
+					<div class="mui-loader">暂无单位点评</div>
 				</div>
 				
 				<div id="item5" class="mui-control-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="#">
-								<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-								<p class="hot">
-									<span>校内信息发布</span>
-									<span>城市:长春</span>
-									<span>学历:本科</span>
-									<span>专业:不限</span>
-								</p>								
-								<p class="time">
-									<span class="note">提供住宿</span>
-									<span class="note">带薪休假</span>
-								</p>
-								<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-								<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-							</a>
-						</li>
-					</ul>
+					<div class="mui-loader">暂无面试经验</div>
 				</div>
 		
-		<!--<div class="mui-slider mui-fullscreen ad-bottom">
-			<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-				<div class="mui-scroll">
-					<a class="mui-control-item mui-active" href="#item1mobile">
-						单位首页
-					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						宣讲会日程
-					</a>
-					<a class="mui-control-item" href="#item3mobile">
-						在招职位
-					</a>
-					<a class="mui-control-item" href="#item4mobile">
-						单位点评
-					</a>
-					<a class="mui-control-item" href="#item5mobile">
-						面试经验
-					</a>
-				
-				</div>
-			</div>-->
-			<!--<div class="mui-slider-group">
-				<div id="item1mobile" class="unit-index mui-slider-item mui-control-content mui-active">
-					<ul class="list">
-						<li>所属行业:<span id="company_trade"></span></li>
-						<li>单位性质:<span id="company_property"></span></li>
-						<li>所属地区:<span id="company_city"></span></li>
-						<li>官方网址:<span id="company_web"></span></li>
-						<li>地址:<span id="company_address"></span></li>
-					</ul>
-					<div >
-						<span class="describe">单位介绍</span>
-						<p class="describe-word" id="company_describe">教师应忠诚社会主义教育事业，有强烈的事业心、责任感，有正确的教育思想，对学生负责，对全体学生负责，爱生育人。遵循教育方针和“三个面向”的要求和所任课班级的实际情况，制订出学期教学工作计划(包括班主任工作计划)。</p>
-					</div>
-				</div>
-				<div id="item2mobile" class=" mui-control-content">
-					
-						
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell">
-									<a href="#">
-										<div class="mui-table">
-							                <div class="mui-table-cell">
-							                	<span class="date mui-bg-primary">
-							                		&nbsp;2月<br />
-							                		<strong>16</strong>
-							                	</span>
-							                	<span class="time">
-							                		<p>&nbsp;周一</p>
-							                		<p>
-							                			<time>14:30</time>
-							                		</p>
-							                	</span>
-							                    <h4>东北师范大学附属中学东北师</h4>
-							                    <h5><span>视频宣讲会</span></h5>
-							                    <button type="button" class="btn mui-btn mui-btn-primary" style="right:-12px;">已报名</button>
-							                </div>
-							            </div>
-						            </a>
-								</li>
-							</ul>
-						
-					
-				</div>
-				<div id="item3mobile" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell">
-									<a href="#">
-										<h4 class="recruit-name">职位名称: <span>高中教师</span></h4>
-										<p class="hot">
-											<span>校内信息发布</span>
-											<span>城市:长春</span>
-											<span>学历:本科</span>
-											<span>专业:不限</span>
-										</p>								
-										<p class="time">
-											<span class="note">提供住宿</span>
-											<span class="note">带薪休假</span>
-										</p>
-										<a href="units.html" class="mui-btn mailing" id="see">立即投递</a>
-										<a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a>
-									</a>
-								</li>
-								
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div id="item4mobile" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell">
-									第4个选项卡子项-1
-								</li>
-								<li class="mui-table-view-cell">
-									第4个选项卡子项-2
-								</li>
-								<li class="mui-table-view-cell">
-									第4个选项卡子项-3
-								</li>
-								
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div id="item5mobile" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell">
-									第5个选项卡子项-1
-								</li>
-								
-							</ul>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>-->
+		
 	</div>
 	<!-- 正文内容 end -->
 	<script src="../../js/mui.min.js"></script>
@@ -303,12 +111,94 @@
                document.getElementById("company_property").innerHTML = data.company.companyproperty;
                document.getElementById("company_web").innerHTML = data.company.website;
                document.getElementById("company_logo").innerHTML = '<img class="logo" src=http://www.dsjyw.net/'+data.company.logo+' />';
+               if(data.company.is_famous==1&&data.compnay.companytrade=='教育'){
+               	   document.getElementById("famous").innerHTML = '<span class="property">名校</span>';
+               }else if(data.company.is_famous==1&&data.company.companytrade!='教育'){
+               	   document.getElementById("famous").innerHTML = '<span class="property">名企</span>';
+               }
+               
+               if(data.recruit){
+               	  document.getElementById("recruit").innerHTML = '';
+               	  var listFrag = document.createDocumentFragment();
+                  var content_r;
+               	  mui.each(data.recruit,function(index,item){
+                    var li =document.createElement('li');
+					li.className='mui-table-view-cell peach_list';
+					content_r = '<a href="#"><div class="mui-table" style="width:85%;"><div class="mui-table-cell"><span class="date mui-bg-primary">&nbsp;'
+					            +item.month
+					            +'月<br /><strong>16</strong></span><span class="time"><p>&nbsp;'
+					            +item.week
+					            +'</p><p><time>14:30</time></p></span><h4>'
+					            +item.company
+					            +'</h4><h5><span>'
+					            +item.preachType
+					            +'</span></h5>';
+					if(item.isEnroll==1){
+					    content_r+='<button type="button" class="btn mui-btn mui-btn-primary" style="width=60px;">已报名</button></div></div></a>';
+					}else if(item.isEnroll==0){
+						content_r+='<button type="button" class="btn mui-btn mui-btn-primary" style="width:60px">报名</button></div></div></a>';
+					}
+					li.innerHTML = content_r;
+					listFrag.appendChild(li);	            
+               	 });
+               	 document.getElementById("recruit").appendChild(listFrag);
+               }
+               
+               if(data.position){
+               	  document.getElementById("position").innerHTML = '';
+               	  var listFrag = document.createDocumentFragment();
+                  var content_p;
+               	  mui.each(data.position,function(index,item){
+                    var li =document.createElement('li');
+					li.className='mui-table-view-cell position_list';
+					content_p = '<a href="../recruit/recruit_view.html" rel='+item.id+' open-type="common"><h4 class="recruit-name">职位名称: <span>'
+					+item.jobName
+					+'</span></h4><p class="hot"><span>'+item.messageSource+'</span><span>职位类别:'
+					+item.jobType
+					+'</span><br/><span>学历:'
+					+item.degreeRequire
+					+'</span><span>专业:'
+					+item.major
+					+'</span></p><p class="time"><span class="note">提供住宿</span><span class="note">带薪休假</span></p><a href="units.html" class="mui-btn mailing" id="see">立即投递</a><a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a></a>';
+					
+					li.innerHTML = content_p;
+					listFrag.appendChild(li);	            
+               	 });
+               	 document.getElementById("position").appendChild(listFrag);
+               }
                
 			},
 			error:function(type){
 				console.log(type);
 			}
 		});
+		
+		mui('#position').on('tap', 'a', function() {
+				var id = this.getAttribute('href');
+				var href = this.href;
+				var type = this.getAttribute('open-type');
+				var pid = this.rel;
+				if (type == "common") {
+					window.localStorage.setItem('position_id',pid);
+					var webview_style = {
+						popGesture: "close"
+					};
+			
+					mui.openWindow({
+						id: id,
+						url: this.href,
+						styles: webview_style,
+						show: {
+							aniShow: "pop-in",
+							duration:300,
+							autoShow:true
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}
+			});
 	</script>
 </body>
 </html>

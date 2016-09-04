@@ -4,35 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/common.css" />
     <link rel="stylesheet" href="../../css/center/center_index.css" />
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
 </head>
 <body>
 	<!-- 顶部标题 公共模块 start -->
 	<header class="center-head">
-		<a href="setting.html" class="mui-icon mui-icon-gear mui-pull-right setting-btn"></a>
+		<a href="setting.html" open-type="common" class="mui-icon mui-icon-gear mui-pull-right setting-btn"></a>
 		
-		<a href="login.html">
+		<a href="login.html" id="unlogin" open-type="common">
 			<div>
-				<img src="../../img/center/unlog.jpg" class="icon" />
+				<img src="../../img/center/unlog.jpg" class="icon" / style="margin-left:32px;">
 			</div>
 			<p class="log-register">登陆</p>
+			<p>
+				<span>&nbsp;</span><span>&nbsp;</span>
+			</p>
 		</a>
-		<a href="account_infro.html"  class="msged">
-			<div>
-				<img src="../../img/center/unlog.jpg" class="icon" />
+		<a href="account_infro.html" open-type="common"  id="login" class="hide" >
+			<div id="head_url">
+				<img src="../../img/center/unlog.jpg" class="icon"/ style="margin-left: 32px;">
 			</div>
 			<div>
-				<p>王中中</p>
-				<p>
-					<span>东北师范大学</span>|<span>教育管理</span>
+				<p id="realname" style="color:#fff;"></p>
+				<p style="color:#fff;">
+					<span id="school_name"></span>|<span id="major"></span>
 				</p>
 			</div>
 		</a>
@@ -49,22 +48,22 @@
             <li>
             	<div class="mui-table my-apply">
             		<div class="mui-table-cell mui-col-xs-3">
-            			<a href="#">
-            				<h3>0</h3>
+            			<a href="position.html" open-type="common">
+            				<h3 id="position_num">0</h3>
             				<p>关注职位</p>
             			</a>
             		</div>
             		|
             		<div class="mui-table-cell mui-col-xs-3">
-            			<a href="company.html">
-            				<h3>0</h3>
+            			<a href="company.html" open-type="common">
+            				<h3 id="company_num">0</h3>
             				<p>关注单位</p>
             			</a>
             		</div>
             		|
             		<div class="mui-table-cell mui-col-xs-3">
-            			<a href="#">
-            				<h3>0</h3>
+            			<a href="peach.html" open-type="common">
+            				<h3 id="recruit_num">0</h3>
             				<p>报名宣讲会</p>
             			</a>
             		</div>
@@ -74,12 +73,12 @@
         </ul>
         <ul class="mui-table-view add1">
             <li class="mui-table-view-cell">
-                <a class="mui-navigate-right">
+                <a href="add_letter.html" class="mui-navigate-right" open-type="common">
                 	添加求职信
                 </a>
             </li>
             <li class="mui-table-view-cell">
-                <a href="msg.html" class="mui-navigate-right">
+                <a href="msg.html" open-type="common" class="mui-navigate-right">
                   	短信定制
                 </a>
             </li>
@@ -88,19 +87,94 @@
         </ul>
         <ul class="mui-table-view add1">
             <li class="mui-table-view-cell">
-                <a class="mui-navigate-right">
+                <a class="mui-navigate-right" open-type="common" href="my_cv.html">
                 	我的简历
                 </a>
             </li>
             <img src="../../img/center/add2_1.jpg" class="my-msg" />
         </ul>
 	</div>
-	<!-- 正文 end -->
-	<script type="application/javascript" charset="UTF-8">
-		//底部导航跳转bug修复
-		mui('.mui-bar-tab').on('tap','a',function(){
-			location.href = this.getAttribute('href');
+	
+	
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+      	if(!window.localStorage.getItem('user_id')){
+      		setLogin('user_id',0);
+      	}
+
+      	
+      	var user_id = check(60000*60);
+      	if(user_id){
+      		mui.ajax('http://www.dsjyw.net/mobile/job/index',{
+	      		data:{user_id:user_id},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},	              
+				success:function(data){
+					document.getElementById("head_url").innerHTML = '<img src='+data.headUrl+' class="icon"/ style="margin-left: 32px;">';
+					document.getElementById("realname").innerHTML = data.name;
+					document.getElementById("school_name").innerHTML = data.school;
+					document.getElementById("major").innerHTML = data.major;
+					document.getElementById("position_num").innerHTML = data.PositionOrderNum;
+					document.getElementById("company_num").innerHTML = data.CompanyOrderNum;
+					document.getElementById("recruit_num").innerHTML = data.RecruitOrderNum;
+					window.localStorage.setItem('concern_company',data.CompanyOrderNum);
+					window.localStorage.setItem('concern_position',data.PositionOrderNum);
+					window.localStorage.setItem('concern_recruit',data.RecruitOrderNum);
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+	      	});
+      	}
+      	
+      	
+      	
+      	function check(overtime){
+      		var status = getLogin('user_id',overtime);
+      		if(!status){
+      			document.getElementById("unlogin").className = 'show';
+      			document.getElementById("login").className = 'hide';
+      		}else{
+      			document.getElementById("unlogin").className = 'hide';
+      			document.getElementById("login").className = 'show';
+      		}
+      		return status;
+      	}
+      	mui('.mui-content,header').on('tap', 'a', function() {
+  		    var status = getLogin('user_id',60000*60);
+			var id = this.getAttribute('href');
+			var href = this.href;
+			var type = this.getAttribute('open-type');
+
+			if(!status){
+				id = 'login.html';
+				href = 'login.html';
+			}
+			if (type == "common") {
+				var webview_style = {
+					popGesture: "close"
+				};
+		
+				mui.openWindow({
+					id: id,
+					url: href,
+					styles: webview_style,
+					show: {
+						aniShow: "pop-in",
+						duration:300,
+						autoShow:true
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}
 		});
-	</script>
+    </script>
 </body>
 </html>
