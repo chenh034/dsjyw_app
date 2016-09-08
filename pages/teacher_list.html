@@ -129,7 +129,7 @@
 							mui.each(data.teacher,function(index,item){
 								var li =document.createElement('li');
 								 li.className='mui-table-view-cell';
-								 li.innerHTML='<a class="teacher_list" rel='+item.id+'>'+ item.title
+								 li.innerHTML='<a class="teacher_list" href="detail.html" rel='+item.id+'>'+ item.title
 								                          +'</a><a class="mui-pull-right update city ">'
 								                          +item.city
 								                          +'</a><span class="mui-pull-right update time ">'
@@ -157,6 +157,101 @@
 					mui('#pullrefresh').pullRefresh().pullupLoading();
 				});
 			}
+			
+			var templates = {};
+			var getTemplate = function(name, header, content) {
+				var template = templates[name];
+				if (!template) {
+					//预加载共用父模板；
+					var headerWebview = mui.preload({
+						url: header,
+						id: name + "-main",
+						styles: {
+							popGesture: "hide",
+						},
+						extras: {
+							mType: 'main'
+						}
+					});
+					//预加载共用子webview
+					var subWebview = mui.preload({
+						url: !content ? "" : content,
+						id: content,
+						styles: {
+							top: '45px',
+							bottom: '0px',
+						},
+						extras: {
+							mType: 'sub'
+						}
+					});
+					subWebview.addEventListener('titleUpdate', function() {
+						setTimeout(function() {
+							subWebview.show();
+						}, 50);
+					});
+					subWebview.hide();
+					headerWebview.append(subWebview);
+					//iOS平台支持侧滑关闭，父窗体侧滑隐藏后，同时需要隐藏子窗体；
+					if (mui.os.ios) { //5+父窗体隐藏，子窗体还可以看到？不符合逻辑吧？
+						headerWebview.addEventListener('hide', function() {
+							subWebview.hide("none");
+						});
+					}
+					templates[name] = template = {
+						name: name,
+						header: headerWebview,
+						content: subWebview,
+					};
+				}
+				return template;
+			};
+			var initTemplates = function() {
+				getTemplate('default', 'template.html');
+			};
+			
+			mui.plusReady(function(){
+				initTemplates();
+			});
+			
+			mui('#list').on('tap','a',function(){
+				var aid = this.rel;
+				var href = this.href;
+				//获得共用模板组
+				var template = getTemplate('default');
+				//获得共用父模板
+				var headerWebview = template.header;
+				//获得共用子webview
+				var contentWebview = template.content;
+				//通知模板修改标题，并显示隐藏右上角图标；
+				mui.fire(headerWebview, 'updateHeader', {
+					title: '详情',
+					target:href,
+					aniShow: 'pop-in'
+				});
+				
+			//	mui.fire(contentWebview, 'getId', {
+			//		id:aid,
+			//		aniShow: aniShow
+			//	});
+			    window.localStorage.setItem('announce_id',aid);
+				
+				if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
+					var reload = true;
+					if (!template.loaded) {
+						if (contentWebview.getURL() != this.href) {
+							contentWebview.loadURL(this.href);
+						} else {
+							reload = false;
+						}
+					} else {
+						reload = false;
+					}
+					(!reload) && contentWebview.show();
+					
+					headerWebview.show(aniShow, 150);
+				}
+			})
 		</script>
 	</body>
 

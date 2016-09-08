@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/common.css" />
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
     <style>
     	html,body, .mui-content {
     		background: #fff;
+    		font-size: 14px;
     	}
     	section {
     		width: 100%;
@@ -62,11 +59,18 @@
     		margin-right: 20px;
     	}
     	article {
-    		width: 80%;
+    		width: 90%;
+    		/*height: 200px;*/
     		margin: 20px auto;
-    		padding-top: 20px;
+    		padding-top: 50px;
     		border: 1px solid #a0a0a0;
     		color: #797979;
+    	}
+    	#J_noLetter{
+    		height: 200px;
+    	}
+    	#J_addLetter{
+    		
     	}
     	.details {
     		margin-top: 15px;
@@ -74,15 +78,18 @@
     	.add {
     		height: 25px;
     		line-height: 13px;
-    		padding: 5px;
+    		padding: 8px;
     		background: #fa9b05;
     	}
     	.add-letter {
-    		display: none;
+    		/*display: none;*/
     	}
     	
     	/*填写求职信*/
     	.edit-letter {
+    		/*display: none;*/
+    	}
+    	.hide{
     		display: none;
     	}
     	.mui-input-group .mui-input-row {
@@ -119,6 +126,19 @@
     		background: #f39903;
     		color: #fff;
     	}
+    	
+    	.mui-loader {
+			position: absolute;
+			top: 25%;
+			width: 100%;
+			height: 60%;
+			color: #888;
+			font-size: 14px;
+			text-align: center;
+		}
+		.mui-btn-link{
+			margin-right: 20px;
+		}
     </style>
 </head>
 <body>
@@ -130,95 +150,204 @@
 	<!-- 顶部标题 公共模块 end -->
 
 	<!-- 正文 start -->
-	<div class="mui-content">
+	<div class="mui-loader" id="loading">正在加载...</div>
+	<div class="mui-content" id="main-content" style="display: none;">
     	<section id="J_iconBack">
     		<div class="shadow">
-				<div class="icon-back">
-	    			<img id="J_icon" class="icon" src="../../img/center/unlog.jpg"  />
+				<div class="icon-back" id="head_url">
+	    			
 	    		</div>
 	    		<div class="info">
 	    			<ul class="info-list">
-	    				<li class="mui-h4 name">王中中</li>
-	    				<li><span>东北师范大学</span>|<span>教育管理</span></li>
+	    				<li class="mui-h4 name" id="name"></li>
+	    				<li><span id="school"></span>|<span id="major"></span></li>
 	    				<li class="info-msg">
-	    					<i class="fa fa-user">女</i>
-	    					<i class="fa fa-map-marker">成都</i>
-	    					<i class="fa fa-graduation-cap">本科</i>
+	    					<i class="fa fa-user" id="gender"></i>
+	    					<i class="fa fa-map-marker" id="city"></i>
+	    					<i class="fa fa-graduation-cap" id="degree"></i>
 	    				</li>
 	    				<li>
-	    					出生日期：<span>1955-08-15</span>
+	    					出生日期：<span id="birthday"></span>
 	    				</li>
 	    			</ul>
 	    		</div>
 			</div>    		
     	</section>
-    	<article class="mui-text-center add-letter" id="J_noLetter">
+    	<article class="mui-text-center add-letter hide" id="J_noLetter">
     		<h4>毛遂自荐，让招聘者了解你</h4>
     		<p class="details">一封好的求职信可以拉近招聘者与你之间的距离，帮你活的更多的面试机会。</p>
     		<button type="button" class="add">添加求职信</button>
     	</article>
     	
-    	<article class="edit-letter" id="J_noLetter">
+    	<article class="edit-letter hide" id="J_addLetter">
     		<h4 class="h4-title">求职信</h4>
     		<p class="details tips">注：标题不得为空，求职信不得少于十个字</p>
-    		<form class="mui-input-group">
+    		<form class="mui-input-group" id="letterForm">
 				<div class="mui-input-row">
 					<label>标题：</label>
-					<input type="text" placeholder="不得为空">
+					<input type="text" name="title" id="letter_title" placeholder="不得为空">
+					<input id="letterid" value="" name="letterid" style="display: none;">
 				</div>
 				<div class="mui-input-row">
 					<label>内容：</label>
-					<textarea rows="5" placeholder="不得少于十个字"></textarea>
+					<textarea rows="5" name="content" id="letter_content" placeholder="不得少于十个字"></textarea>
 				</div>
 				<div class="btns">
 					<button type="submit" class="save">保存</button>
-					<button type="reset">重置</button>
+					<!--<button type="reset">重置</button>-->
 				</div>
     		</form>
     	</article>
     	
-    	<article class="show-letter" id="J_noLetter">
+    	<article class="show-letter show" id="J_hasLetter">
     		<h4 class="h4-title">求职信</h4>
-			<ul class="mui-table-view">
-			        <li class="mui-table-view-cell">
-			            <p>
-			            	<span>标题：</span>
-			            	<span>title</span>
-			            </p>
-			            <p>
-			            	<span>内容：</span>
-			            	<span>
-			       				dfgdfgsdfgdfsg dfg dfgdfg dfg dfg dfgdfg dfsg fdsg dfg dfsg df gsdf gdf gddddddddddddddddddddddddddddddds
-			            	</span>
-			            </p>
-			            <div class="pull-right">
-			            	<button class="mui-btn-link">编辑</button>
-			            	<button class="mui-btn-link">删除</button>
-			            </div>
-			        </li>
-			        <li class="mui-table-view-cell">
-			            <p>
-			            	<span>标题：</span>
-			            	<span>title</span>
-			            </p>
-			            <p>
-			            	<span>内容：</span>
-			            	<span>
-			       				dfgdfgsdfgdfsg dfg dfgdfg dfg dfg dfgdfg dfsg fdsg dfg dfsg df gsdf gdf gddddddddddddddddddddddddddddddds
-			            	</span>
-			            </p>
-			            <div class="pull-right">
-			            	<button class="mui-btn-link">编辑</button>
-			            	<button class="mui-btn-link">删除</button>
-			            </div>
-			        </li>
-			    </ul>
+			<ul class="mui-table-view" id="list">
+			        
+			</ul>
 			    <div class="mui-text-right">
 			    	<button type="button" class="add-btn">添加求职信</button>
 			    </div>
 
     	</article>
 	</div>
-        
+    
+    <script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+      	var user_id = getLogin('user_id');
+      	mui.ajax('http://www.dsjyw.net/mobile/job/applicationLetter',{
+			data:{user_id:user_id},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},       
+			success:function(data){
+				document.getElementById("name").innerHTML = data.User.name;
+				document.getElementById("gender").innerHTML = data.User.gender;
+				document.getElementById("major").innerHTML = data.User.major;
+				document.getElementById("city").innerHTML = data.User.city;
+				document.getElementById("birthday").innerHTML = data.User.birthday;
+				document.getElementById("school").innerHTML = data.User.school;
+				document.getElementById("head_url").innerHTML = '<img id="J_icon" class="icon" src='+data.User.headUrl+'>';
+				document.getElementById("degree").innerHTML = data.User.degree;
+				
+				if(!data.applicationLetter){
+					document.getElementById("J_addLetter").className = 'add-letter hide';
+					document.getElementById("J_hasLetter").className = 'show-letter hide';
+					document.getElementById("J_noLetter").className = 'mui-text-center add-letter';
+				}else{
+					var table = document.getElementById("list");
+					var listFrag = document.createDocumentFragment();
+					mui.each(data.applicationLetter,function(index,item){
+						var li =document.createElement('li');
+						li.className='mui-table-view-cell';
+						content='<p><span>标题：</span><span>'
+						+item.title
+						+'</span></p><p><span>内容：</span><span>'
+						+item.content
+						+'</p><div class="pull-right"><a class="mui-btn-link" rel='
+						+item.id
+						+'>编辑</a><a class="mui-btn-link" rel='
+						+item.id
+						+'>删除</a></div>';
+
+						li.innerHTML = content;	
+
+						listFrag.appendChild(li);
+					});
+					table.appendChild(listFrag);
+				}
+				
+				document.getElementById("main-content").style.display = 'block';
+				document.getElementById("loading").style.display = 'none';
+			},
+			error:function(xhr,type,errorThrown){
+	            alert(type);
+			}
+		});
+		
+		mui('#J_noLetter').on('tap','button',function(){
+			document.getElementById("J_addLetter").className = 'add-letter';
+			document.getElementById("J_noLetter").className = 'mui-text-center add-letter hide';
+		});
+		mui('#J_addLetter').on('tap','button',function(){
+			var form = document.getElementById("letterForm");
+			var title = form.title.value;
+			var content = form.content.value;
+			var id = form.letterid.value;
+			
+			mui.ajax('http://www.dsjyw.net/mobile/job/addLetter',{
+				data:{user_id:user_id,title:title,content:content,id:id},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},       
+				success:function(data){
+					var curView = plus.webview.currentWebview();
+					curView.reload(true);
+				},
+				error:function(xhr,type,errorThrown){
+		            alert(type);
+				}
+			});
+		});
+		mui('#J_hasLetter').on('tap','button',function(){
+			document.getElementById("J_addLetter").className = 'add-letter';
+			document.getElementById("J_hasLetter").className = 'show-letter hide';
+			document.getElementById("J_noLetter").className = 'mui-text-center add-letter hide';
+			document.getElementById("letterid").value = null;
+			
+			document.getElementById("letter_title").innerHTML = '';
+			document.getElementById("letter_content").innerHTML = '';
+		});
+		mui('#list').on('tap','a',function(){
+			var type = this.innerHTML;
+			var id = this.rel;
+			if(type=='编辑'){
+				document.getElementById("J_addLetter").className = 'add-letter';
+				document.getElementById("J_hasLetter").className = 'show-letter hide';
+				document.getElementById("J_noLetter").className = 'mui-text-center add-letter hide';
+				document.getElementById("letterid").value = id;
+				mui.ajax('http://www.dsjyw.net/mobile/job/editApplicationLetter',{
+					data:{id:id},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					headers:{'Content-Type':'application/json'},       
+					success:function(data){
+						document.getElementById("letter_title").value = data.title;
+						document.getElementById("letter_content").innerHTML = data.content;
+					},
+					error:function(xhr,type,errorThrown){
+			            alert(type);
+					}
+				});
+				
+			}else if(type=='删除'){ //DelApplicationLetter
+				mui.confirm('确认删除？', function(e) {
+				    if (e.index == 1) {
+				    	mui.ajax('http://www.dsjyw.net/mobile/job/delApplicationLetter',{
+							data:{id:id},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},       
+							success:function(data){
+								if(!data.code){
+									var curView = plus.webview.currentWebview();
+									curView.reload(true);
+								}
+							},
+							error:function(xhr,type,errorThrown){
+					            alert(type);
+							}
+						});
+				    }
+				});
+				
+			}
+		})
+    </script>
 </body>
 </html>

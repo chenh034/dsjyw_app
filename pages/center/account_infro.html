@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/common.css" />
     <link rel="stylesheet" href="../../css/center/center_index.css" />
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
     <style>
     	.icons {
     		margin-left: -27px;
@@ -32,6 +28,15 @@
     	a.grey {
     		color: #666768 !important;
     	}
+    	.mui-loader {
+			position: absolute;
+			top: 25%;
+			width: 100%;
+			height: 60%;
+			color: #888;
+			font-size: 14px;
+			text-align: center;
+		}
     </style>
 </head>
 <body>
@@ -39,29 +44,30 @@
 	<header class="center-head">
 		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
 		<a href="#">
-			<div>
-				<img src="../../img/center/unlog.jpg" class="icons" />
+			<div id="head_url">
+				
 			</div>
-			<p class="log-register">上传照片</p>
+			<a class="log-register">上传照片</a>
 		</a>
 	</header>
 	<!-- 顶部标题 公共模块 end -->
 
 	<!-- 正文 start -->
-	<div class="mui-content">
+	<div class="mui-loader" id="loading">正在加载...</div>
+	<div class="mui-content" id="main-content">
 		
 		
         <ul class="mui-table-view add1">
             <li class="mui-table-view-cell">
                 <label class="items">登录账号</label>
-                <label>180***5666</label>
+                <label id="account"></label>
             </li>
             <li class="mui-table-view-cell">
                 <label class="items">姓名</label>
-                <label>王中中</label>
+                <label id="realname"></label>
             </li>
         </ul>
-         <ul class="mui-table-view add1">
+        <ul class="mui-table-view add1">
             <li class="mui-table-view-cell">
                 <a href="change_password.html" class="mui-navigate-right grey">
                 	修改密码
@@ -71,11 +77,32 @@
       
 	</div>
 	<!-- 正文 end -->
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 	<script type="application/javascript" charset="UTF-8">
-		//底部导航跳转bug修复
-		mui('.mui-bar-tab').on('tap','a',function(){
-			location.href = this.getAttribute('href');
-		});
+		mui.init();
+		var user_id = getLogin('user_id');
+		document.getElementById("main-content").style.display = 'none';
+		mui.ajax('http://www.dsjyw.net/mobile/job/user',{
+      		data:{user_id:user_id},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},	              
+			success:function(data){
+				document.getElementById("account").innerHTML = data.account;
+				document.getElementById("realname").innerHTML = data.realname;
+				document.getElementById("head_url").innerHTML = '<img src='+data.headUrl+' class="icons" />';
+				
+				document.getElementById("loading").style.display = 'none';
+				document.getElementById("main-content").style.display = 'block';
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				console.log(type);
+			}
+      	});
+		
 	</script>
 </body>
 </html>

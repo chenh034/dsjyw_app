@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/common.css" />
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
+    
     <style>
     	html,body, .mui-content {
     		background: #fff;
@@ -19,6 +16,15 @@
     	.mui-content {
     		margin-top: 40px;
     	}
+    	.mui-loader {
+			position: absolute;
+			top: 25%;
+			width: 100%;
+			height: 60%;
+			color: #888;
+			font-size: 14px;
+			text-align: center;
+		}
     	.msg-title {
     		height: 25px;
     		padding-left: 30px;
@@ -55,35 +61,107 @@
 	
 	<!-- 正文 start -->
 	<div class="mui-content">
-		<form class="mui-card J_noData">
+		<div class="mui-loader" id="loading">加载中...</div>
+		<form class="mui-card has J_noData" id="noData">
     		<h5 class="msg-title">短信定制</h5>
     		<p class="mui-text-left" style="font-size: 13px;letter-spacing: -1px;padding-left: 20px;">
     			绑定手机号后，就业中心短信平台每天上午8:30向该手机号推送当天宣讲信息，找到工作后可以随时解绑。
     		</p>
     		<p class="mui-text-center">
     			<label class="label">手机号码：</label>
-    			<input class="input" type="tel" placeholder="请输入真实手机号码" style="font-size: 12px;line-height: 12px;"/>
-    			<button type="button" class="mui-btn mui-btn-danger">确定</button>
+    			<input class="input" type="tel" name="phone" placeholder="请输入真实手机号码" style="font-size: 12px;line-height: 12px;"/>
+    			<button type="button" id="submitphone" class="mui-btn mui-btn-danger submit">确定</button>
     		</p>
     	</form>
-    	<div class="mui-card has J_hasData">
+    	<div class="mui-card has J_hasData" id="hasData">
     		<h5 class="msg-title">修改手机号</h5>
     		<p class="mui-text-center">
-    			已添加号码：<i class="fa fa-dot-circle-o"></i><span>17790078780</span>
+    			已添加号码：<i class="fa fa-dot-circle-o"></i><span id="cellphone">17790078780</span>
     		</p>
     		<p class="mui-text-center">
-    			<button class="mui-btn mui-btn-link">修改</button>
-    			<button class="mui-btn mui-btn-link red">删除</button>
+    			<button class="mui-btn mui-btn-link" value="update">修改</button>
+    			<button class="mui-btn mui-btn-link red" value="delete">删除</button>
     		</p>
     	</div>
 	</div>
         
 	<!-- 正文 end -->
-	<script type="application/javascript" charset="UTF-8">
-		//底部导航跳转bug修复
-		mui('.mui-bar-tab').on('tap','a',function(){
-			location.href = this.getAttribute('href');
+	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="UTF-8">
+      	mui.init();
+      	var user_id = getLogin('user_id');
+      	mui.ajax('http://www.dsjyw.net/mobile/job/message',{
+      		data:{user_id:user_id},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},
+			success:function(data){
+				if(data.cellphone){
+					document.getElementById("loading").className = 'has mui mui-loader';
+					document.getElementById("hasData").className = 'mui-card J_hasData';
+					document.getElementById("noData").className = 'mui-card has J_noData';
+					document.getElementById("cellphone").innerHTML = data.cellphone;
+				}else{
+					document.getElementById("loading").className = 'has mui mui-loader';
+					document.getElementById("hasData").className = 'mui-card has J_hasData';
+					document.getElementById("noData").className = 'mui-card J_noData';
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				console.log(type);
+			}
+     });
+     
+	mui('#noData').on('tap','button',function(){
+	    var phone = document.getElementById("noData").phone.value;
+	    if(phone==''){
+	    	return;
+	    }
+		mui.ajax('http://www.dsjyw.net/mobile/job/addcellphone',{
+			data:{user_id:user_id,cellphone:phone},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},	              
+			success:function(data){
+				if(!data.code){
+					var curView = plus.webview.currentWebview();
+					curView.reload(true);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+	            alert(type);
+			}
 		});
-	</script>
+	});
+	
+	mui('#hasData').on('tap','button',function(){
+		var buttonType = this.value;
+		if(buttonType=='update'){
+			document.getElementById("hasData").className = 'mui-card has J_hasData';
+			document.getElementById("noData").className = 'mui-card J_noData';
+		}else if(buttonType=='delete'){
+			mui.ajax('http://www.dsjyw.net/mobile/job/delcellphone',{
+				data:{user_id:user_id},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},              
+				success:function(data){
+					if(!data.code){
+						var curView = plus.webview.currentWebview();
+						curView.reload(true);
+					}
+				},
+				error:function(xhr,type,errorThrown){
+		            alert(type);
+				}
+			});
+		}
+	})
+    </script>
 </body>
 </html>
