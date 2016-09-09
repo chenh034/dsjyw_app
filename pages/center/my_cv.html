@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../../js/mui.min.js"></script>
     <link href="../../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../css/iconfont.css" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/common.css" />
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
     <style>
     	html,body, .mui-content {
     		background: #fff;
@@ -124,6 +120,15 @@
     		background: #f7eaeb;
     		border: 1px dotted #959595;
     	}
+        .mui-loader {
+			position: absolute;
+			top: 25%;
+			width: 100%;
+			height: 60%;
+			color: #888;
+			font-size: 14px;
+			text-align: center;
+		}
     </style>
 </head>
 <body>
@@ -135,27 +140,28 @@
 	<!-- 顶部标题 公共模块 end -->
 	
 	<!-- 正文 start -->
-	<div class="mui-content">
+	<div class="mui-loader" id="loading">正在加载...</div>
+	<div class="mui-content" id="main-content">
     	<section id="J_iconBack">
     		<div class="shadow">
     			<h4 class="top">
     				基本信息
-    				<span class="pull-right">更新时间：<em>2016-03-15</em></span>
+    				<!--<span class="pull-right">更新时间：2016-03-15</span>-->
     			</h4>
-				<div class="icon-back">
-	    			<img id="J_icon" class="icon" src="../../img/center/unlog.jpg"  />
+				<div class="icon-back" id="head_url">
+	    			
 	    		</div>
-	    		<div class="info">
+	    		<div class="info" style="font-size:14px;">
 	    			<ul class="info-list">
-	    				<li class="mui-h4 name">王中中</li>
-	    				<li><span>东北师范大学</span>|<span>教育管理</span></li>
+	    				<li class="mui-h4 name" id="realname"></li>
+	    				<li><span id="school"></span>|<span id="major"></span></li>
 	    				<li class="info-msg">
-	    					<i class="fa fa-user">女</i>
-	    					<i class="fa fa-map-marker">成都</i>
-	    					<i class="fa fa-graduation-cap">本科</i>
+	    					<i class="fa fa-user" id="gender"></i>
+	    					<i class="fa fa-map-marker" id="account_place"></i>
+	    					<i class="fa fa-graduation-cap" id="degree"></i>
 	    				</li>
 	    				<li>
-	    					出生日期：<span>1955-08-15</span>
+	    					出生日期：<span id="birthday"></span>
 	    				</li>
 	    			</ul>
 	    		</div>
@@ -168,13 +174,13 @@
     	<div class="box">
     		<h4 class="cv-title">联系方式</h4>
     		<ul>
-    			<li>手机：<span>110</span></li>
-    			<li>Q&nbsp;&nbsp;Q：<span>110</span></li>
-    			<li>邮箱：<span>110</span></li>
-    			<li>微信：<span>110</span></li>
+    			<li>手机：<span id="cellphone"></span></li>
+    			<li>Q&nbsp;&nbsp;Q：<span id="qq"></span></li>
+    			<li>邮箱：<span id="email"</span></li>
+    			<li>微信：<span id="wechat"></span></li>
     		</ul>
     		<div class="mui-text-right">
-    			<a class="mui-btn mui-btn-link" href="contact.html">编辑</a>
+    			<!--<a class="mui-btn mui-btn-link" href="#">编辑</a>-->
     		</div>
 
     	</div>
@@ -183,29 +189,77 @@
     		<!--<ul>
     			<li>2014.09：<span>后端开发</span></li>
     		</ul>-->
-    		<a class="mui-btn mui-btn-block add-ex" href="experence.html">点此添加描述，让经历信息更加丰富</a>
+    		<a class="mui-btn mui-btn-block add-ex" href="#">暂无工作经历</a>
     	</div>
     	<div class="box">
     		<h4 class="cv-title">教育经历</h4>
-    		<ul>
-    			<li>毕业学校：<span>110</span></li>
-    			<li>就读时间：<span>110</span></li>
-    			<li class="label">学历：<span>110</span></li>
-    			<li class="label">专业：<span>110</span></li>
-    		</ul>
+    		<div id="study_list" style="font-size: 14px;"></div>
+    		
     		<div class="mui-text-right">
-    			<a class="mui-btn mui-btn-link" href="education.html">编辑</a>
+    			<!--<a class="mui-btn mui-btn-link" href="education.html">编辑</a>-->
     		</div>
     	</div>
 	</div>
         
 	<!-- 正文 end -->
-	<script type="application/javascript" charset="UTF-8">
-		//底部导航跳转bug修复
-		mui('.mui-bar-tab').on('tap','a',function(){
-			location.href = this.getAttribute('href');
+	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="UTF-8">
+      	mui.init();
+      	var user_id =  getLogin('user_id');
+      	document.getElementById("main-content").style.display = 'none';
+      	mui.ajax('http://www.dsjyw.net/mobile/resume/index',{
+			data:{user_id:user_id},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},       
+			success:function(data){
+				document.getElementById("account_place").innerHTML = data.basicInfo.account_place;
+				document.getElementById("realname").innerHTML = data.basicInfo.realname;
+				if(data.basicInfo.gender==1){
+					document.getElementById("gender").innerHTML = '男';
+				}else if(data.basicInfo.gender==0){
+					document.getElementById("gender").innerHTML = '女';
+				}
+				document.getElementById("birthday").innerHTML = data.basicInfo.birthday;
+				document.getElementById("head_url").innerHTML = '<img id="J_icon" class="icon" src='+data.basicInfo.head_url+'  />';
+				var studyFrag = document.createDocumentFragment();
+				mui.each(data.StudyExperienceInfo,function(index,item){
+					if(index==0){
+						document.getElementById("degree").innerHTML = item.position_degree_id;
+						document.getElementById("school").innerHTML = item.school_name;
+						document.getElementById("major").innerHTML = item.major_name;
+					}
+					var ul =document.createElement('ul');
+					var content = '<li>毕业学校：<span>'
+					+item.school_name
+					+'</span></li><li>就读时间：<span>'
+					+item.start_time+'-'+item.end_time
+					+'</span></li><li class="label">学历：<span>'
+					+item.position_degree_id
+					+'</span></li><li class="label">专业：<span>'
+					+item.major_name+'</span></li>';
+					
+					ul.innerHTML = content;
+					studyFrag.appendChild(ul);
+    			
+				});
+				document.getElementById("study_list").appendChild(studyFrag);
+				
+				document.getElementById("qq").innerHTML = data.contact.qq;
+				document.getElementById("cellphone").innerHTML = data.contact.cellphone;
+				document.getElementById("wechat").innerHTML = data.contact.wechat;
+				document.getElementById("email").innerHTML = data.contact.email;
+				
+				document.getElementById("main-content").style.display = 'block';
+				document.getElementById("loading").style.display = 'none';
+				
+			},
+			error:function(xhr,type,errorThrown){
+	            alert(type);
+			}
 		});
-		document.getElementById("J_iconBack").style.background = 'url(' + document.getElementById("J_icon").getAttribute('src') + ') no-repeat';
-	</script>
+    </script>
 </body>
 </html>

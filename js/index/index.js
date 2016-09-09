@@ -48,7 +48,7 @@ mui.ajax('http://www.dsjyw.net/mobile/index/index',{
 		mui.each(image,function(index,item){
 			img_div = document.createElement('div');
 			img_div.className = 'mui-slider-item';
-			img_div.innerHTML = '<a href='+item.url+'><img src='+item.path+'></a>';
+			img_div.innerHTML = '<a open-type="common" href='+item.url+'><img src='+item.path+'></a>';
 	        
 	        indicator_div = document.createElement('div');
 			if (index==0) {
@@ -190,10 +190,7 @@ mui('#list').on('tap','a',function(){
 		aniShow: aniShow
 	});
 	
-//	mui.fire(contentWebview, 'getId', {
-//		id:aid,
-//		aniShow: aniShow
-//	});
+
     window.localStorage.setItem('announce_id',aid);
 	
 	if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
@@ -211,8 +208,40 @@ mui('#list').on('tap','a',function(){
 		
 		headerWebview.show(aniShow, 150);
 	}
-})
+});
 
+mui('#slider').on('tap','a',function(){
+	var href = this.href;
+	//获得共用模板组
+	var template = getTemplate('default');
+	//获得共用父模板
+	var headerWebview = template.header;
+	//获得共用子webview
+	var contentWebview = template.content;
+	//通知模板修改标题，并显示隐藏右上角图标；
+	mui.fire(headerWebview, 'updateHeader', {
+		title: '',
+		target:href,
+		aniShow: aniShow
+	});
+	
+	
+	if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
+		var reload = true;
+		if (!template.loaded) {
+			if (contentWebview.getURL() != this.href) {
+				contentWebview.loadURL(this.href);
+			} else {
+				reload = false;
+			}
+		} else {
+			reload = false;
+		}
+		(!reload) && contentWebview.show();
+		
+		headerWebview.show(aniShow, 150);
+	}
+})
 
 
 mui('.mui-table-view-cell').on('tap', 'a', function() {

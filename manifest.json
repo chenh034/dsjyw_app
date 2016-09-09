@@ -738,7 +738,8 @@
 					"fonts/iconfont.ttf",
 					"css/mui.css",
 					"fonts/fontawesome-webfont.ttf",
-					"pages/center/education.html"
+					"pages/center/education.html",
+					"js/loginTime.js"
 				],
 				"refer": [],
 				"priority": 0
