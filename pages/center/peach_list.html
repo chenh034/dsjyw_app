@@ -81,7 +81,7 @@
 								+item.name
 								+'</h4><h5><span>'
 								+item.type
-								+'</span></h5><button type="button" class="btn mui-btn mui-btn-primary">取消报名</button></div>';
+								+'</span></h5><a href="#" rel='+item.id+' class="btn mui-btn mui-btn-primary">取消报名</a></div>';
 														
 							li.innerHTML = content;	
 
@@ -108,6 +108,77 @@
 					mui('#pullrefresh').pullRefresh().pullupLoading();
 				});
 			}
+			
+			mui('#list').on('tap','a',function(){
+				var user_id = getLogin('user_id',60000*60);
+				var id = this.getAttribute('rel');
+				var _this = this;
+				var saved = this.innerHTML;
+				
+				if(user_id==0){
+					mui.confirm('是否现在登录？', function(e) {
+						if (e.index == 1) {
+							mui.openWindow({
+								id: 'login.html',
+								url: 'center/login.html',
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+						    });
+						}
+					})
+				}else{
+					plus.nativeUI.showWaiting();
+					if(saved=='我要报名'){
+						mui.ajax('http://www.dsjyw.net/mobile/job/recruitConcern',{
+				      		data:{user_id:user_id,recruit_id:this.rel},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+//								console.log(data);
+								if(data.code==0){
+									plus.nativeUI.closeWaiting();
+									_this.className = 'btn mui-btn mui-btn-primary';
+                                    _this.innerHTML = '取消报名'
+								}else{
+									plus.nativeUI.closeWaiting();
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+				      	});
+					}else if(saved=='取消报名'){
+						mui.ajax('http://www.dsjyw.net/mobile/job/recruitCancel',{
+				      		data:{user_id:user_id,id:this.rel},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+								if(data.code==0){
+									plus.nativeUI.closeWaiting();
+									_this.className = 'btn mui-btn mui-btn-primary has-btn';
+                                    _this.innerHTML = '我要报名'
+								}else{
+									plus.nativeUI.closeWaiting();
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+				      	});
+					}
+				}
+			})
 		</script>
 	</body>
 

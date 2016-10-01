@@ -50,6 +50,7 @@
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
 				pullRefresh: {
@@ -100,14 +101,15 @@
 			var page = 0;
 			var timeSort = 1;
 			var heatSort = 0;
-			function pullupRefresh() {				
+			function pullupRefresh() {		
+				var user_id = getLogin('user_id',60000*60*100);
 				page = page+1;
 				var table = document.getElementById('list');
 				var propertyId = document.getElementById('property').value;
 				var isEliteFirm = document.getElementById("isEliteFirm").checked?"1":"0";
 				var isEliteSchool = document.getElementById("isEliteSchool").checked?"1":"0";
 				mui.ajax('http://www.dsjyw.net/mobile/company/searchJson',{
-                    data:{page:page,propertyId:propertyId,isEliteFirm:isEliteFirm,isEliteSchool:isEliteSchool,timeSort:timeSort,heatSort:heatSort},
+                    data:{user_id:user_id,page:page,propertyId:propertyId,isEliteFirm:isEliteFirm,isEliteSchool:isEliteSchool,timeSort:timeSort,heatSort:heatSort},
 					dataType:'json',
 					type:'get',
 					timeout:10000,
@@ -138,9 +140,9 @@
 							+' open-type="common" class="mui-btn" id="see">查看</a>';
 							
 							if(item.isfollow==1){
-								content+='<a href="javascript:;" class="mui-btn" id="focus">关注</a>';
+								content+='<a href="javascript:;" rel='+item.id+' open-type="focus" class="mui-btn" id="focus">关注</a>';
 							}else if(item.isfollow==0){
-								content+='<a href="javascript:;" class="mui-btn" id="focus">取消关注</a>';
+								content+='<a href="javascript:;" rel='+item.id+' open-type="focus" class="mui-btn" id="focus">取消关注</a>';
 							}
 							
 							content+='<span class="num">'+item.followNumber+'人关注</span></a>';
@@ -203,11 +205,13 @@
 			});
 			
 			mui('#list').on('tap', 'a', function() {
+				var user_id = getLogin('user_id',60000*60*100);
 				var id = this.getAttribute('href');
 				var href = this.href;
 				var type = this.getAttribute('open-type');
 				var cid = this.rel;
-//				console.log(type);
+				var saved = this.innerHTML;
+				var _this = this;
 				if (type == "common") {
 					window.localStorage.setItem('company_id',cid);
 					var webview_style = {
@@ -227,6 +231,68 @@
 							autoShow: false
 						}
 					});
+				}else if(type=="focus"){
+					if(user_id==0){
+						mui.confirm('是否现在登录？', function(e) {
+							if (e.index == 1) {
+								mui.openWindow({
+								id: 'login.html',
+								url: '../center/login.html',
+//								styles: webview_style,
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							}
+						})
+					}else{
+						plus.nativeUI.showWaiting();
+						if(saved=="关注"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/companyConcern',{
+					      		data:{user_id:user_id,company_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+                                        _this.innerHTML = '取消关注'
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}else if(saved=="取消关注"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/companyCancel',{
+					      		data:{user_id:user_id,company_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.innerHTML = '关注';
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}
+					}
 				}
 			});
 		</script>

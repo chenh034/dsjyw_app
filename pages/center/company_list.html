@@ -110,7 +110,7 @@
 						mui.each(data.info,function(index,item){
 							var li =document.createElement('li');
 							li.className='mui-table-view-cell';
-							content='<a href="#"><h4>'
+							content='<a href="../units/units.html" open-type="common" rel='+item.id+'><h4>'
 							+item.name
 							+'</h4><ul class="content"><li>行业：<span>'
 							+item.trade
@@ -120,7 +120,7 @@
 							+item.property
 							+'</span></li><li>亮点：<span>'
 							+item.bright
-							+'</span></li></ul><p><button class="mui-btn mui-btn-block"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;取消关注</button></p></a>';
+							+'</span></li></ul><p><button class="mui-btn mui-btn-block"><i class="fa fa-heart-o"></i>&nbsp;&nbsp;<a href="#" open-type="focus" style="color:#fff" rel='+item.id+'>取消关注</a></button></p></a>';
 		
 							li.innerHTML = content;	
 
@@ -147,6 +147,99 @@
 					mui('#pullrefresh').pullRefresh().pullupLoading();
 				});
 			}
+			
+			
+			mui('#list').on('tap', 'a', function() {
+				var user_id = getLogin('user_id',60000*60);
+				var id = this.getAttribute('href');
+				var href = this.href;
+				var type = this.getAttribute('open-type');
+				var cid = this.rel;
+				var saved = this.innerHTML;
+				var _this = this;
+				if (type == "common") {
+					window.localStorage.setItem('company_id',cid);
+					var webview_style = {
+						popGesture: "close"
+					};
+			
+					mui.openWindow({
+						id: id,
+						url: this.href,
+						styles: webview_style,
+						show: {
+							aniShow: "pop-in",
+							duration:300,
+							autoShow:true
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}else if(type=="focus"){
+					if(user_id==0){
+						mui.confirm('是否现在登录？', function(e) {
+							if (e.index == 1) {
+								mui.openWindow({
+								id: 'login.html',
+								url: '../center/login.html',
+//								styles: webview_style,
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							}
+						})
+					}else{
+						plus.nativeUI.showWaiting();
+						if(saved=="关注"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/companyConcern',{
+					      		data:{user_id:user_id,company_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+                                        _this.innerHTML = '取消关注'
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}else if(saved=="取消关注"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/companyCancel',{
+					      		data:{user_id:user_id,company_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.innerHTML = '关注';
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}
+					}
+				}
+			});
 		</script>
 	</body>
 

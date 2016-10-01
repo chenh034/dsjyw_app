@@ -68,9 +68,14 @@
             </li>
         </ul>
         <ul class="mui-table-view add1">
-            <li class="mui-table-view-cell">
+            <li class="mui-table-view-cell" id="change_password">
                 <a href="change_password.html" class="mui-navigate-right grey">
                 	修改密码
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#" class="mui-navigate-right grey">
+                	退出登录
                 </a>
             </li>
         </ul>
@@ -82,6 +87,10 @@
 	<script type="application/javascript" charset="UTF-8">
 		mui.init();
 		var user_id = getLogin('user_id');
+		var user_type = window.localStorage.getItem('user_type');
+		if(user_type==2){
+			document.getElementById("change_password").style.display = 'none';
+		}
 		document.getElementById("main-content").style.display = 'none';
 		mui.ajax('http://www.dsjyw.net/mobile/job/user',{
       		data:{user_id:user_id},

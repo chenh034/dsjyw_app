@@ -31,16 +31,13 @@
                     <option value="0">全部类型</option>
                 </select>
             </div>
-            <form class="mui-input-group">
+            <form class="mui-input-group" id="ifocus">
 				<div class="mui-input-row mui-checkbox mui-left">
 					<label>我关注的单位</label>
 					<input name="checkbox" value="focus" type="checkbox">
 				</div>
 			</form>
-			<!--<form>
-				<input name="checkbox" value="focus" type="checkbox">
-				<label>我关注的单位</label>
-			</form>-->
+	
 		</div>
 		
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
@@ -53,6 +50,7 @@
 		</div>
 		
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
 				pullRefresh: {
@@ -66,38 +64,44 @@
 					}
 				}
 			});
+			var user_id = getLogin('user_id',60000*60);
+			if(user_id!=0){
+				document.getElementById("ifocus").style.display = 'inline-block';
+			}else{
+				document.getElementById("ifocus").style.display = 'none';
+			}
 			
 			var trade_op = document.getElementById("trade");
 			var type_op = document.getElementById("type");
 			mui.ajax('http://www.dsjyw.net/mobile/index/recruitList',{
-					data:{},
-					dataType:'json',//服务器返回json格式数据
-					type:'post',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
-					headers:{'Content-Type':'application/json'},	              
-					success:function(data){
-						var tradeFrag = document.createDocumentFragment();
-						var typeFrag = document.createDocumentFragment();
-						mui.each(data.trade,function(index,item){
-							var option = document.createElement('option');
-							option.value = item.id;
-							option.innerHTML = item.name;
-							tradeFrag.appendChild(option);
-						});
-						mui.each(data.type,function(index,item){
-							var option = document.createElement('option');
-							option.value = item.id;
-							option.innerHTML = item.name;
-							typeFrag.appendChild(option);
-						});
-						trade_op.appendChild(tradeFrag);
-						type_op.appendChild(typeFrag);
-					},
-					error:function(xhr,type,errorThrown){
-						//异常处理；
-						console.log(type);
-					}
-				});
+				data:{},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				headers:{'Content-Type':'application/json'},	              
+				success:function(data){
+					var tradeFrag = document.createDocumentFragment();
+					var typeFrag = document.createDocumentFragment();
+					mui.each(data.trade,function(index,item){
+						var option = document.createElement('option');
+						option.value = item.id;
+						option.innerHTML = item.name;
+						tradeFrag.appendChild(option);
+					});
+					mui.each(data.type,function(index,item){
+						var option = document.createElement('option');
+						option.value = item.id;
+						option.innerHTML = item.name;
+						typeFrag.appendChild(option);
+					});
+					trade_op.appendChild(tradeFrag);
+					type_op.appendChild(typeFrag);
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+				}
+			});
 					
 			/**
 			 * 下拉刷新具体业务实现
@@ -110,21 +114,24 @@
 			 * 上拉加载具体业务实现
 			 */
 			var page = 0;
-			function pullupRefresh() {				
+			var follow = 0;
+			function pullupRefresh() {	
 				page = page+1;
+				
+				var user_id = getLogin('user_id',60000*60);
 				var table = document.getElementById('list');
 				var timeId = document.getElementById('time').value;
 				var tradeId = document.getElementById("trade").value;
 				var typeId = document.getElementById("type").value;
 				mui.ajax('http://www.dsjyw.net/mobile/index/recruitJson',{
 //					data:{timeId:timeId},
-                    data:{page:page,timeId:timeId,industryId:tradeId,preachTypeId:typeId},
+                    data:{user_id:user_id,page:page,timeId:timeId,industryId:tradeId,preachTypeId:typeId,follow:follow},
 					dataType:'json',
 					type:'get',
 					timeout:10000,
 					headers:{'content-type':'application/json'},
 					success:function(data){
-//						console.log(data.timeId);
+//						console.log(data);
 						var listFrag = document.createDocumentFragment();
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.dataCount<10)); 
 							mui.each(data.data,function(index,item){
@@ -140,12 +147,12 @@
 								+item.time
 								+'</time></p></span><h4>'
 								+item.company
-								+'</h4><h5><span>'
+								+'</h4><span style="font-size:12px;">'+item.location+'</span><h5><span>'
 								+item.preachType;
 								if(item.isEnroll==1){
-									content+='</span></h5><button type="button" class="btn mui-btn mui-btn-primary">已报名</button></div>';
+									content+='</span></h5><a type="button" open-type="focus" rel='+item.id+' class="btn mui-btn mui-btn-primary">已报名</a></div>';
 								}else{
-									content+='</span></h5><button type="button" class="btn mui-btn mui-btn-primary has-btn">我要报名</button></div>';
+									content+='</span></h5><a type="button" open-type="focus" rel='+item.id+' class="btn mui-btn mui-btn-primary has-btn">我要报名</a></div>';
 								}
 								li.innerHTML = content;	
 	
@@ -176,6 +183,88 @@
 				page = 0;
 				document.getElementById("list").innerHTML='';
 				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+			
+			mui('.picer').on('change','input',function(){
+				if(this.checked){
+					follow = 1;
+				}else{
+					follow = 0;
+				}
+				page = 0;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+			
+			mui('#list').on('tap','a',function(){
+				var user_id = getLogin('user_id',60000*60);
+				var id = this.getAttribute('rel');
+				var _this = this;
+				var saved = this.innerHTML;
+				
+				if(user_id==0){
+					mui.confirm('是否现在登录？', function(e) {
+						if (e.index == 1) {
+							mui.openWindow({
+								id: 'login.html',
+								url: 'center/login.html',
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+						    });
+						}
+					})
+				}else{
+					plus.nativeUI.showWaiting();
+					if(saved=='我要报名'){
+						mui.ajax('http://www.dsjyw.net/mobile/job/recruitConcern',{
+				      		data:{user_id:user_id,recruit_id:this.rel},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+//								console.log(data);
+								if(data.code==0){
+									plus.nativeUI.closeWaiting();
+									_this.className = 'btn mui-btn mui-btn-primary';
+                                    _this.innerHTML = '已报名'
+								}else{
+									plus.nativeUI.closeWaiting();
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+				      	});
+					}else if(saved=='已报名'){
+						mui.ajax('http://www.dsjyw.net/mobile/job/recruitCancel',{
+				      		data:{user_id:user_id,id:this.rel},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+								if(data.code==0){
+									plus.nativeUI.closeWaiting();
+									_this.className = 'btn mui-btn mui-btn-primary has-btn';
+                                    _this.innerHTML = '我要报名'
+								}else{
+									plus.nativeUI.closeWaiting();
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+				      	});
+					}
+				}
 			})
 		</script>
 		</script>

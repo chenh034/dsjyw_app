@@ -57,6 +57,7 @@
 		<script src="../../js/mui.picker.js"></script>
 		<script src="../../js/mui.poppicker.js"></script>
 		<script src="../../js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($, doc) {
 				$.init({
@@ -126,6 +127,8 @@
 				});
 			})(mui, document);
 			
+			
+//			var user_id = getLogin('user_id');
 			/**
 			 * 下拉刷新具体业务实现
 			 */
@@ -141,17 +144,18 @@
 			var heatSort = 0;
 			function pullupRefresh() {				
 				page = page+1;
+				var user_id = getLogin('user_id',60000*60);
 				var table = document.getElementById('list');
 				var degreeId = document.getElementById('degree').value;
 				var sourceId = document.getElementById("source").value;
 				var locationId = document.getElementById("showCityPicker").innerHTML;
 				mui.ajax('http://www.dsjyw.net/mobile/position/searchJson',{
-                    data:{page:page,degreeId:degreeId,messageSourceId:sourceId,locationId:locationId,kind:0,timeSort:timeSort,heatSort:heatSort},
+                    data:{user_id:user_id,page:page,degreeId:degreeId,messageSourceId:sourceId,locationId:locationId,kind:0,timeSort:timeSort,heatSort:heatSort},
 					dataType:'json',
 					type:'get',
 					timeout:10000,
 					headers:{'content-type':'application/json'},
-					success:function(data){                   
+					success:function(data){     
                         var listFrag = document.createDocumentFragment();
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.dataCount<10)); 
 						mui.each(data.data,function(index,item){
@@ -169,16 +173,22 @@
 							+item.city
 							+'</span><span>学历:'
 							+item.degree
-							+'</span><span>专业:'
+							+'</span><br/><span>专业:'
 							+item.major
 							+'</span></p><p class="time"><span class="note">'
 							+item.specialA
-							+'</span><span class="note">'+item.specialB+'</span></p><a href="#" class="mui-btn mailing" id="see" open-type="send">立即投递</a>';
+							+'</span><span class="note">'+item.specialB+'</span></p>';
+							
+							if(item.sended==1){
+								content+='<a href="#" rel='+item.id+' class="mui-btn mailing" id="see" open-type="send">投递成功</a>';
+							}else if(item.sended==0){
+								content+='<a href="#" rel='+item.id+' class="mui-btn mailing" id="see" open-type="send">立即投递</a>'
+							}
 							
 							if(item.collection==1){
-								content+='<a href="javascript:;" class="mui-btn remove" id="focus" open-type="focus">取消收藏</a></a>';
-							}else{
-								content+='<a href="javascript:;" class="mui-btn remove" id="focus" open-type="focus">收藏</a></a>'
+								content+='<a rel='+item.id+' class="mui-btn remove" id="focus" open-type="focus">取消收藏</a></a>';
+							}else if(item.collection==0){
+								content+='<a rel='+item.id+' class="mui-btn remove" id="focus" open-type="focus">收藏</a></a>'
 							}
 							li.innerHTML = content;	
 
@@ -206,6 +216,7 @@
 				});
 			}
 			
+			
 			mui('.picer').on('change','select',function(){
 				page = 0;
 				document.getElementById("list").innerHTML='';
@@ -231,12 +242,15 @@
 			});
 			
 			mui('#list').on('tap', 'a', function() {
+				var user_id = getLogin('user_id',60000*60);
 				var id = this.getAttribute('href');
 				var href = this.href;
 				var type = this.getAttribute('open-type');
 				var pid = this.rel;
+				var _this = this;
+				var saved = this.innerHTML;
 				if (type == "common") {
-					window.localStorage.setItem('position_id',pid)
+					window.localStorage.setItem('position_id',pid);
 					var webview_style = {
 						popGesture: "close"
 					};
@@ -253,8 +267,118 @@
 							autoShow: false
 						}
 					});
+				}else if(type=="focus"){
+					if(user_id==0){
+						mui.confirm('是否现在登录？', function(e) {
+							if (e.index == 1) {
+								mui.openWindow({
+								id: 'login.html',
+								url: '../center/login.html',
+//								styles: webview_style,
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							}
+						})
+					}else{
+						plus.nativeUI.showWaiting();
+						if(saved=="收藏"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/positionConcern',{
+					      		data:{user_id:user_id,position_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+                                        _this.innerHTML = '取消收藏'
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}else if(saved=="取消收藏"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/positionCancel',{
+					      		data:{user_id:user_id,position_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.innerHTML = '收藏';
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}
+					}
+					
+				}else if(type=='send'){
+					if(user_id==0){
+						mui.confirm('是否现在登录？', function(e) {
+							if (e.index == 1) {
+								mui.openWindow({
+								id: 'login.html',
+								url: '../center/login.html',
+//								styles: webview_style,
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							}
+						})
+					}else{
+						if(saved=='立即投递'){
+							plus.nativeUI.showWaiting();
+							mui.ajax('http://www.dsjyw.net/mobile/position/sendResume',{
+					      		data:{user_id:user_id,id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.innerHTML = '投递成功';
+									}else{
+										plus.nativeUI.closeWaiting();
+										alert('投递简历失败,该职位可能未提供投递地址');
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+									plus.nativeUI.closeWaiting();
+								}
+					      	});
+						}
+					}
+					
 				}
 			});
+			
+			
 			
 		</script>
 	</body>

@@ -7,7 +7,7 @@ html,body, .mui-content {
 }
 
 h4 {
-	margin-bottom: 8px;
+	margin-bottom: 0px;
 	font-size: 14px;
 }
 
@@ -25,11 +25,11 @@ form {
 	float: left;
 	display: block;
 	width: 40px;
-	height: 55px;
+	height: 65px;
 	font-size: 14px;
 	color: #fff;
 	text-align: center;
-	padding-top: 2px;
+	padding-top: 6px;
 }
 
 
@@ -41,15 +41,18 @@ strong {
 
 .time {
 	float: left;
+	display: inline-block;
+	height: 60px;
 	margin-top: 5px;
 	margin-left: 3px;
 	margin-right: 10px;
 	font-weight: bold;
+	margin-top: 14px;
 }
 
 h5 {
-	height: 30px;
-	line-height: 30px;
+	/*height: 30px;
+	line-height: 30px;*/
 }
 
 .btn {
@@ -57,7 +60,7 @@ h5 {
 	right: -60px;
 	top: 20px;
 	padding: 0;
-	width: 76px;
+	width: 65px;
 	height: 28px;
 	line-height: 26px;
 }

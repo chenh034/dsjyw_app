@@ -16,6 +16,15 @@
     	body{
     		background-color: #fff;
     	}
+    	.mui-loader {
+			position: absolute;
+			top: 25%;
+			width: 100%;
+			height: 60%;
+			color: #888;
+			font-size: 14px;
+			text-align: center;
+		}
     </style>
 </head>
 <body>
@@ -26,7 +35,8 @@
 	</header>
 	<!-- 顶部标题 公共模块 end -->
 	<!--正文 start-->
-	<div class="mui-content">
+	<div class="mui-loader" id="loading">正在加载...</div>
+	<div class="mui-content" id="main-content">
 		<div id="scroll1" class="mui-scroll-wrapper">
 			<div class="mui-scroll wrap">
 				<h1 class="recruit-view-name" id="position_name"></h1>
@@ -61,8 +71,8 @@
 					</ul>
 				</div>
 				<div style="height: 30px;"></div>
-				<button type="button" class="mui-btn mui-btn-block">发送简历</button>
-				<button type="button" class="mui-btn mui-btn-warning mui-btn-block">收藏职位</button>
+				<button type="button" id="send_v" class="mui-btn mui-btn-block">发送简历</button>
+				<button type="button" id="focus_v" class="mui-btn mui-btn-warning mui-btn-block">收藏职位</button>
 			</div>
 		</div>
 		
@@ -71,8 +81,11 @@
 	<!-- 公告正文 end -->
 	<script src="../../js/mui.pullToRefresh.js"></script>
 	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			mui.init();
+			var user_id = getLogin('user_id',60000*60);
+			document.getElementById("main-content").style.display = 'none';
 			(function($) {
 				//阻尼系数
 				var deceleration = mui.os.ios?0.003:0.0009;
@@ -85,7 +98,7 @@
 			
 			var position_id = window.localStorage.getItem('position_id');
 			mui.ajax('http://www.dsjyw.net/mobile/position/positionDetail',{
-				data:{pid:position_id},
+	      		data:{user_id:user_id,pid:position_id},
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
 				timeout:10000,//超时时间设置为10秒；
@@ -114,13 +127,68 @@
 		                                              +'</span></li><li><i>手 机</i>：<span>'
 		                                              +data.position.contactCellphone
 		                                              +'</span></li><li>电子邮件 ：<span>'+data.position.contactEmail+'</span></li>';
-		                                              
+		            
+		            document.getElementById("loading").style.display = 'none';
+		            document.getElementById("main-content").style.display = 'block';
+		            if(data.concerned==1){
+		            	document.getElementById("focus_v").innerHTML='取消收藏';
+		            }else{
+		            	document.getElementById("focus_v").innerHTML='收藏职位';
+		            }
 				},
 				error:function(xhr,type,errorThrown){
 					//异常处理；
 					console.log(type);
 				}
-			});
+	      	});
+
+			
+			document.getElementById("focus_v").addEventListener('tap',function(){
+				var user_id = getLogin('user_id',60000*60);
+				var _this = this;
+				plus.nativeUI.showWaiting();
+				if(this.innerHTML=='收藏职位'){
+					mui.ajax('http://www.dsjyw.net/mobile/job/positionConcern',{
+			      		data:{user_id:user_id,position_id:window.localStorage.getItem('position_id')},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						headers:{'Content-Type':'application/json'},	              
+						success:function(data){
+							if(data.code==0){
+								plus.nativeUI.closeWaiting();
+                                document.getElementById("focus_v").innerHTML = '取消收藏'
+							}else{
+								plus.nativeUI.closeWaiting();
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							//异常处理；
+							console.log(type);
+						}
+			      	});
+				}else if(this.innerHTML=='取消收藏'){
+					mui.ajax('http://www.dsjyw.net/mobile/job/positionCancel',{
+			      		data:{user_id:user_id,position_id:window.localStorage.getItem('position_id')},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						headers:{'Content-Type':'application/json'},	              
+						success:function(data){
+							if(data.code==0){
+								plus.nativeUI.closeWaiting();
+								_this.innerHTML = '收藏';
+							}else{
+								plus.nativeUI.closeWaiting();
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							//异常处理；
+							console.log(type);
+						}
+			      	});
+				}
+			})
 		</script>
 
 </body>

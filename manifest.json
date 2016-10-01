@@ -1,9 +1,9 @@
 {
 	"@platforms": ["android", "iPhone", "iPad"],
-	"id": "H549EBDEE",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "oaApp",/*应用名称，程序桌面图标名称*/
+	"id": "H52630BA1",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "东北高师就业联盟网客户端",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
+		"name": "1.0.1",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -180,12 +180,12 @@
 						"landscape-retina7": ""
 					}
 				},
-				"android": {
-					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+				"android": {"mdpi":"unpackage/res/drawable/240.png","ldpi":"unpackage/res/drawable/320.png","hdpi":"unpackage/res/drawable/480.png","xhdpi":"unpackage/res/drawable/720.png","xxhdpi":"res/drawable/1080.png"
+					 /*普通屏启动图片，分辨率：240x282*/
+					 /*大屏启动图片，分辨率：320x442*/
+					 /*高分屏启动图片，分辨率：480x762*/
+					 /*720P高分屏启动图片，分辨率：720x1242*/
+					
 				}
 			}
 		}
@@ -457,10 +457,12 @@
 					"fonts/iconfont.ttf",
 					"css/mui.css",
 					"css/peach.css",
-					"css/recruit/recruit.css"
+					"css/recruit/recruit.css",
+					"js/loginTime.js"
 				],
 				"refer": [
-					"pages/recruit/recruit_view.html"
+					"pages/recruit/recruit_view.html",
+					"pages/center/login.html"
 				],
 				"priority": 0
 			},
@@ -554,7 +556,8 @@
 					"img/logo.png",
 					"img/center/account.jpg",
 					"pages/center/center_index.html",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/loginTime.js"
 				],
 				"refer": [
 					"pages/teacher.html"
@@ -631,9 +634,12 @@
 					"css/mui.picker.css",
 					"js/mui.min.js",
 					"css/common.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/loginTime.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/center/login.html"
+				],
 				"priority": 0
 			},
 			"pages/detail.html": {
@@ -658,9 +664,12 @@
 					"fonts/mui.ttf",
 					"js/city.data.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.css"
+					"css/mui.picker.css",
+					"js/loginTime.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/recruit/recruit_view.html"
+				],
 				"priority": 0
 			},
 			"pages/recruit/jiaoyu.html": {
@@ -678,9 +687,12 @@
 					"js/mui.picker.js",
 					"js/mui.poppicker.js",
 					"js/city.data.js",
-					"css/app.css"
+					"css/app.css",
+					"js/loginTime.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/center/login.html"
+				],
 				"priority": 0
 			},
 			"pages/units/unit_list.html": {
@@ -691,9 +703,12 @@
 					"fonts/mui.ttf",
 					"css/iconfont.css",
 					"css/mui.min.css",
-					"pages/units/units.html"
+					"pages/units/units.html",
+					"js/loginTime.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/center/login.html"
+				],
 				"priority": 0
 			},
 			"pages/center/company.html": {
@@ -808,7 +823,9 @@
 					"js/loginTime.js",
 					"css/recruit/recruit.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/recruit/recruit_view.html"
+				],
 				"priority": 0
 			},
 			"pages/center/company_list.html": {
@@ -822,7 +839,9 @@
 					"js/loginTime.js",
 					"fonts/fontawesome-webfont.ttf"
 				],
-				"refer": [],
+				"refer": [
+					"pages/units/units.html"
+				],
 				"priority": 0
 			},
 			"pages/center/peach.html": {

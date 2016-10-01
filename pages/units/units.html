@@ -93,11 +93,12 @@
 	</div>
 	<!-- 正文内容 end -->
 	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 	<script type="application/javascript" charset="UTF-8">
 		mui.init();
-		
+		var user_id = getLogin('user_id',60000*60);
 		mui.ajax('http://www.dsjyw.net/mobile/company/detail',{
-            data:{id:window.localStorage.getItem('company_id')},
+            data:{id:window.localStorage.getItem('company_id'),user_id:user_id},
 			dataType:'json',
 			type:'get',
 			timeout:10000,
@@ -124,19 +125,23 @@
                	  mui.each(data.recruit,function(index,item){
                     var li =document.createElement('li');
 					li.className='mui-table-view-cell peach_list';
-					content_r = '<a href="#"><div class="mui-table" style="width:85%;"><div class="mui-table-cell"><span class="date mui-bg-primary">&nbsp;'
-					            +item.month
-					            +'月<br /><strong>16</strong></span><span class="time"><p>&nbsp;'
-					            +item.week
-					            +'</p><p><time>14:30</time></p></span><h4>'
-					            +item.company
-					            +'</h4><h5><span>'
-					            +item.preachType
-					            +'</span></h5>';
+
+                   content_r='<div class="mui-table"><div class="mui-table-cell"><span class="date mui-bg-primary">&nbsp;'
+								+item.month
+								+'月<br /><strong>'
+								+item.date
+								+'</strong></span><span class="time"><p>&nbsp;'
+								+item.week
+								+'</p><p><time>'
+								+item.time
+								+'</time></p></span><h4>'
+								+item.company
+								+'</h4><span style="font-size:12px;">'+item.location+'</span><h5><span>'
+								+item.preachType;
 					if(item.isEnroll==1){
-					    content_r+='<button type="button" class="btn mui-btn mui-btn-primary" style="width=60px;">已报名</button></div></div></a>';
-					}else if(item.isEnroll==0){
-						content_r+='<button type="button" class="btn mui-btn mui-btn-primary" style="width:60px">报名</button></div></div></a>';
+						content_r+='</span></h5><a href="#" open-type="focus" rel='+item.id+' style="right:-8px;font-size:13px;width:60px;" class="btn mui-btn mui-btn-primary">取消报名</a></div>';
+					}else{
+						content_r+='</span></h5><a href="#" open-type="focus" rel='+item.id+' style="right:-8px;font-size:13px;width=60px;" class="btn mui-btn mui-btn-primary has-btn">我要报名</a></div>';
 					}
 					li.innerHTML = content_r;
 					listFrag.appendChild(li);	            
@@ -159,12 +164,24 @@
 					+item.degreeRequire
 					+'</span><span>专业:'
 					+item.major
-					+'</span></p><p class="time"><span class="note">提供住宿</span><span class="note">带薪休假</span></p><a href="units.html" class="mui-btn mailing" id="see">立即投递</a><a href="javascript:;" class="mui-btn remove" id="focus">取消收藏</a></a>';
+					+'</span></p><p style="height:30px;" class="time"><span class="note">提供住宿</span><span class="note">带薪休假</span></p>';
 					
+					if(item.sended==1){
+						content_p+='<a href="#" open-type="send" rel='+item.id+' class="mui-btn mailing" id="see">投递成功</a>';
+					}else{
+						content_p+='<a href="#" open-type="send" rel='+item.id+' class="mui-btn mailing" id="see">立即投递</a>'
+					}
+					
+					if(item.collection==1){
+						content_p+='<a rel='+item.id+' class="mui-btn remove" id="focus" open-type="focus">取消收藏</a></a>';
+					}else if(item.collection==0){
+						content_p+='<a rel='+item.id+' class="mui-btn remove" id="focus" open-type="focus">收藏</a></a>'
+					}
 					li.innerHTML = content_p;
-					listFrag.appendChild(li);	            
+					listFrag.appendChild(li);	  
                	 });
                	 document.getElementById("position").appendChild(listFrag);
+               	
                }
                
 			},
@@ -173,11 +190,14 @@
 			}
 		});
 		
-		mui('#position').on('tap', 'a', function() {
+		mui('.mui-content').on('tap', 'a', function() {
+			    var user_id = getLogin('user_id',60000*60);
 				var id = this.getAttribute('href');
 				var href = this.href;
 				var type = this.getAttribute('open-type');
 				var pid = this.rel;
+				var _this = this;
+				var saved = this.innerHTML;
 				if (type == "common") {
 					window.localStorage.setItem('position_id',pid);
 					var webview_style = {
@@ -197,6 +217,156 @@
 							autoShow: false
 						}
 					});
+				}else if(type=="focus"){
+					if(user_id==0){
+						mui.confirm('是否现在登录？', function(e) {
+							if (e.index == 1) {
+								mui.openWindow({
+								id: 'login.html',
+								url: '../center/login.html',
+//								styles: webview_style,
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							}
+						})
+					}else{
+						plus.nativeUI.showWaiting();
+						if(saved=="收藏"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/positionConcern',{
+					      		data:{user_id:user_id,position_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+                                        _this.innerHTML = '取消收藏'
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}else if(saved=="取消收藏"){
+							mui.ajax('http://www.dsjyw.net/mobile/job/positionCancel',{
+					      		data:{user_id:user_id,position_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.innerHTML = '收藏';
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}else if(saved=='我要报名'){
+						    mui.ajax('http://www.dsjyw.net/mobile/job/recruitConcern',{
+					      		data:{user_id:user_id,recruit_id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+	//								console.log(data);
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.className = 'btn mui-btn mui-btn-primary';
+	                                    _this.innerHTML = '取消报名'
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}else if(saved=='取消报名'){
+							mui.ajax('http://www.dsjyw.net/mobile/job/recruitCancel',{
+					      		data:{user_id:user_id,id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.className = 'btn mui-btn mui-btn-primary has-btn';
+	                                    _this.innerHTML = '我要报名'
+									}else{
+										plus.nativeUI.closeWaiting();
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+					      	});
+						}
+					}
+				}else if(type=='send'){
+					if(user_id==0){
+						mui.confirm('是否现在登录？', function(e) {
+							if (e.index == 1) {
+								mui.openWindow({
+								id: 'login.html',
+								url: '../center/login.html',
+//								styles: webview_style,
+								show: {
+									aniShow: "pop-in",
+									duration:300
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							}
+						})
+					}else{
+						if(saved=='立即投递'){
+							plus.nativeUI.showWaiting();
+							mui.ajax('http://www.dsjyw.net/mobile/position/sendResume',{
+					      		data:{user_id:user_id,id:this.rel},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									if(data.code==0){
+										plus.nativeUI.closeWaiting();
+										_this.innerHTML = '投递成功';
+									}else{
+										plus.nativeUI.closeWaiting();
+										alert('投递简历失败,该职位可能未提供投递地址');
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+									plus.nativeUI.closeWaiting();
+								}
+					      	});
+						}
+					}
+					
 				}
 			});
 	</script>
