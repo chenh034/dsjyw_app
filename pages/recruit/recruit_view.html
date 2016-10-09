@@ -84,7 +84,7 @@
 	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			mui.init();
-			var user_id = getLogin('user_id',60000*60);
+			var user_id = getLogin('user_id',60000*60*24*30);
 			document.getElementById("main-content").style.display = 'none';
 			(function($) {
 				//阻尼系数
@@ -144,7 +144,7 @@
 
 			
 			document.getElementById("focus_v").addEventListener('tap',function(){
-				var user_id = getLogin('user_id',60000*60);
+				var user_id = getLogin('user_id',60000*60*24*30);
 				var _this = this;
 				plus.nativeUI.showWaiting();
 				if(this.innerHTML=='收藏职位'){

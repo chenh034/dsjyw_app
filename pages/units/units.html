@@ -96,7 +96,7 @@
 	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 	<script type="application/javascript" charset="UTF-8">
 		mui.init();
-		var user_id = getLogin('user_id',60000*60);
+		var user_id = getLogin('user_id',60000*60*24*30);
 		mui.ajax('http://www.dsjyw.net/mobile/company/detail',{
             data:{id:window.localStorage.getItem('company_id'),user_id:user_id},
 			dataType:'json',
@@ -191,7 +191,7 @@
 		});
 		
 		mui('.mui-content').on('tap', 'a', function() {
-			    var user_id = getLogin('user_id',60000*60);
+			    var user_id = getLogin('user_id',60000*60*24*30);
 				var id = this.getAttribute('href');
 				var href = this.href;
 				var type = this.getAttribute('open-type');

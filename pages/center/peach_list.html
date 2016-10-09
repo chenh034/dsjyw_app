@@ -56,7 +56,7 @@
 				var table = document.getElementById('list');
 				offset = offset+10;
 //				var user_id = window.localStorage.getItem('user_id');
-				var user_id = getLogin('user_id',60000*60);
+				var user_id = getLogin('user_id',60000*60*24*30);
 				mui.ajax('http://www.dsjyw.net/mobile/job/recruit',{
 		      		data:{user_id:user_id},
 					dataType:'json',//服务器返回json格式数据
@@ -81,7 +81,7 @@
 								+item.name
 								+'</h4><h5><span>'
 								+item.type
-								+'</span></h5><a href="#" rel='+item.id+' class="btn mui-btn mui-btn-primary">取消报名</a></div>';
+								+'</span></h5><h5><span>门票ID：'+item.id+'</span></h5><a href="#" rel='+item.id+' class="btn mui-btn mui-btn-primary">取消报名</a></div>';
 														
 							li.innerHTML = content;	
 
@@ -110,7 +110,7 @@
 			}
 			
 			mui('#list').on('tap','a',function(){
-				var user_id = getLogin('user_id',60000*60);
+				var user_id = getLogin('user_id',60000*60*24*30);
 				var id = this.getAttribute('rel');
 				var _this = this;
 				var saved = this.innerHTML;

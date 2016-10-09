@@ -79,6 +79,12 @@ h3 {
 }
 
 .short-msg {
+	/*top: 55px;*/
+	top: 12px;
+}
+
+.short-msg1 {
+	/*top: 55px;*/
 	top: 55px;
 }
 

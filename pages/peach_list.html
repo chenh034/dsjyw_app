@@ -64,7 +64,7 @@
 					}
 				}
 			});
-			var user_id = getLogin('user_id',60000*60);
+			var user_id = getLogin('user_id',60000*60*24*30);
 			if(user_id!=0){
 				document.getElementById("ifocus").style.display = 'inline-block';
 			}else{
@@ -118,7 +118,7 @@
 			function pullupRefresh() {	
 				page = page+1;
 				
-				var user_id = getLogin('user_id',60000*60);
+				var user_id = getLogin('user_id',60000*60*24*30);
 				var table = document.getElementById('list');
 				var timeId = document.getElementById('time').value;
 				var tradeId = document.getElementById("trade").value;
@@ -197,7 +197,7 @@
 			});
 			
 			mui('#list').on('tap','a',function(){
-				var user_id = getLogin('user_id',60000*60);
+				var user_id = getLogin('user_id',60000*60*24*30);
 				var id = this.getAttribute('rel');
 				var _this = this;
 				var saved = this.innerHTML;

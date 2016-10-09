@@ -185,13 +185,6 @@
 
     	</div>
     	<div class="box">
-    		<h4 class="cv-title">工作经历</h4>
-    		<!--<ul>
-    			<li>2014.09：<span>后端开发</span></li>
-    		</ul>-->
-    		<a class="mui-btn mui-btn-block add-ex" href="#">暂无工作经历</a>
-    	</div>
-    	<div class="box">
     		<h4 class="cv-title">教育经历</h4>
     		<div id="study_list" style="font-size: 14px;"></div>
     		
@@ -199,6 +192,64 @@
     			<!--<a class="mui-btn mui-btn-link" href="education.html">编辑</a>-->
     		</div>
     	</div>
+    	<div class="box">
+    		<h4 class="cv-title">工作经历</h4>
+    		<div id="WorkExperience_list" style="font-size: 14px;"></div>
+    	</div>
+    	
+    	<!--<div class="box">
+    		<h4 class="cv-title">证书</h4>
+    		<div id="study_list" style="font-size: 14px;"></div>
+    		<a class="mui-btn mui-btn-block add-ex" href="#">暂无证书</a>
+    	</div>-->
+    	
+    	<div class="box">
+    		<h4 class="cv-title">校内职务</h4>
+    		<div id="school_list" style="font-size: 14px;"></div>
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">校内奖励</h4>
+    		<div id="award_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">语言能力</h4>
+    		<div id="languages_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">实习经历</h4>
+    		<div id="train_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">IT技能</h4>
+    		<div id="ItSkill_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">项目经验</h4>
+    		<div id="ProjectExperience_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">培训经历</h4>
+    		<div id="TrainingExperience_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
+    	<div class="box">
+    		<h4 class="cv-title">求职经历</h4>
+    		<div id="JobExperience_list" style="font-size: 14px;"></div>
+    		
+    	</div>
+    	
 	</div>
         
 	<!-- 正文 end -->
@@ -206,7 +257,7 @@
 	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="UTF-8">
       	mui.init();
-      	var user_id =  getLogin('user_id');
+      	var user_id =  getLogin('user_id',60000*60*24*30);
       	document.getElementById("main-content").style.display = 'none';
       	mui.ajax('http://www.dsjyw.net/mobile/resume/index',{
 			data:{user_id:user_id},
@@ -225,6 +276,214 @@
 				document.getElementById("birthday").innerHTML = data.basicInfo.birthday;
 				document.getElementById("head_url").innerHTML = '<img id="J_icon" class="icon" src='+data.basicInfo.head_url+'  />';
 				var studyFrag = document.createDocumentFragment();
+				var schoolFrag = document.createDocumentFragment();
+				var ItSkillFrag = document.createDocumentFragment();
+				var WorkExperienceFrag = document.createDocumentFragment();
+				var trainFrag = document.createDocumentFragment();
+				var ProjectExperienceFrag = document.createDocumentFragment();
+				var TrainingExperienceFrag = document.createDocumentFragment();
+				var JobExperienceFrag = document.createDocumentFragment();
+				var languagesFrag = document.createDocumentFragment();
+				var awardFrag = document.createDocumentFragment();
+				var modelFrag = document.createDocumentFragment();
+				
+				if(data.school.length>0){
+					mui.each(data.school,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>职务名称：<span>'
+						+item.duty_name
+						+'</span></li><li>任职时间：<span>'
+						+item.start_time+'-'+item.end_time
+						+'</span></li><li class="label">学校：<span>'
+						+item.school
+						+'</span></li><li>职务描述：<span>'
+						+item.duty_performance
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						schoolFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无校内职务';
+					schoolFrag.appendChild(aTag);
+				}
+				
+				if(data.WorkExperience.length>0){
+					mui.each(data.WorkExperience,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>工作单位：<span>'
+						+item.company_name
+						+'</span></li><li>在职时间：<span>'
+						+item.start_time+'至'+item.end_time
+						+'</span></li><li>职位名称：<span>'
+						+item.position_name
+						+'</span></li><li>工作描述：<span>'
+						+item.experience_describe
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						WorkExperienceFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无工作经验';
+					WorkExperienceFrag.appendChild(aTag);
+				}
+				
+				if(data.award.length>0){
+					mui.each(data.award,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>奖项名称：<span>'
+						+item.award_name
+						+'</span></li><li>获奖时间：<span>'
+						+item.award_time
+						+'</span></li><li>学校：<span>'
+						+item.school
+						+'</span></li><li>奖项描述：<span>'
+						+item.explain
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						awardFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无校内职务';
+					awardFrag.appendChild(aTag);
+				}
+				
+				if(data.languages.length>0){
+					mui.each(data.languages,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>语言：<span>'
+						+item.lan_name
+						+'</span></li><li>听说：<span>'
+						+item.les_say
+						+'</span></li><li>读写：<span>'
+						+item.rea_wri
+						+'</span></li><li>等级考试：<span>'
+						+item.grade
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						languagesFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂未添加';
+					languagesFrag.appendChild(aTag);
+				}
+				
+				if(data.train.length>0){
+					mui.each(data.train,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>工作公司：<span>'
+						+item.company_name
+						+'</span></li><li>在职时间：<span>'
+						+item.start_time+'至'+item.end_time
+						+'</span></li><li>职位名称：<span>'
+						+item.position_name
+						+'</span></li><li>职位描述：<span>'
+						+item.experience_describe
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						trainFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无实习经历';
+					trainFrag.appendChild(aTag);
+				}
+				
+				if(data.ItSkill.length>0){
+					mui.each(data.ItSkill,function(index,item){
+						var ul =document.createElement('span');
+						var content = '&nbsp;&nbsp;'+item.name+',';
+						
+						ul.innerHTML = content;
+						ItSkillFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂未添加';
+					ItSkillFrag.appendChild(aTag);
+				}
+				
+				if(data.ProjectExperience.length>0){
+					mui.each(data.ProjectExperience,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>项目名称：<span>'
+						+item.project_name
+						+'</span></li><li>参与时间：<span>'
+						+item.start_time+'至'+item.end_time
+						+'</span></li><li>担当职务：<span>'
+						+item.project_role
+						+'</span></li><li>项目成果：<span>'
+						+item.project_results
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						ProjectExperienceFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无项目经验';
+					ProjectExperienceFrag.appendChild(aTag);
+				}
+				
+				if(data.TrainingExperience.length>0){
+					mui.each(data.TrainingExperience,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>培训名称：<span>'
+						+item.training_name
+						+'</span></li><li>参与时间：<span>'
+						+item.start_time+'至'+item.end_time
+						+'</span></li><li>培训机构：<span>'
+						+item.training_organization
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						TrainingExperienceFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无培训经历';
+				    TrainingExperienceFrag.appendChild(aTag);
+				}
+				
+				if(data.JobExperience.length>0){
+					mui.each(data.JobExperience,function(index,item){
+						var ul =document.createElement('ul');
+						var content = '<li>公司名称：<span>'
+						+item.company_name
+						+'</span></li><li>职位名称：<span>'
+						+item.position_name
+						+'</span></li><li>类型：<span>'
+						+item.type
+						+'</span></li><li>时间：<span>'
+						+item.time
+						+'</span></li>';
+						
+						ul.innerHTML = content;
+						JobExperienceFrag.appendChild(ul);
+					});
+				}else{
+					var aTag = document.createElement('a');
+					aTag.className = 'mui-btn mui-btn-block add-ex';
+					aTag.innerHTML = '暂无求职经历';
+					JobExperienceFrag.appendChild(aTag);
+				}
+				
 				mui.each(data.StudyExperienceInfo,function(index,item){
 					if(index==0){
 						document.getElementById("degree").innerHTML = item.position_degree_id;
@@ -235,7 +494,7 @@
 					var content = '<li>毕业学校：<span>'
 					+item.school_name
 					+'</span></li><li>就读时间：<span>'
-					+item.start_time+'-'+item.end_time
+					+item.start_time+'至'+item.end_time
 					+'</span></li><li class="label">学历：<span>'
 					+item.position_degree_id
 					+'</span></li><li class="label">专业：<span>'
@@ -246,6 +505,16 @@
     			
 				});
 				document.getElementById("study_list").appendChild(studyFrag);
+				document.getElementById("school_list").appendChild(schoolFrag);
+				document.getElementById("WorkExperience_list").appendChild(WorkExperienceFrag);
+				document.getElementById("ItSkill_list").appendChild(ItSkillFrag);
+				document.getElementById("languages_list").appendChild(languagesFrag);
+				document.getElementById("award_list").appendChild(awardFrag);
+				document.getElementById("train_list").appendChild(trainFrag);
+				document.getElementById("ProjectExperience_list").appendChild(ProjectExperienceFrag);
+				document.getElementById("TrainingExperience_list").appendChild(TrainingExperienceFrag);
+				document.getElementById("JobExperience_list").appendChild(JobExperienceFrag);
+				
 				
 				document.getElementById("qq").innerHTML = data.contact.qq;
 				document.getElementById("cellphone").innerHTML = data.contact.cellphone;

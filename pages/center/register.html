@@ -22,14 +22,14 @@
 				line-height: 40px;
 				padding-left: 15px;
 				color: #a0a2a2;
-				font-size: 17px;
+				font-size: 14px;
 			}
 			.input input {
 				margin-left: 10px;
 			}
 			.red {
 				color: #e34c52;
-				font-size: 16px;
+				font-size: 14px;
 			}
 			.yes {
 				display: none;
@@ -50,51 +50,103 @@
 		<!-- 公告正文部分 start -->
 		<div class="mui-content">
 			<form id="J_formR" class="mui-content-padded">
-				<input type="text" placeholder="姓名" required autofocus />
-				<input type="email" placeholder="邮箱" required />
+				<input type="text" name="username" placeholder="姓名" required autofocus />
+				<input type="email" name="email" placeholder="邮箱  请务必填写真实邮箱,否则无法激活" required />
 				<div class="mui-input-row mui-password">
-					<input id="J_pass" type="password" placeholder="密码"  class="mui-input-password" required />
+					<input id="J_pass" type="password" name="password" placeholder="密码"  class="mui-input-password" required />
 				</div>
 				<div class="mui-input-row mui-password">
 					<input id="J_passSure" type="password" placeholder="确认密码"  class="mui-input-password" required />
 				</div>
 				<div class="input">
 					当前状态
-					<input type="radio" name="status" checked /><label>我是学生</label>
-					<input type="radio" name="status" /><label>我已工作</label>
+					<input type="radio" name="status" value="2" checked /><label>我是学生</label>
+					<input type="radio" name="status" value="1" /><label>我已工作</label>
 				</div>
 				<button id="J_register" type="submit" class="mui-btn mui-btn-block submit">立即注册</button>
-				<div class="mui-text-center">
+				<!--<div class="mui-text-center">
 					<input type="checkbox" class="orange-box" required /> <label class="red">我已阅读并同意联盟网条款</label>
-				</div>
+				</div>-->
 
 			</form>
-			 <div id="J_yes" class="yes">
+			 <!--<div id="J_yes" class="yes">
 			    	<img src="../../img/center/right.jpg" /><label>注册成功，请登陆注册邮箱查看激活文件</label>
-			 </div>
+			 </div>-->
 		</div>
 		<!-- 公告正文 end -->
 		<script type="application/javascript" charset="UTF-8">
-		//底部导航跳转bug修复
-		mui('.mui-bar-tab').on('tap','a',function(){
-			location.href = this.getAttribute('href');
-		});
 		
-		function backLogin () {
-			window.location = 'login.html';
+		function stripscript(s) 
+		{ 
+			var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]") 
+			var rs = ""; 
+			for (var i = 0; i < s.length; i++) { 
+				rs = rs+s.substr(i, 1).replace(pattern, ''); 
+			} 
+			return rs;
+		
 		}
 		
 		mui('#J_formR').on('tap','#J_register', function() {
+			var form = document.getElementById("J_formR");
+			var pattern = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
 			var pass = document.getElementById("J_pass").value.trim();
 			var passSure = document.getElementById("J_passSure").value.trim();
 			if (pass != passSure) {
 				plus.ui.toast('两次密码输入不一致');
 				return;
+			}else if(!form.username.value){
+				plus.ui.toast('姓名不能为空');
+				return;
+			}else if(!form.email.value){
+				plus.ui.toast('邮箱不能为空');
+				return;
+			}else if(!form.password.value){
+				plus.ui.toast('密码不能为空');
+				return;
+			}else if(!pattern.test(form.email.value)){
+				plus.ui.toast('邮箱格式错误');
+				return;
 			}
 			else {
-				document.getElementById("J_formR").style.display = 'none';
-				document.getElementById("J_yes").style.display = 'block';
-				setTimeout('backLogin()',1000);
+//				document.getElementById("J_formR").style.display = 'none';
+//				document.getElementById("J_yes").style.display = 'block';
+//				setTimeout('backLogin()',3000);
+                plus.nativeUI.showWaiting();
+                var username = stripscript(form.username.value);
+                var password = stripscript(form.password.value);
+                var email = form.email.value;
+                var status_list = document.getElementsByName("gender"); 
+				for(i=0;i<status_list.length;i++) 
+				{ 
+					if(status_list[i].checked){
+						var status = status_list[i].value;
+					}
+				} 
+                mui.ajax('http://www.dsjyw.net/mobile/login/reg',{
+					data:{email:email,password:password,username:username,status:status},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					headers:{'Content-Type':'application/json'},	              
+					success:function(data){
+						if(data.code==0){
+                            plus.nativeUI.closeWaiting();
+                            alert('注册成功,请登陆注册邮箱进行激活');
+						}else{
+							plus.nativeUI.closeWaiting();
+							alert('注册失败,请检查您的邮箱格式是否正确');
+						}
+						plus.nativeUI.closeWaiting();
+						mui.back();
+					},
+					error:function(xhr,type,errorThrown){
+						//异常处理；
+	//					console.log(type);
+	                    plus.nativeUI.closeWaiting();
+	                    alert(type);
+					}
+				});
 			};
 		});
 		

@@ -215,7 +215,7 @@
     <script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="UTF-8">
       	mui.init();
-      	var user_id = getLogin('user_id');
+      	var user_id = getLogin('user_id',60000*60*24*30);
       	mui.ajax('http://www.dsjyw.net/mobile/job/applicationLetter',{
 			data:{user_id:user_id},
 			dataType:'json',//服务器返回json格式数据

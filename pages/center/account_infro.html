@@ -86,9 +86,9 @@
 	<script src="../../js/loginTime.js" type="text/javascript" charset="utf-8"></script>
 	<script type="application/javascript" charset="UTF-8">
 		mui.init();
-		var user_id = getLogin('user_id');
+		var user_id = getLogin('user_id',60000*60*24*30);
 		var user_type = window.localStorage.getItem('user_type');
-		if(user_type==2){
+		if(user_type==1){
 			document.getElementById("change_password").style.display = 'none';
 		}
 		document.getElementById("main-content").style.display = 'none';
@@ -97,7 +97,7 @@
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒；
-			headers:{'Content-Type':'application/json'},	              
+			headers:{'Content-Type':'application/json'},
 			success:function(data){
 				document.getElementById("account").innerHTML = data.account;
 				document.getElementById("realname").innerHTML = data.realname;

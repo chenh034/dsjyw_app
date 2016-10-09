@@ -102,7 +102,7 @@
 			var timeSort = 1;
 			var heatSort = 0;
 			function pullupRefresh() {		
-				var user_id = getLogin('user_id',60000*60*100);
+				var user_id = getLogin('user_id',60000*60*24*30*100);
 				page = page+1;
 				var table = document.getElementById('list');
 				var propertyId = document.getElementById('property').value;
@@ -205,7 +205,7 @@
 			});
 			
 			mui('#list').on('tap', 'a', function() {
-				var user_id = getLogin('user_id',60000*60*100);
+				var user_id = getLogin('user_id',60000*60*24*30*100);
 				var id = this.getAttribute('href');
 				var href = this.href;
 				var type = this.getAttribute('open-type');

@@ -83,7 +83,7 @@
                 </a>
             </li>
             <img src="../../img/center/add1_1.jpg" class="add-letter" />
-            <img src="../../img/center/add1_2.jpg" class="short-msg" />
+            <img src="../../img/center/add1_2.jpg" class="short-msg1" />
         </ul>
         <ul class="mui-table-view add1">
             <li class="mui-table-view-cell">
@@ -105,7 +105,7 @@
       	}
 
       	
-      	var user_id = check(60000*60);
+      	var user_id = check(60000*60*24*30);
       	if(user_id){
       		mui.ajax('http://www.dsjyw.net/mobile/job/index',{
 	      		data:{user_id:user_id},
@@ -146,7 +146,7 @@
       		return status;
       	}
       	mui('.mui-content,header').on('tap', 'a', function() {
-  		    var status = getLogin('user_id',60000*60);
+  		    var status = getLogin('user_id',60000*60*24*30);
 			var id = this.getAttribute('href');
 			var href = this.href;
 			var type = this.getAttribute('open-type');
