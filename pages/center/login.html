@@ -371,14 +371,18 @@
 //						window.localStorage.setItem('user_id',data.user_id);
                         setLogin('user_id',data.user_id);
                         window.localStorage.setItem('user_type',1);
+                        plus.nativeUI.closeWaiting();
+						mui.back();
 					}else if(data.code==2){
-						
+						document.getElementById("login_content").style.display = 'none';
+						document.getElementById("study_content").style.display = 'block';
+						plus.nativeUI.closeWaiting();
+						window.localStorage.setItem('tem_id',data.user_id);
+						document.getElementById("J_username").value = data.username;
 					}else{
 						plus.nativeUI.closeWaiting();
 						alert('登陆失败，请检查学号和密码');
 					}
-					plus.nativeUI.closeWaiting();
-					mui.back();
 				},
 				error:function(xhr,type,errorThrown){
 					//异常处理；

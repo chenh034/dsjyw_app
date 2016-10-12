@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li class="mui-table-view-cell">
-                <a href="#" class="mui-navigate-right grey">
+                <a href="#" id="J_exit" class="mui-navigate-right grey">
                 	退出登录
                 </a>
             </li>
@@ -111,6 +111,23 @@
 				console.log(type);
 			}
       	});
+      	
+      	document.getElementById("J_exit").addEventListener('tap', function() {
+			var btnArray = ['取消', '确认'];
+			mui.confirm('确认退出登录？', function(e) {
+				if (e.index == 1) {
+					setLogin('user_id',0);
+					var loginview = plus.webview.getWebviewById('center/center_index.html');
+					loginview.reload(true);
+					
+					curview = plus.webview.currentWebview();
+					
+					setTimeout(function(){
+						plus.webview.close(curview);
+					},500);
+				}
+			})
+		});
 		
 	</script>
 </body>

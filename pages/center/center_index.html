@@ -17,7 +17,7 @@
 		
 		<a href="login.html" id="unlogin" open-type="common">
 			<div>
-				<img src="../../img/center/unlog.jpg" class="icon" / style="margin-left:32px;">
+				<img src="../../img/center/unlog.jpg" class="icon" / style="margin-left: 48px;">
 			</div>
 			<p class="log-register">登陆</p>
 			<p>
@@ -26,7 +26,7 @@
 		</a>
 		<a href="account_infro.html" open-type="common"  id="login" class="hide" >
 			<div id="head_url">
-				<img src="../../img/center/unlog.jpg" class="icon"/ style="margin-left: 32px;">
+				<img src="../../img/center/unlog.jpg" class="icon"/ style="margin-left: ;">
 			</div>
 			<div>
 				<p id="realname" style="color:#fff;"></p>
@@ -114,7 +114,7 @@
 				timeout:10000,//超时时间设置为10秒；
 				headers:{'Content-Type':'application/json'},	              
 				success:function(data){
-					document.getElementById("head_url").innerHTML = '<img src='+data.headUrl+' class="icon"/ style="margin-left: 32px;">';
+					document.getElementById("head_url").innerHTML = '<img src='+data.headUrl+' class="icon"/ style="margin-left: 48px;">';
 					document.getElementById("realname").innerHTML = data.name;
 					document.getElementById("school_name").innerHTML = data.school;
 					document.getElementById("major").innerHTML = data.major;
