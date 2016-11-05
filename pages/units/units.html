@@ -35,7 +35,7 @@
 	<div class="mui-content">
 		<div class="ad">
 	    	<span id="company_logo"></span>
-	    	<span class="unit-name" id="company_name"></span>
+	    	<p class="unit-name" id="company_names"></p>
 			<div id="famous"></div>
 		</div>
 		
@@ -103,11 +103,11 @@
 			type:'get',
 			timeout:10000,
 			headers:{'content-type':'application/json'},
-			success:function(data){  
+			success:function(data){
                document.getElementById("company_address").innerHTML = data.company.full_address;
                document.getElementById("company_city").innerHTML = data.company.city;
                document.getElementById("company_describe").innerHTML = data.company.introduction;
-               document.getElementById("company_name").innerHTML = data.company.name;
+               document.getElementById("company_names").innerHTML = data.company.name;
                document.getElementById("company_trade").innerHTML = data.company.companytrade;
                document.getElementById("company_property").innerHTML = data.company.companyproperty;
                document.getElementById("company_web").innerHTML = data.company.website;
@@ -126,7 +126,7 @@
                     var li =document.createElement('li');
 					li.className='mui-table-view-cell peach_list';
 
-                   content_r='<div class="mui-table"><div class="mui-table-cell"><span class="date mui-bg-primary">&nbsp;'
+                    content_r='<div class="mui-table"><div class="mui-table-cell"><span class="date mui-bg-primary">&nbsp;'
 								+item.month
 								+'月<br /><strong>'
 								+item.date
@@ -219,7 +219,7 @@
 					});
 				}else if(type=="focus"){
 					if(user_id==0){
-						mui.confirm('是否现在登录？', function(e) {
+						mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
 							if (e.index == 1) {
 								mui.openWindow({
 								id: 'login.html',
@@ -324,7 +324,7 @@
 					}
 				}else if(type=='send'){
 					if(user_id==0){
-						mui.confirm('是否现在登录？', function(e) {
+						mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
 							if (e.index == 1) {
 								mui.openWindow({
 								id: 'login.html',

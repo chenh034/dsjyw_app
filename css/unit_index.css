@@ -21,10 +21,12 @@ html, body, .mui-content {
 	/*margin-top: -20px;*/
 	background-color:#fff;
 }
-
+.mui-scroll{
+	margin-top: 4px;
+}
 
 .mui-table-view-cell{
-	padding-left: 18px;
+	padding-left: 13px;
 }
 h4 {
 	color: #e24b51;
@@ -49,7 +51,7 @@ p {
 }
 
 #see {
-	width: 80px;
+	width: 70px;
 	height: 30px;
 	padding-top: 6px;
 	top: 35%;
@@ -57,7 +59,7 @@ p {
 }
 
 #focus {
-	width: 80px;
+	width: 70px;
 	height: 30px;
 	padding-top: 6px;
 	top: 60%;

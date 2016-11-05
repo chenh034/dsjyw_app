@@ -3,7 +3,7 @@
 	"id": "H51325433",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "东师微就业",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "3.0",/*应用版本名称*/
+		"name": "1.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -28,7 +28,7 @@
         "Console": {
             "description": "跟踪调试输出日志"
         },
-        "Contacts": {},
+        
         "Device": {
             "description": "访问设备信息"
         },
@@ -41,12 +41,8 @@
         "File": {
             "description": "访问本地文件系统"
         },
-        "Gallery": {
-            "description": "访问系统相册"
-        },
-        "Geolocation": {
-            "description": "访问位置信息"
-        },
+        
+        
          "Invocation": {
             "description": "使用Native.js能力"
         },
@@ -54,9 +50,7 @@
         "Orientation": {
             "description": "访问方向感应器"
         },
-        "Proximity": {
-            "description": "访问距离感应器"
-        },
+        
         "Storage": {
             "description": "管理应用本地数据"
         },
@@ -70,9 +64,7 @@
         "XMLHttpRequest": {
             "description": "跨域网络访问"
         },
-        "Zip": {
-            "description": "文件压缩与解压缩"
-        },
+        
         "Barcode": {
             "description": "管理二维码扫描插件"
         },
@@ -86,9 +78,7 @@
         "NativeUI":{
         	"description": "原生UI控件"
         },
-        "Navigator":{
-        	"description": "浏览器信息"
-        },
+        "Navigator":{},
         "NativeObj":{
         	"description": "原生对象"
         },"OAuth":{}
@@ -204,7 +194,9 @@
 					"js/index/index.js",
 					"css/mui.min.css",
 					"pages/detail.html",
-					"js/storage.js"
+					"js/storage.js",
+					"img/left.jpg",
+					"img/right.jpg"
 				],
 				"refer": [
 					"pages/accordion.html",
@@ -332,7 +324,8 @@
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js",
 					"pages/recruit/recruit_view.html",
-					"pages/recruit/jiaoyu.html"
+					"pages/recruit/jiaoyu.html",
+					"pages/index_main.html"
 				],
 				"refer": [
 					"pages/recruit/feijiaoyu.html"
@@ -564,7 +557,8 @@
 				],
 				"refer": [
 					"pages/teacher.html",
-					"pages/units/units.html"
+					"pages/units/units.html",
+					"pages/center/login.html"
 				],
 				"priority": 0
 			},
@@ -577,11 +571,13 @@
 					"css/mui.min.css",
 					"fonts/iconfont.ttf",
 					"pages/center/center_index.html",
-					"js/update.js"
+					"js/update.js",
+					"pages/recruit/recruit_index.html"
 				],
 				"refer": [
-					"pages/recruit/recruit_index.html",
-					"pages/units/unit_index.html"
+					"pages/units/unit_index.html",
+					"pages/recruit/feijiaoyu.html",
+					"pages/recruit/jiaoyu.html"
 				],
 				"priority": 0
 			},

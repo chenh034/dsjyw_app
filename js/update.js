@@ -1,7 +1,7 @@
 var server = "http://www.dsjyw.net/assets/mobile/update.json"; //获取升级描述文件服务器地址
 
 function update() {
-	mui.ajax('http://www.dsjyw.net/assets/mobile/update.json',{
+	mui.ajax('http://www.dsjyw.net/assets/mobile/update.php',{
 		data:{},
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型

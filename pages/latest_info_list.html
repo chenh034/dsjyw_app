@@ -15,6 +15,28 @@
 			.mui-content{
 				background-color:#fff ;
 			}
+			.teacher{
+				color: #8f8f94;
+				margin-top: 16px;
+				position: relative;
+			}
+			.teacher h5{
+				font-size: 15px;
+				display: inline-block;
+			}
+			.teacher span{
+				border-bottom:3px solid #e14a50 ;
+			}
+			#time{
+				width: 60px;
+				position: absolute;
+				right: 15px;
+				top: 0;
+			}
+			#topic{
+				width: 250px;
+				text-align: center;
+			}
 			.announce_list{
 				font-size: 15px;
 				float: left;
@@ -33,6 +55,10 @@
 	</head>
 
 	<body>
+		<nav class="teacher">
+			<h5 id="topic"><span>招考主题</span></h5>
+			<h5 id="time"><span>发布时间</span></h5>
+		</nav>
 		<!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
@@ -61,36 +87,10 @@
 			 * 下拉刷新具体业务实现
 			 */
 			function pulldownRefresh() {
-				setTimeout(function() {
-					var table = document.getElementById('list');
-					var first = document.querySelector('.announce_list').rel;
-					mui.ajax('http://www.dsjyw.net/mobile/index/announceRefresh',{
-						data:{first:first},
-						dataType:'json',//服务器返回json格式数据
-						type:'post',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
-						headers:{'Content-Type':'application/json'},	              
-						success:function(data){
-							var listFrag = document.createDocumentFragment();
-							mui.each(data.announce,function(index,item){
-								var li = document.createElement('li');
-								li.className = 'mui-table-view-cell';
-								li.innerHTML='<a class="announce_list" rel='+item.id+'>'+ item.title
-							                          +'</a><span class="mui-pull-right update time ">'+item.time+'</span>';
-							    listFrag.appendChild(li);
-								//下拉刷新，新纪录插到最前面；
-//								table.insertBefore(li, table.firstChild);
-							});
-							table.insertBefore(listFrag,table.firstChild);
-							mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-						},
-						error:function(xhr,type,errorThrown){
-							//异常处理；
-							console.log(type);
-						}
-					});
-					
-				}, 100);
+				last = -15;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 			}
 			var count = 0;
 			/**

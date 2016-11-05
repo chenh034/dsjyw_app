@@ -75,37 +75,10 @@
 			 * 下拉刷新具体业务实现
 			 */
 			function pulldownRefresh() {
-				setTimeout(function() {
-					var table = document.getElementById('list');
-					var first = document.querySelector('.teacher_list').rel;
-					mui.ajax('http://www.dsjyw.net/mobile/index/teacherRefresh',{
-						data:{first:first},
-						dataType:'json',//服务器返回json格式数据
-						type:'post',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
-						headers:{'Content-Type':'application/json'},	              
-						success:function(data){
-							var listFrag = document.createDocumentFragment();
-							mui.each(data.teacher,function(index,item){
-								var li = document.createElement('li');
-								li.className = 'mui-table-view-cell';
-								li.innerHTML='<a class="teacher_list" rel='+item.id+'>'+ item.title
-								                          +'</a><a class="mui-pull-right update city ">'
-								                          +item.city
-								                          +'</a><span class="mui-pull-right update time ">'
-								                          +item.time+'</span>';
-							    listFrag.appendChild(li);
-							});
-							table.insertBefore(listFrag,table.firstChild);
-							mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-						},
-						error:function(xhr,type,errorThrown){
-							//异常处理；
-							console.log(type);
-						}
-					});
-					
-				}, 100);
+				last = -15;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 			}
 			var count = 0;
 			/**
@@ -250,7 +223,7 @@
 					}
 					(!reload) && contentWebview.show();
 					
-					headerWebview.show(aniShow, 150);
+					headerWebview.show("pop-in", 150);
 				}
 			})
 		</script>

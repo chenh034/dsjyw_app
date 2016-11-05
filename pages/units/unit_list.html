@@ -92,6 +92,9 @@
 			 * 下拉刷新具体业务实现
 			 */
 			function pulldownRefresh() {
+				page = 0;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
 				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 			}
 			var count = 0;
@@ -123,7 +126,7 @@
 							li.className='mui-table-view-cell';
 							content = '<a href="units.html" open-type="common" rel='
 							+item.id
-							+'><h4>单位名称: <span>'
+							+'><h4 style="font-size:14px;">单位名称: <span>'
 							+item.name
 							+'</span></h4><p>性质:<span class="city">'
 							+item.property_name
@@ -137,12 +140,12 @@
 							+item.brightspot2
 							+'</span></p><a href="units.html" rel='
 							+item.id
-							+' open-type="common" class="mui-btn" id="see">查看</a>';
+							+' open-type="common" class="mui-btn" id="see" style="right:10px;">查看</a>';
 							
 							if(item.isfollow==1){
-								content+='<a href="javascript:;" rel='+item.id+' open-type="focus" class="mui-btn" id="focus">关注</a>';
+								content+='<a href="javascript:;" rel='+item.id+' open-type="focus" class="mui-btn" id="focus" style="right:10px;">关注</a>';
 							}else if(item.isfollow==0){
-								content+='<a href="javascript:;" rel='+item.id+' open-type="focus" class="mui-btn" id="focus">取消关注</a>';
+								content+='<a href="javascript:;" rel='+item.id+' open-type="focus" class="mui-btn" id="focus" style="right:10px;">取消关注</a>';
 							}
 							
 							content+='<span class="num">'+item.followNumber+'人关注</span></a>';
@@ -234,7 +237,7 @@
 					});
 				}else if(type=="focus"){
 					if(user_id==0){
-						mui.confirm('是否现在登录？', function(e) {
+						mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
 							if (e.index == 1) {
 								mui.openWindow({
 								id: 'login.html',
@@ -262,7 +265,8 @@
 								success:function(data){
 									if(data.code==0){
 										plus.nativeUI.closeWaiting();
-                                        _this.innerHTML = '取消关注'
+                                        _this.innerHTML = '取消关注';
+                                        plus.webview.getWebviewById('center/center_index.html').reload(true);
 									}else{
 										plus.nativeUI.closeWaiting();
 									}
@@ -283,6 +287,7 @@
 									if(data.code==0){
 										plus.nativeUI.closeWaiting();
 										_this.innerHTML = '关注';
+										plus.webview.getWebviewById('center/center_index.html').reload(true);
 									}else{
 										plus.nativeUI.closeWaiting();
 									}

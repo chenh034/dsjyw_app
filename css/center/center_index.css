@@ -1,8 +1,4 @@
-/*
- * 模块 ： 就业oa 求职通（个人中心）首页
- * 作者： 田慧婷
- * 创建日期： 2016.5.22
- */
+
 .center-head {
 	display: block;
 	padding-top: 10px;
@@ -67,7 +63,7 @@ h3 {
 
 .add1 {
 	position: relative;
-	margin-top: 20px;
+	margin-top: 40px;
 	padding-left: 30px;
 }
 

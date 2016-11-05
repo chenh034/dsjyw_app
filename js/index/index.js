@@ -218,29 +218,35 @@ mui('#slider').on('tap','a',function(){
 	var headerWebview = template.header;
 	//获得共用子webview
 	var contentWebview = template.content;
-	//通知模板修改标题，并显示隐藏右上角图标；
-	mui.fire(headerWebview, 'updateHeader', {
-		title: '',
-		target:href,
-		aniShow: aniShow
-	});
 	
-	
-	if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
-		var reload = true;
-		if (!template.loaded) {
-			if (contentWebview.getURL() != this.href) {
-				contentWebview.loadURL(this.href);
-			} else {
-				reload = false;
-			}
-		} else {
-			reload = false;
-		}
-		(!reload) && contentWebview.show();
-		
-		headerWebview.show(aniShow, 150);
+	if(!this.getAttribute('href')){
+		mui.toast('该焦点图无链接')
+		return;
 	}
+	plus.runtime.openURL(this.getAttribute('href'));
+	//通知模板修改标题，并显示隐藏右上角图标；
+//	mui.fire(headerWebview, 'updateHeader', {
+//		title: '',
+//		target:href,
+//		aniShow: aniShow
+//	});
+//	
+//	
+//	if(mui.os.ios||(mui.os.android&&parseFloat(mui.os.version)<4.4)){
+//		var reload = true;
+//		if (!template.loaded) {
+//			if (contentWebview.getURL() != this.href) {
+//				contentWebview.loadURL(this.href);
+//			} else {
+//				reload = false;
+//			}
+//		} else {
+//			reload = false;
+//		}
+//		(!reload) && contentWebview.show();
+//		
+//		headerWebview.show(aniShow, 150);
+//	}
 })
 
 

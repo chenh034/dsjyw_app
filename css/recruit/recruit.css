@@ -18,6 +18,7 @@ html, body, .mui-content {
 	position: relative;
 	top: -10px;
 	left: 5px;
+	font-size: 14px;
 }
 .mui-content {
 	/*margin-top: 10px;*/
@@ -59,6 +60,7 @@ html, body, .mui-content {
 }
 .unit-name{
 	color: #3f3f3f;
+	margin-top: 1px;
 }
 .time{
 	margin-top: 5px;
@@ -88,14 +90,14 @@ html, body, .mui-content {
 #focus{
 	display: inline-block;
 	width: 64px;
-	top: 69%;
+	top: 78%;
 	font-size: 13px;
 	padding: 4px 5px;
 }
 #see{
 	display: inline-block;
 	width: 64px;
-	top: 42%;
+	top: 50%;
 	font-size: 13px;
 	padding: 4px 5px;
 }
@@ -211,7 +213,7 @@ html, body, .mui-content {
 }
 
 .mui-select{
-	width: 70px;
+	width: 74px;
 	display: inline-block;
 }
 .mui-select select{
@@ -249,7 +251,7 @@ html, body, .mui-content {
 }
 
 #company_name{
-	width: 200px;
+	width: 185px;
 	display: inline-block;
 	overflow: hidden;
 	white-space: nowrap;

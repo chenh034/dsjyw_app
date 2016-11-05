@@ -71,7 +71,7 @@
 					</ul>
 				</div>
 				<div style="height: 30px;"></div>
-				<button type="button" id="send_v" class="mui-btn mui-btn-block">发送简历</button>
+				<button type="button" id="send_v" class="mui-btn mui-btn-block">投递简历</button>
 				<button type="button" id="focus_v" class="mui-btn mui-btn-warning mui-btn-block">收藏职位</button>
 			</div>
 		</div>
@@ -112,8 +112,7 @@
 					document.getElementById("position_city").innerHTML = data.position.city;
 					document.getElementById("number").innerHTML = data.position.recruitment_num;
 					document.getElementById("degree").innerHTML = data.position.degree;
-					
-					document.getElementById("company_logo").innerHTML = '<img id ="logo" class="mui-media-object" src='+data.company.logo+'>';
+					document.getElementById("company_logo").innerHTML = '<img id ="logo" class="mui-media-object" src=http://'+data.company.logo+'>';
 					document.getElementById("company_city").innerHTML = data.company.city;
 					document.getElementById("company_name").innerHTML = data.company.name;
 					document.getElementById("phone").innerHTML = data.company.phone;
@@ -162,10 +161,86 @@
 				});
 	      	});
 
+            document.getElementById("send_v").addEventListener('tap',function(){
+            	var user_id = getLogin('user_id',60000*60*24*30);
+				var _this = this;
+				var btnArray = ['取消', '确认'];
+				if(user_id==0){
+					mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
+						if (e.index == 1) {
+							mui.openWindow({
+							id: 'login.html',
+							url: '../center/login.html',
+//								styles: webview_style,
+							show: {
+								aniShow: "pop-in",
+								duration:300
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+						}
+					});
+					return;
+				}
+				
+				if(this.innerHTML=='投递成功'){
+					return;
+				}
+				mui.confirm('确认投递简历？', function(e) {
+					if (e.index == 1) {
+						plus.nativeUI.showWaiting();
+						mui.ajax('http://www.dsjyw.net/mobile/position/sendResume',{
+				      		data:{user_id:user_id,id:window.localStorage.getItem('position_id')},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+								if(data.code==0){
+									plus.nativeUI.closeWaiting();
+									plus.ui.toast('投递成功');
+									_this.innerHTML = '投递成功';
+								}else{
+									plus.nativeUI.closeWaiting();
+//										mui.toast('失败,该职位可能未提供投递地址');
+                                    alert('投递简历失败,该职位可能未提供投递地址');
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+								plus.nativeUI.closeWaiting();
+							}
+				      	});
+					}
+				});
+            });
 			
 			document.getElementById("focus_v").addEventListener('tap',function(){
 				var user_id = getLogin('user_id',60000*60*24*30);
 				var _this = this;
+				if(user_id==0){
+					mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
+						if (e.index == 1) {
+							mui.openWindow({
+							id: 'login.html',
+							url: '../center/login.html',
+//								styles: webview_style,
+							show: {
+								aniShow: "pop-in",
+								duration:300
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+						}
+					});
+					return;
+				}
+				
 				plus.nativeUI.showWaiting();
 				if(this.innerHTML=='收藏职位'){
 					mui.ajax('http://www.dsjyw.net/mobile/job/positionConcern',{
@@ -177,7 +252,9 @@
 						success:function(data){
 							if(data.code==0){
 								plus.nativeUI.closeWaiting();
-                                document.getElementById("focus_v").innerHTML = '取消收藏'
+                                document.getElementById("focus_v").innerHTML = '取消收藏';
+                                plus.ui.toast('收藏成功');
+                                plus.webview.getWebviewById('center/center_index.html').reload(true);
 							}else{
 								plus.nativeUI.closeWaiting();
 							}
@@ -186,7 +263,7 @@
 							//异常处理；
 							console.log(type);
 						}
-			      	});
+			      });
 				}else if(this.innerHTML=='取消收藏'){
 					mui.ajax('http://www.dsjyw.net/mobile/job/positionCancel',{
 			      		data:{user_id:user_id,position_id:window.localStorage.getItem('position_id')},
@@ -197,7 +274,9 @@
 						success:function(data){
 							if(data.code==0){
 								plus.nativeUI.closeWaiting();
-								_this.innerHTML = '收藏';
+								_this.innerHTML = '收藏职位';
+								plus.ui.toast('取消成功');
+								plus.webview.getWebviewById('center/center_index.html').reload(true);
 							}else{
 								plus.nativeUI.closeWaiting();
 							}
@@ -206,7 +285,7 @@
 							//异常处理；
 							console.log(type);
 						}
-			      	});
+			      });
 				}
 			})
 		</script>

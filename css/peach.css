@@ -13,7 +13,7 @@ h4 {
 
 form {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 .picer {
@@ -70,7 +70,7 @@ h5 {
 }
 
 .mui-select{
-	width: 70px;
+	width: 72px;
 	display: inline-block;
 }
 .mui-select select{
@@ -90,7 +90,7 @@ h5 {
 }
 .mui-input-group .mui-input-row {
     height: 28px;
-    margin-left: 8px;
+    /*margin-left: 4px;*/
 }
 
 .mui-input-group:before {

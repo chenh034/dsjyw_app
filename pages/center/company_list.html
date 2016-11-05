@@ -179,7 +179,7 @@
 					});
 				}else if(type=="focus"){
 					if(user_id==0){
-						mui.confirm('是否现在登录？', function(e) {
+						mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
 							if (e.index == 1) {
 								mui.openWindow({
 								id: 'login.html',

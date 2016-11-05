@@ -15,6 +15,9 @@
 	    	.mui-content {
 				margin-top: 10px;
 			}
+			.mui-scroll{
+				margin-top: 4px;
+			}
 	    </style>
 	</head>
 
@@ -86,10 +89,12 @@
 					var showCityPickerButton = doc.getElementById('showCityPicker');
 					var cityResult = doc.getElementById('cityResult');
 					showCityPickerButton.addEventListener('tap', function(event) {
+						mui('#pullrefresh').pullRefresh().setStopped(true);
 						cityPicker.show(function(items) {
 							showCityPickerButton.innerText = items[1].text;
 							page = 0;
 							document.getElementById("list").innerHTML='';
+							mui('#pullrefresh').pullRefresh().setStopped(false);
 							mui('#pullrefresh').pullRefresh().pullupLoading();
 							//返回 false 可以阻止选择框的关闭
 							//return false;
@@ -134,11 +139,18 @@
 			
 			
 //			var user_id = getLogin('user_id');
+            mui('body').on('tap','button',function(){
+            	mui('#pullrefresh').pullRefresh().setStopped(false);
+            });
 			/**
 			 * 下拉刷新具体业务实现
 			 */
 			function pulldownRefresh() {
+				page = 0;
+				document.getElementById("list").innerHTML='';
+				mui('#pullrefresh').pullRefresh().pullupLoading();
 				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				
 			}
 			var count = 0;
 			/**
@@ -275,7 +287,7 @@
 					});
 				}else if(type=="focus"){
 					if(user_id==0){
-						mui.confirm('是否现在登录？', function(e) {
+						mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
 							if (e.index == 1) {
 								mui.openWindow({
 								id: 'login.html',
@@ -304,7 +316,8 @@
 									if(data.code==0){
 										plus.nativeUI.closeWaiting();
 										plus.ui.toast('收藏成功');
-                                        _this.innerHTML = '取消收藏'
+                                        _this.innerHTML = '取消收藏';
+                                        plus.webview.getWebviewById('center/center_index.html').reload(true);
 									}else{
 										plus.nativeUI.closeWaiting();
 									}
@@ -326,6 +339,7 @@
 										plus.nativeUI.closeWaiting();
 										plus.ui.toast('取消成功');
 										_this.innerHTML = '收藏';
+										plus.webview.getWebviewById('center/center_index.html').reload(true);
 									}else{
 										plus.nativeUI.closeWaiting();
 									}
@@ -340,7 +354,7 @@
 					
 				}else if(type=='send'){
 					if(user_id==0){
-						mui.confirm('是否现在登录？', function(e) {
+						mui.confirm('请登录后再进行此操作\n是否现在登录？', function(e) {
 							if (e.index == 1) {
 								mui.openWindow({
 								id: 'login.html',
